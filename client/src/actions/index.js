@@ -1,0 +1,169 @@
+import axios from "axios";
+import {
+  FETCH_USER,
+  UPDATE_CONTENT_COMPONENT_FAILED,
+  UPDATE_CONTENT_COMPONENT_SUCCESS,
+  FETCH_PRODUCT_LIST,
+  FETCH_PRODUCT_CONTENT,
+  FETCH_PRODUCT_LIST_FIELD,
+  FETCH_SHOPPING_LIST,
+  FETCH_SHOPPING_CONTENT,
+  FETCH_SHOPPING_LIST_FIELD,
+  FETCH_STORE_LIST,
+  SIGN_IN,
+  SIGN_UP,
+} from "./types";
+import _ from "lodash";
+
+export const fetchUser = () => async (dispatch) => {
+  const res = await axios.get("api/current_user");
+
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const ContentAreaTypes = {
+  PRODUCTS: "Products",
+  SHOPPING: "Shopping",
+  SUPERMARKETS: "Supermarkets",
+  DEFAULT: "Dashboard",
+};
+
+const updateContentComponentFailed = (attemptComponent) => ({
+  type: UPDATE_CONTENT_COMPONENT_FAILED,
+  payload: {
+    component: ContentAreaTypes.DEFAULT,
+    failedComponent: attemptComponent,
+  },
+});
+
+const updateContentComponentSuccess = (newComponent) => ({
+  type: UPDATE_CONTENT_COMPONENT_SUCCESS,
+  payload: newComponent,
+});
+
+export const updateContentComponent = (component) => {
+  const newComponent = _.find(ContentAreaTypes, (v) => v === component);
+  if (typeof newComponent === "undefined") {
+    return updateContentComponentFailed(component);
+  }
+
+  return updateContentComponentSuccess(newComponent);
+};
+
+export const signIn = (values, history) => async (dispatch) => {
+  console.log("sign in values are: " + values);
+  const res = await axios.post("/api/sign-in", values);
+
+  history.push("/dashboard");
+  dispatch({ type: SIGN_IN, payload: res.data });
+};
+
+export const signUp = (values, history) => async (dispatch) => {
+  console.log("sign up values are: " + values);
+  const res = await axios.post("/api/sign-up", values);
+
+  history.push("/sign-in");
+  dispatch({ type: SIGN_UP, payload: res.data });
+};
+
+export const createShoppingList = (list) => async (dispatch) => {
+  const res = await axios.post("/api/lists", list);
+
+  console.log({ res });
+
+  dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+};
+
+export const deleteShoppingList = (listId) => async (dispatch) => {
+  console.log("<<<<<< delete shopping list >>>>>> : " + listId);
+  const res = await axios.delete("/api/lists/", {
+    params: {
+      listId: listId,
+    },
+  });
+
+  dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+};
+
+export const updateShoppingList = (listId, list) => async (dispatch) => {
+  console.log("<<<<<< update shopping list >>>>>> : " + listId);
+  const res = await axios.put("/api/lists/${listId}", list);
+
+  dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+};
+
+export const getAllShoppingList = () => async (dispatch) => {
+  const res = await axios.get("/api/lists");
+  console.log({ res });
+  if (res.status === 200) {
+    dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
+  }
+};
+
+export const getShoppingList = (listId) => async (dispatch) => {
+  const res = await axios.get("/api/lists/", {
+    params: {
+      listId: listId,
+    },
+  });
+
+  if (res.status === 200) {
+    dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
+  }
+};
+
+export const createProduct = (product) => async (dispatch) => {
+  const res = await axios.post("/api/products", product);
+
+  console.log({ res });
+
+  dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data });
+};
+
+export const createSupermarket = (supermarket) => async (dispatch) => {
+  const res = await axios.post("/api/supermarkets", supermarket);
+
+  console.log({ res });
+
+  dispatch({ type: FETCH_STORE_LIST, payload: res.data });
+};
+
+export const getAllProducts = () => async (dispatch) => {
+  const res = await axios.get("/api/products");
+
+  console.log({ res });
+
+  if (res.status === 200) {
+    dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
+  }
+};
+
+export const getAllSupermarkets = () => async (dispatch) => {
+  const res = await axios.get("/api/supermarkets");
+
+  console.log({ res });
+
+  if (res.status === 200) {
+    dispatch({ type: FETCH_STORE_LIST, payload: res.data.stores });
+  }
+};
+
+export const getSupermarket = (supermarketId) => async (dispatch) => {
+  const res = await axios.get("/api/supermarkets/", {
+    params: {
+      supermarketId: supermarketId,
+    },
+  });
+
+  dispatch({ type: FETCH_STORE_LIST, payload: res.data.stores });
+};
+
+export const getProduct = (productId) => async (dispatch) => {
+  const res = await axios.get("/api/products/", {
+    params: {
+      productId: productId,
+    },
+  });
+
+  dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
+};

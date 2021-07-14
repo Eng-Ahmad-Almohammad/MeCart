@@ -1,0 +1,16 @@
+#mecart-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 10vh;
+  width: 100%;
+  height: fit-content;
+}
+/* 
+Green colour scheme
+
+
+*/

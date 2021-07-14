@@ -1,0 +1,44 @@
+{
+  "name": "mecart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12"
+  },
+  "scripts": {
+    "start": "npm run prod",
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build-server": "babel ./server --out-dir build --copy-files",
+    "build-client": "npm run build --prefix client",
+    "clean-build": "rm -rf build",
+    "prebuild": "npm run clean-build",
+    "build": "concurrently \"npm run build-server\" \"npm run build-client\"",
+    "postbuild": "cp -R ./client/build ./build/client",
+    "heroku-postbuild": "npm run build",
+    "prod": "node ./build/index.js",
+    "postinstall": "npm install --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "concurrently": "^6.1.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5",
+    "mongoose-geojson-schema": "^2.1.6",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^5.0.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

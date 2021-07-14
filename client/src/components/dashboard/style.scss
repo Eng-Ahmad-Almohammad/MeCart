@@ -1,0 +1,48 @@
+@import "~materialize-css";
+
+#dashboard {
+  margin-bottom: 0;
+}
+#dashboard .col {
+  padding: 0;
+}
+#dashboard #dashboard-container {
+  width: 100%;
+  min-height: 60vh !important;
+}
+
+#dashboard-container .collection {
+  margin: 0;
+}
+
+#SideNav-10.sidenav {
+  height: 100%;
+  min-height: 60vh !important;
+  padding-bottom: 0;
+}
+
+ 
+#SideNav-10.sidenav {
+  overflow-x: hidden;
+  width: inherit;
+  max-width: initial;
+  top:auto;
+  bottom: auto;
+}
+
+#SideNav-10.sidenav li {
+  min-width: max-content;
+}
+#SideNav-10.sidenav li>a>i,
+#SideNav-10.sidenav li>a>i.material-icons{
+  margin-right: 0.5em;
+}
+
+.content-area {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: flex-start;
+}
