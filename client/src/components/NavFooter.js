@@ -6,7 +6,7 @@ const NavFooter = () => (
     copyrights="&copy 2021 Copyright Text"
     style={{
       position: "fixed",
-      bottom: "10vh",
+      bottom: "65px",
       width: "100%",
       height: "fit-content"
     }}
