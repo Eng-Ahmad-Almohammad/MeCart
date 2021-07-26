@@ -37,7 +37,9 @@ class NewProductModal extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  newList: (vals) => dispatch(actions.createShoppingList(vals)),
+  newList: (vals) => {
+   
+    dispatch(actions.createProduct(vals))},
 });
 
 const modalComponent = connect(null, mapDispatchToProps)(NewProductModal);
