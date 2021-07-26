@@ -39,12 +39,12 @@ const CardItem = ({
   return (
     <Card
       header={<CardItemHeader imageUrl={imageUrl} />}
-      title={title || ""}
+      title={listItem.name || ""}
       className="hoverable"
       actions={[]}
     >
       {showMenu()}
-      <p>{itemDescription}</p>
+      <p>{listItem.descriptionOne}</p>
       <Col s={6} className="left-align">
         <span className="star-rating">
           {stars.map((value) => (

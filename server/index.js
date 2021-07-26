@@ -6,6 +6,8 @@ import "regenerator-runtime/runtime";
 import express from "express";
 import mongoose from "mongoose";
 
+import cors from 'cors';
+
 import cookieSession from "cookie-session";
 import passport from "passport";
 import keys from "./config/keys";
@@ -24,6 +26,10 @@ getDatabase().then(() => {
 
   app.use(express.json({ type: 'application/*+json' }));
   
+  app.use(cors());
+
+  app.use(express.json());
+
   app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days

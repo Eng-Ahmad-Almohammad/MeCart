@@ -113,7 +113,15 @@ export const getShoppingList = (listId) => async (dispatch) => {
 };
 
 export const createProduct = (product) => async (dispatch) => {
-  const res = await axios.post("/api/products", product);
+  console.log('Products', product)
+  const res = await axios(`http://localhost:5000/api/products`, {
+    method: 'post',
+    headers: {
+      
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(product)
+  });
 
   console.log({ res });
 
@@ -134,7 +142,10 @@ export const getAllProducts = () => async (dispatch) => {
   console.log({ res });
 
   if (res.status === 200) {
-    dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
+    
+     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})  
+    
+   
   }
 };
 
