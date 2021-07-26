@@ -1,9 +1,11 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
+
+
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
-
+  
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
       <div>
@@ -42,7 +44,7 @@ const SimpleForm = (props) => {
       <div>
         <label>Category</label>
         <div>
-          <Field name="category" component="select">
+          <Field style={{display: 'inline-block'}} name="category" component="select">
             <option></option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>

@@ -11,20 +11,21 @@ export const createProduct = async (req, res, next) => {
     function: "createProduct",
   };
 
-  console.log({ debugInfo });
+  console.log('Hellllllllllllo Product', req.body);  
 
   try {
     const imageStorage = await getImageStorage();
     const uploader = multer({ storage: imageStorage });
     await uploader.any()(req, res, async () => {
       console.log({files: req.files})
+      
       const { name, descriptionOne, descriptionTwo, category } = req.body;
-
+      
       const product = new Products({
         name,
         descriptionOne,
         descriptionTwo,
-        files: req.files.map(f => f.id),
+        // files: req.files.map(f => f.id),
         _category: category,
         dateAdded: Date.now(),
         dateModified: Date.now(),
@@ -102,7 +103,7 @@ export const getAllProducts = async (req, res, next) => {
 
   try {
     const products = await Products.find();
-
+    console.log(products)
     res.send({ products: products });
     next();
   } catch (err) {

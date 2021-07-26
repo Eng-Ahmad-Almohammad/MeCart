@@ -30,6 +30,7 @@
     "@babel/preset-env": "^7.14.2",
     "concurrently": "^6.1.0",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.12.5",
     "mongoose-geojson-schema": "^2.1.6",

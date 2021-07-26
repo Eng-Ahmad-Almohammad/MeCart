@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes } from "../../actions";
+import { ContentAreaTypes, getAllProducts } from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
+
 
 class ProductContentArea extends Component {
   constructor(props) {
@@ -11,15 +12,31 @@ class ProductContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards: Array(12)
-        .fill("")
-        .map((value, index, array) => {
-          return `https://picsum.photos/${250}/${250}`;
-        }),
+      cards:this.props.storeList
+      // cards: Array(12)
+      //   .fill("")
+      //   .map((value, index, array) => {
+      //     return `https://picsum.photos/${250}/${250}`;
+      //   }),
     };
   }
+  componentDidMount(){
+    this.props.getData().then(res =>{
+      console.log('Hellllllllllllo',this.props.storeList)
+    this.setState({ cards: this.props.storeList })
+    })
+    
+    
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cards !== this.state.cards) {
+      console.log('Carrrrrrrddds',this.state.cards)
+    }
+  }
+  
   render() {
+
     return (
       <div>
         <Row>
@@ -54,8 +71,15 @@ class ProductContentArea extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  storeList: state.storeList,
-});
+const mapStateToProps = (state => {
+  console.log('Stattttttttttttttttttttte',state);
+  return {
+  storeList: state.product.product
+  }
 
-export default connect(mapStateToProps, null)(ProductContentArea);
+}
+)
+const mapDispatchToProp = (dispatch) => ({
+  getData :  () =>  dispatch(getAllProducts())
+})
+export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);
