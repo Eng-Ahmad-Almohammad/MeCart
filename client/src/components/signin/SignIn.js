@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import SignInField from "./SignInField";
 import formFields from "./formFields";
 import { connect } from "react-redux";
+import './style.css';
 
 class SignIn extends Component {
   isLoggedIn() {
@@ -45,10 +46,11 @@ class SignIn extends Component {
       return <Redirect to="/dashboard" />;
     } else {
       return (
-        <div>
-          <form>
+        <div id="signOptions">
+          <form id="mainform">
             {this.renderFields()}
             <button
+              id="signInButton"
               type="submit"
               className="teal btn-flat right white-text"
               // onClick={() => signIn(formValues, history)}

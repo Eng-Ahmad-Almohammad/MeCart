@@ -4,6 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import { Link } from "react-router-dom";
 import SignUpField from "./SignUpField";
 import formFields from "./formFields";
+import './style.css';
 
 class SignUp extends Component {
   renderFields() {
@@ -22,17 +23,17 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>
-        <form>
+      <div id="signOptions">
+        <form id="mainform">
           {this.renderFields()}
-          <Link to="/dashboard" className="red btn-flat white-text">
-            Cancel
-          </Link>
-          <button type="submit" className="teal btn-flat right white-text ">
-            Sign In
+          <button id="signInButton" type="submit" className="teal btn-flat right white-text ">
+            Sign Up
             <i className="material-icons right">done</i>
           </button>
         </form>
+          <Link to="/dashboard" className="red btn-flat white-text">
+            Cancel
+          </Link>
       </div>
     );
   }
