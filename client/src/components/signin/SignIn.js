@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import './style.css';
 
 class SignIn extends Component {
+  
   isLoggedIn() {
     return this.props.auth !== null;
   }

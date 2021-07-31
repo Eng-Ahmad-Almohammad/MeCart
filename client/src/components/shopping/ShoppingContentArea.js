@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList } from "../../actions";
+import { ContentAreaTypes, getAllShoppingList ,fetchUser} from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -11,14 +11,19 @@ class ShoppingContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards: Array(12)
-        .fill("")
-        .map((value, index, array) => {}),
+      cards:this.props.shoppingList
+      // cards: Array(12)
+      //   .fill("")
+      //   .map((value, index, array) => {}),
     };
   }
 
-  async componentDidMount() {
-    await this.props.fetchShoppingList();
+  componentDidMount() {
+  
+    this.props.fetchShoppingList().then(res =>{
+      console.log('from shopping list ======?',this.props.shoppingList)
+      this.setState({ cards: this.props.shoppingList });
+    })
   }
 
   render() {
@@ -57,7 +62,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchShoppingList: async () => dispatch(await getAllShoppingList()),
+  fetchShoppingList:  () => dispatch( getAllShoppingList()),
+  // fetchUser:async ()=>dispatch(await fetchUser())
 });
 
-export default connect(mapStateToProps, null)(ShoppingContentArea);
+export default connect(mapStateToProps,mapDispatchToProps)(ShoppingContentArea);

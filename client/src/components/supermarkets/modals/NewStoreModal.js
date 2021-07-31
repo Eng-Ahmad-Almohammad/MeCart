@@ -37,7 +37,7 @@ class NewStoreModal extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  newList: (vals) => dispatch(actions.createShoppingList(vals)),
+  newList: (vals) => dispatch(actions.createSupermarket(vals)),
 });
 
 const modalComponent = connect(null, mapDispatchToProps)(NewStoreModal);

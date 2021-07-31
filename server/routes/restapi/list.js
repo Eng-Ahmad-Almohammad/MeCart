@@ -11,7 +11,7 @@ export const createShoppingList = async (req, res, next) => {
     function: "createShoppingList",
   };
 
-  console.log({ debugInfo });
+  console.log("debug Info=====================",{ debugInfo });
 
   try {
     const { name, description } = req.body;
@@ -136,8 +136,8 @@ export const deleteShoppingList = async (req, res, next) => {
 
 const router = Router();
 
-// All routes must be authenticated
-router.use(authenticatedUser);
+// All routes must be authenticated___commented just for now ___
+// router.use(authenticatedUser);
 
 router.post("/lists", createShoppingList);
 router.get("/lists", getAllShoppingList);
