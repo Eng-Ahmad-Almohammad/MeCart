@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
-  fetchUser:async ()=>dispatch(await fetchUser())
+  // fetchUser:async ()=>dispatch(await fetchUser())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShoppingContentArea);

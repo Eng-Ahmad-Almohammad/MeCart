@@ -3,7 +3,7 @@ import { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes } from "../../actions";
+import { ContentAreaTypes,getAllSupermarkets } from "../../actions";
 import NewStoreModal from "./modals/NewStoreModal";
 
 class SupermarketContentArea extends Component {
@@ -12,14 +12,17 @@ class SupermarketContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards: Array(12)
-        .fill("")
-        .map((value, index, array) => {
-          return `https://picsum.photos/${200}/${200}`;
-        }),
+      cards: this.props.supermarketList,
     };
   }
-
+  componentDidMount(){
+    this.props.getData().then(res =>{
+      // console.log('Hellllllllllllo',this.props.storeList)
+    this.setState({ cards: this.props.supermarketList })
+    })
+    
+    
+  }
   render() {
     return (
       <div>
@@ -52,7 +55,10 @@ class SupermarketContentArea extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  productlist: state.productList,
+  supermarketList: state.supermarketList.supermarkets,
 });
 
-export default connect(mapStateToProps, null)(SupermarketContentArea);
+const mapDispatchToProp = (dispatch) => ({
+  getData :  () =>  dispatch(getAllSupermarkets())
+})
+export default connect(mapStateToProps,mapDispatchToProp)(SupermarketContentArea);

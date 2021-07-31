@@ -136,8 +136,8 @@ export const deleteShoppingList = async (req, res, next) => {
 
 const router = Router();
 
-// All routes must be authenticated
-router.use(authenticatedUser);
+// All routes must be authenticated___commented just for now ___
+// router.use(authenticatedUser);
 
 router.post("/lists", createShoppingList);
 router.get("/lists", getAllShoppingList);

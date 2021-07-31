@@ -28,12 +28,6 @@ class ProductContentArea extends Component {
     
     
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.cards !== this.state.cards) {
-  //     // console.log('Carrrrrrrddds',this.state.cards)
-  //   }
-  // }
   
   render() {
 

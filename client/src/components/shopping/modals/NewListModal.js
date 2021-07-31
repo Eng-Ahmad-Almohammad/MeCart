@@ -6,6 +6,7 @@ import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
 class NewListModal extends Component {
+
   render() {
     return (
       <Modal
