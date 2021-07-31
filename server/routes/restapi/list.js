@@ -11,7 +11,7 @@ export const createShoppingList = async (req, res, next) => {
     function: "createShoppingList",
   };
 
-  console.log({ debugInfo });
+  console.log("debug Info=====================",{ debugInfo });
 
   try {
     const { name, description } = req.body;

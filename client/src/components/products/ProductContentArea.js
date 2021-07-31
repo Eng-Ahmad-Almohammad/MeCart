@@ -22,18 +22,18 @@ class ProductContentArea extends Component {
   }
   componentDidMount(){
     this.props.getData().then(res =>{
-      console.log('Hellllllllllllo',this.props.storeList)
+      // console.log('Hellllllllllllo',this.props.storeList)
     this.setState({ cards: this.props.storeList })
     })
     
     
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.cards !== this.state.cards) {
-      console.log('Carrrrrrrddds',this.state.cards)
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.cards !== this.state.cards) {
+  //     // console.log('Carrrrrrrddds',this.state.cards)
+  //   }
+  // }
   
   render() {
 

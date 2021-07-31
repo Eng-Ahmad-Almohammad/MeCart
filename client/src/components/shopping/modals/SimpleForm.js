@@ -39,6 +39,10 @@ const SimpleForm = (props) => {
     </form>
   );
 };
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
 
 export default reduxForm({
   form: "simple",

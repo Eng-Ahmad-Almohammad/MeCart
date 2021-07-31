@@ -16,7 +16,7 @@ import {
 import _ from "lodash";
 
 export const fetchUser = () => async (dispatch) => {
-  const res = await axios.get("api/current_user");
+  const res = await axios.get("/api/current_user");
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };
@@ -67,11 +67,23 @@ export const signUp = (values, history) => async (dispatch) => {
 };
 
 export const createShoppingList = (list) => async (dispatch) => {
-  const res = await axios.post("/api/lists", list);
+  
 
-  console.log({ res });
-
-  dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+    const res = await axios({
+      method:"post",
+      url:"http://localhost:5000/api/lists",
+      headers: {
+        
+        'Content-Type': 'application/json'
+      },
+      data:JSON.stringify(list)
+    });
+  
+    console.log('from list creation',res);
+  
+    dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+  
+  // const res =await axios.post(`http://localhost:5000/api/lists`,list)
 };
 
 export const deleteShoppingList = (listId) => async (dispatch) => {
@@ -94,7 +106,7 @@ export const updateShoppingList = (listId, list) => async (dispatch) => {
 
 export const getAllShoppingList = () => async (dispatch) => {
   const res = await axios.get("/api/lists");
-  console.log({ res });
+  console.log("from get all lists====> ", res );
   if (res.status === 200) {
     dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
   }

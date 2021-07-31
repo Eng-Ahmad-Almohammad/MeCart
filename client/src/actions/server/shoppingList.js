@@ -5,7 +5,7 @@ export const createShoppingList = async (name, description) => {
     throw new Error("Name parameter cannot be empty.");
   }
 
-  const res = await axios.post("api/lists", {
+  const res = await axios.post("http://localhost:5000/api/lists", {
     name: name,
     description: description,
   });
