@@ -8,7 +8,8 @@ const productInstanceSchema = new Schema({
   priceAfterTax: { type: Schema.Types.Number, required: true },
   unitOfMeasure: { type: String, enum: UnitOfMeasureKeys, required: true },
   measurement: { type: Schema.Types.Number, required: true },
-  store: { type: Schema.Types.ObjectId, ref: "stores", required: true },
+  // store: { type: Schema.Types.ObjectId, ref: "stores", required: true },**ignored only for now**
+  productId: { type: Schema.Types.ObjectId, ref: "products", required: true },
   ranks: [{ type: Schema.Types.ObjectId, ref: "rankings" }],
 },
 {

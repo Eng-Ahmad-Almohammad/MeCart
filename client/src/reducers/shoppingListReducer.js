@@ -2,6 +2,7 @@ import {
   FETCH_SHOPPING_LIST,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
+  CREATE_SHOPPING_LIST
 } from "../actions/types";
 
 const InitialState = {
@@ -21,6 +22,8 @@ const shoppingListReducer = function (state = InitialState, action) {
     case FETCH_SHOPPING_CONTENT:
       return state;
     case FETCH_SHOPPING_LIST_FIELD:
+      return state;
+    case CREATE_SHOPPING_LIST:
       return state;
     default:
       return state;

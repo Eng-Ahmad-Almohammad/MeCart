@@ -50,7 +50,7 @@ const SimpleForm = (props) => {
     formData.append("myFile", selectedFile);
 
     // Details of the uploaded file
-    console.log(selectedFile);
+    console.log("the file that we selected ",selectedFile);
 
     // Request made to the backend api
     // Send formData object
@@ -141,7 +141,7 @@ const SimpleForm = (props) => {
       <div>
         <label>Rank</label>
         <div>
-          <Field name="rank" component="select">
+          <Field style={{display: 'inline-block'}} name="rank" component="select">
             <option></option>
             <option value="1">1</option>
             <option value="2">2</option>
