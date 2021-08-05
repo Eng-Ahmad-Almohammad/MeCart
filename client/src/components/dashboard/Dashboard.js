@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import DashboardNav from "./DashboardNav";
 import ProductContentArea from "../products/ProductContentArea";
 import ShoppingContentArea from "../shopping/ShoppingContentArea";
+import Profile from "../profile/Profile";
 import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import DashboardContentArea from "./DashboardContentArea";
 
@@ -33,7 +34,6 @@ class Dashboard extends Component {
         return <ShoppingContentArea />;
       case ContentAreaTypes.SUPERMARKETS:
         return <SupermarketContentArea />;
-
       case ContentAreaTypes.DEFAULT:
       default:
         return <DashboardContentArea />;

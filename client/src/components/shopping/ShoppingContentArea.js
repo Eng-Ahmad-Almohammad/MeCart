@@ -26,6 +26,7 @@ class ShoppingContentArea extends Component {
     })
   }
 
+<<<<<<< HEAD
   render() {
     return (
       <div>
@@ -55,6 +56,44 @@ class ShoppingContentArea extends Component {
       </div>
     );
   }
+=======
+    render() {
+        console.log({shoppingList: this.props.shoppingList})
+        return (
+            <div>
+                <Row>
+                    <Button className="modal-trigger" href="#newListModal" node="button">
+                        New List
+                    </Button>
+                    <NewListModal/>
+                </Row>
+                <Row>
+                    <Container className="content-area">
+                        {this.props.shoppingList.items.map((value) => {
+                            console.log("<<<<<< the value >>>>>>>: " + value._id);
+                            return (
+                                <CardItem
+                                    key={`shopping-list-${value._id}`}
+                                    itemId={value._id}
+                                    type={ContentAreaTypes.SHOPPING}
+                                    title={value.name}
+                                    itemDescription={value.description}
+                                    hasMenu={true}
+                                    menuItems={this.state.listMenuItems}
+                                    onClick={ e => {
+                                        this.setState({isModalOpen: !this.state.isModalOpen});
+                                        this.props.updateContentArea(ContentAreaTypes.SHOPPING_LIST_DETAILS, value._id)
+                                    }
+                                    }
+                                />
+                            );
+                        })}
+                    </Container>
+                </Row>
+            </div>
+        );
+    }
+>>>>>>> 52e37470 (project updates)
 }
 
 const mapStateToProps = (state) => ({

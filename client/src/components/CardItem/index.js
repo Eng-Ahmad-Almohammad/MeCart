@@ -30,6 +30,7 @@ const CardItem = ({
     rating -= 1.0;
   }
 
+<<<<<<< HEAD
   const showMenu = () => {
     if (menu && listItem && listItem._id) {
       return <Menu itemId={listItem._id} />;
@@ -62,6 +63,42 @@ const CardItem = ({
       </Col>
     </Card>
   );
+=======
+    const showMenu = () => {
+        if (menu && Array.isArray(menuItems) && menuItems.length > 0) {
+            return <Menu itemId={itemId} menuItems={menuItems}/>;
+        }
+    };
+
+    return (
+        <a href="#" onClick={onClick}>
+            <div>
+                <Card
+                    header={<CardItemHeader imageUrl={imageUrl}/>}
+                    title={title || ""}
+                    className="hoverable"
+                    actions={[
+                        <a key="1" href="#">This is a link</a>,
+                        <a key="2" href="#">This is a link</a>
+                    ]}
+                >
+                    {showMenu()}
+                    <p>{itemDescription}</p>
+                    <Col s={6} className="left-align">
+                        <span className="star-rating">
+                          {stars.map((value) => (
+                              <Icon>{value}</Icon>
+                          ))}
+                        </span>
+                    </Col>
+                    <Col s={6} className="right-align">
+                        <span>$10.00</span>
+                    </Col>
+                </Card>
+            </div>
+        </a>
+    );
+>>>>>>> 52e37470 (project updates)
 };
 
 export default CardItem;

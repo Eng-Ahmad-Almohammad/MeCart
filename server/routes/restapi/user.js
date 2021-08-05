@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+const mongoose = require("mongoose");
+const Users = mongoose.model("users");
+
 export const authenticatedUser = (req, res, next) => {
   if (!req.user) {
     res.status(400).send({
@@ -42,6 +45,37 @@ export const logout = (req, res, next) => {
   res.send({ user: req.user }); // If no redirect, display this.
   next();
 };
+
+export const getUserProfile = async (req, res, next) => {
+  const debugInfo = {
+    data: req.body,
+    function: "getUserProfile",
+  };
+
+  console.log({ debugInfo });
+
+  if (!req.params || !req.params.userId) {
+    res.status(400).send({error: 'Missing/Invalid userId provided.'})
+    return;
+  }
+
+  try {
+    const user = await Users.findById(req.body.id);
+    if (!user) {
+      res.status(404).send({ error: 'User not found' });
+      return;
+    }
+
+    res.send({ user: user });
+    next();
+  } catch (err) {
+    debugInfo.message = err.message;
+    console.log({ debugInfo });
+    res.status(500).send(err.message);
+  }
+
+  return;
+}
 
 export const registration = (req, res, next) => {
   // TODO: complete this
@@ -103,5 +137,7 @@ router.post("/sign-up", signUp);
 router.put("/users/:userId", replaceUser);
 router.patch("/users/:userId", updateUser);
 router.delete("/users/:userId", deleteUser);
+router.delete("/users/:userId", deleteUser);
+router.delete("/users/profiles/:profileId", getUserProfile);
 
 export default router;

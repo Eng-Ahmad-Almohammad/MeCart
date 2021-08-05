@@ -40,9 +40,17 @@ class Menu extends Component {
           Edit
         </a>
         <a
+<<<<<<< HEAD
           onClick={() => {
             this.deleteItem(this.props.itemId);
           }}
+=======
+            onClick={(e) => {
+                if (onItemClick) {
+                    onItemClick(itemId);
+                }
+            }}
+>>>>>>> 52e37470 (project updates)
         >
           <Icon>delete</Icon>
           Delete

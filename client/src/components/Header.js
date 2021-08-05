@@ -128,11 +128,23 @@ class Header extends Component {
           Logout
         </NavItem>
 
+<<<<<<< HEAD
         <NavItem>Profile</NavItem>
         <NavFooter />
       </Navbar>
     );
   }
+=======
+                <NavItem
+                    onClick={() => {
+                        this.props.updateContentArea(ContentAreaTypes.USER_PROFILE);
+                    }}
+                >Profile</NavItem>
+                <NavFooter/>
+            </Navbar>
+        );
+    }
+>>>>>>> 52e37470 (project updates)
 
   render() {
     if (this.isLoggedIn()) {

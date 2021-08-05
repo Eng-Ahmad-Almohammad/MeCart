@@ -14,6 +14,8 @@ export const CREATE_SHOPPING_LIST = "create_shopping_list";
 export const FETCH_STORE_LIST = "fetch_store_list";
 export const CREATE_STORE_LIST="create_store_list";
 
+export const FETCH_PROFILE = "fetch_profile";
+
 export const SIGN_IN = "sign_in";
 export const SIGN_UP = "sign_up";
 
