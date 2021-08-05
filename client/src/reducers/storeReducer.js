@@ -1,8 +1,7 @@
 import { ContentAreaTypes } from "../actions";
 import {
   FETCH_STORE_LIST,
-//   FETCH_PRODUCT_CONTENT,
-//   FETCH_PRODUCT_LIST_FIELD,
+  CREATE_STORE_LIST,
 } from "../actions/types";
 
 const InitialState = {
@@ -20,6 +19,8 @@ const InitialState = {
           ...state,
           supermarkets: [...action.payload]
         };
+      case CREATE_STORE_LIST:
+        return state;
       default:
         return state;
     }

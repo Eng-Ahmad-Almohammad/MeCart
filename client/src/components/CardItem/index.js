@@ -42,7 +42,12 @@ const CardItem = ({
       title={listItem.name || ""}
       className="hoverable"
       actions={[]}
-    >
+      onClick={()=>{
+       console.log('from click====',listItem)
+      }
+       
+      }
+     >
       {showMenu()}
       <p>{listItem.descriptionOne}</p>
       <Col s={6} className="left-align">

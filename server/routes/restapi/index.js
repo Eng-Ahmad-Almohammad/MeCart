@@ -2,6 +2,7 @@ import userRoutes from "./user";
 import supermarketRoutes from "./supermarket";
 import productRoutes from "./product";
 import shoppingListRoutes from "./list";
+import productInstance from "./productInstance";
 import { Router } from "express";
 
 const requestLogger = (req, res, next) => {
@@ -20,5 +21,7 @@ router.use(supermarketRoutes);
 router.use(productRoutes);
 
 router.use(shoppingListRoutes);
+
+router.use(productInstance);
 
 export default router;

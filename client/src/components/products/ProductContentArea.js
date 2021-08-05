@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllProducts } from "../../actions";
+import { ContentAreaTypes, getAllProducts,getProductInstance} from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
 
 
@@ -12,26 +12,26 @@ class ProductContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards:this.props.storeList
-      // cards: Array(12)
-      //   .fill("")
-      //   .map((value, index, array) => {
-      //     return `https://picsum.photos/${250}/${250}`;
-      //   }),
+      cards:this.props.storeList,
+      ProductIn:{}
     };
   }
   componentDidMount(){
     this.props.getData().then(res =>{
-      // console.log('Hellllllllllllo',this.props.storeList)
     this.setState({ cards: this.props.storeList })
     })
-    
-    
   }
+
+  // componentDidUpdate(prevState){
+  //   if(this.state.isModalOpen===true&&prevState.isModalOpen==false){
+  //    const GetItem=()=>{
+
+  //    }
+  //   }
+  // }
   
   render() {
-
-    return (
+    return !this.state.isModalOpen?(
       <div>
         <Row>
           <Button
@@ -46,34 +46,54 @@ class ProductContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.state.cards.map((value) => {
-              return (
+              
+              return  (
+                <div  onClick={async() =>{
+                  await this.props.getItem(value._id);
+                  console.log("from click========>",this.props.item);
+                  this.setState({ isModalOpen: !this.state.isModalOpen });
+                }}>
                 <CardItem
                   type={ContentAreaTypes.PRODUCTS} //
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
-                  onClick={() =>
-                    this.setState({ isModalOpen: !this.state.isModalOpen })
-                  }
+                  // onClick={() =>
+                  //   this.setState({ isModalOpen: !this.state.isModalOpen })
+                  // }
                 />
-              );
+                </div>
+              )
             })}
           </Container>
         </Row>
       </div>
-    );
+    ):(
+      <div>
+        <Button onClick={()=>
+        this.setState({ isModalOpen: !this.state.isModalOpen })
+        }>
+          close
+        </Button>
+        <p>priceBeforeTax {this.props.item.priceBeforeTax}</p>
+        <p>priceAfterTax {this.props.item.priceAfterTax}</p>
+        <p>unitOfMeasure {this.props.item.unitOfMeasure}</p>
+        <p>measurement {this.props.item.measurement}</p>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = (state => {
-  console.log('Stattttttttttttttttttttte',state);
   return {
-  storeList: state.product.product
+  storeList: state.product.product,
+  item:state.product.item
   }
 
 }
 )
 const mapDispatchToProp = (dispatch) => ({
-  getData :  () =>  dispatch(getAllProducts())
+  getData :  () =>  dispatch(getAllProducts()),
+  getItem:(id)=> dispatch(getProductInstance(id))
 })
 export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);

@@ -3,13 +3,16 @@ import {
   FETCH_PRODUCT_LIST,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
+  CREATE_PRODUCT_LIST,
+  FETCH_PRODUCT_INSTANCE
 } from "../actions/types";
 
 const InitialState = {
   isFailed: false,
   component: ContentAreaTypes.DEFAULT,
   failedComponent: null,
-  product: []
+  product: [],
+  item:{},
 };
 
 const productReducer = function (state = InitialState, action) {
@@ -21,7 +24,8 @@ const productReducer = function (state = InitialState, action) {
         isFailed: false,
         component: action.payload,
         failedComponent: null,
-        product: [...action.payload]
+        product: [...action.payload],
+        item:{}
       };
     case FETCH_PRODUCT_CONTENT:
       return {
@@ -29,9 +33,18 @@ const productReducer = function (state = InitialState, action) {
         isFailed: true,
         component: action.payload.component,
         failedComponent: action.payload.failedComponent,
+        item:{}
       };
     case FETCH_PRODUCT_LIST_FIELD:
       console.log("FETCH_PRODUCT_LIST_FIELD");
+    case FETCH_PRODUCT_INSTANCE:
+      console.log("from reducer========>",action.payload)
+      return{
+        ...state,
+         item:action.payload,
+      }
+    case CREATE_PRODUCT_LIST:
+        return state;
     default:
       return state;
   }

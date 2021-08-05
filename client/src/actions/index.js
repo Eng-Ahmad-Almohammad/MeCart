@@ -4,12 +4,16 @@ import {
   UPDATE_CONTENT_COMPONENT_FAILED,
   UPDATE_CONTENT_COMPONENT_SUCCESS,
   FETCH_PRODUCT_LIST,
+  CREATE_PRODUCT_LIST,
+  FETCH_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
   FETCH_SHOPPING_LIST,
+  CREATE_SHOPPING_LIST,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
+  CREATE_STORE_LIST,
   SIGN_IN,
   SIGN_UP,
 } from "./types";
@@ -81,7 +85,7 @@ export const createShoppingList = (list) => async (dispatch) => {
   
     console.log('from list creation',res);
   
-    dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+    dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
 };
 
 export const deleteShoppingList = (listId) => async (dispatch) => {
@@ -135,7 +139,7 @@ export const createProduct = (product) => async (dispatch) => {
 
   console.log({ res });
 
-  dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data });
+  dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
 };
 
 export const createSupermarket = (supermarket) => async (dispatch) => {
@@ -152,7 +156,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
 
   console.log({ res });
 
-  dispatch({ type: FETCH_STORE_LIST, payload: res.data });
+  dispatch({ type: CREATE_STORE_LIST, payload: res.data });
 };
 
 export const getAllProducts = () => async (dispatch) => {
@@ -196,4 +200,10 @@ export const getProduct = (productId) => async (dispatch) => {
   });
 
   dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
+};
+
+export const getProductInstance = (productId) => async (dispatch) => {
+  const res = await axios.get(`/api/productInstance/${productId}`);
+  console.log('from fetch instance',{res})
+  dispatch({ type:FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
 };
