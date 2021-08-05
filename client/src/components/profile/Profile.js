@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
@@ -34,20 +33,6 @@ function mapStateToProps(state) {
   return {
     formValues: state.form.surveyForm.values,
   };
-=======
-import React, {Component} from "react";
-
-class Profile extends Component {
-    render() {
-        return <div>
-            <h1>Content for Profile</h1>
-
-            <p>Your points are 3000</p>
-
-
-        </div>
-    }
->>>>>>> 52e37470 (project updates)
 }
 
 export default Profile;

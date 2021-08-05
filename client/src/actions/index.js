@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-<<<<<<< HEAD
   FETCH_USER,
   UPDATE_CONTENT_COMPONENT_FAILED,
   UPDATE_CONTENT_COMPONENT_SUCCESS,
@@ -17,24 +16,6 @@ import {
   CREATE_STORE_LIST,
   SIGN_IN,
   SIGN_UP,
-=======
-    FETCH_PRODUCT_INSTANCES,
-    FETCH_PRODUCT_LIST,
-    FETCH_PRODUCT_LIST_FAILED,
-    FETCH_SHOPPING_LIST,
-    FETCH_SHOPPING_LIST_FAILED,
-    CREATE_SHOPPING_LIST,
-    FETCH_STORE_LIST,
-    FETCH_USER,
-    SIGN_IN,
-    SIGN_UP,
-    FETCH_PROFILE,
-    UPDATE_CONTENT_COMPONENT_FAILED,
-    UPDATE_CONTENT_COMPONENT_SUCCESS,
-    CREATE_PRODUCT_LIST,
-    CREATE_STORE_LIST,
-    FETCH_STORE_LIST_FAILED,
->>>>>>> 52e37470 (project updates)
 } from "./types";
 import _ from "lodash";
 
@@ -45,20 +26,10 @@ export const fetchUser = () => async (dispatch) => {
 };
 
 export const ContentAreaTypes = {
-<<<<<<< HEAD
   PRODUCTS: "Products",
   SHOPPING: "Shopping",
   SUPERMARKETS: "Supermarkets",
   DEFAULT: "Dashboard",
-=======
-    PRODUCTS: "Products",
-    SHOPPING: "Shopping",
-    SUPERMARKETS: "Supermarkets",
-    LEADERBOARD: "Leaderboard",
-    SHOPPING_LIST_DETAILS: "Shopping_list_details",
-    USER_PROFILE: "User_Profile",
-    DEFAULT: "Dashboard",
->>>>>>> 52e37470 (project updates)
 };
 
 const updateContentComponentFailed = (attemptComponent) => ({
@@ -83,22 +54,6 @@ export const updateContentComponent = (component) => {
   return updateContentComponentSuccess(newComponent);
 };
 
-<<<<<<< HEAD
-=======
-export const profile = (userId) => async (dispatch) => {
-    const res = await axios.get("/api/users/", {
-        params: {
-            userId: userId,
-        },
-    });
-
-    if (res.status === 200) {
-        dispatch({type: FETCH_PROFILE, payload: res.data.user});
-    }
-};
-
-// authentication
->>>>>>> 52e37470 (project updates)
 export const signIn = (values, history) => async (dispatch) => {
   console.log("sign in values are: " + values);
   const res = await axios.post("/api/sign-in", values);
@@ -116,20 +71,20 @@ export const signUp = (values, history) => async (dispatch) => {
 };
 
 export const createShoppingList = (list) => async (dispatch) => {
-  
+
 
     const res = await axios({
       method:"post",
       url:"api/lists",
       headers: {
-        
+
         'Content-Type': 'application/json'
       },
       data:JSON.stringify(list)
     });
-  
+
     console.log('from list creation',res);
-  
+
     dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
 };
 
@@ -176,7 +131,7 @@ export const createProduct = (product) => async (dispatch) => {
   const res = await axios(`api/products`, {
     method: 'post',
     headers: {
-      
+
       'Content-Type': 'application/json'
     },
     data: JSON.stringify(product)
@@ -192,7 +147,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
     method:"post",
     url:"/api/supermarkets",
     headers: {
-      
+
       'Content-Type': 'application/json'
     },
     data:JSON.stringify(supermarket)
@@ -210,10 +165,10 @@ export const getAllProducts = () => async (dispatch) => {
   console.log({ res });
 
   if (res.status === 200) {
-    
-     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})  
-    
-   
+
+     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})
+
+
   }
 };
 
