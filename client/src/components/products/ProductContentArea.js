@@ -4,6 +4,7 @@ import CardItem from "../CardItem";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllProducts,getProductInstance} from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
+import ProductInstance from "./productInstancesArea";
 
 
 class ProductContentArea extends Component {
@@ -16,19 +17,16 @@ class ProductContentArea extends Component {
       ProductIn:{}
     };
   }
+
+  handleModal=()=>{
+    this.setState({ isModalOpen: !this.state.isModalOpen })
+  }
   componentDidMount(){
     this.props.getData().then(res =>{
     this.setState({ cards: this.props.storeList })
     })
   }
 
-  // componentDidUpdate(prevState){
-  //   if(this.state.isModalOpen===true&&prevState.isModalOpen==false){
-  //    const GetItem=()=>{
-
-  //    }
-  //   }
-  // }
   
   render() {
     return !this.state.isModalOpen?(
@@ -50,7 +48,6 @@ class ProductContentArea extends Component {
               return  (
                 <div  onClick={async() =>{
                   await this.props.getItem(value._id);
-                  console.log("from click========>",this.props.item);
                   this.setState({ isModalOpen: !this.state.isModalOpen });
                 }}>
                 <CardItem
@@ -69,17 +66,7 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ):(
-      <div>
-        <Button onClick={()=>
-        this.setState({ isModalOpen: !this.state.isModalOpen })
-        }>
-          close
-        </Button>
-        <p>priceBeforeTax {this.props.item.priceBeforeTax}</p>
-        <p>priceAfterTax {this.props.item.priceAfterTax}</p>
-        <p>unitOfMeasure {this.props.item.unitOfMeasure}</p>
-        <p>measurement {this.props.item.measurement}</p>
-      </div>
+      <ProductInstance handler={this.handleModal}  item={this.props.item}/>
     )
   }
 }
