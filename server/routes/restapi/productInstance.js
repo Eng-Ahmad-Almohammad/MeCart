@@ -1,5 +1,4 @@
 import { Router } from "express";
-import multer from "multer";
 const mongoose = require("mongoose");
 
 import ProductItances from "../../models/ProductInstance";
@@ -13,14 +12,10 @@ export const createProductInstance = async (req, res, next) => {
     console.log('Hellllllllllllo ProductInstance', req.body);  
   
     try {
-    //   const imageStorage = await getImageStorage();
-    //   const uploader = multer({ storage: imageStorage });
-    //   await uploader.any()(req, res, async () => {
-        // console.log({files: req.files})
         
         const {priceBeforeTax, priceAfterTax, unitOfMeasure, measurement } = req.body;
         
-        const productInstance = new ProductItances({
+        const productInstances = new ProductItances({
             priceBeforeTax,
             priceAfterTax,
             unitOfMeasure,
@@ -31,10 +26,9 @@ export const createProductInstance = async (req, res, next) => {
         });
     
         await productInstances.save();
-    
         res.send({ productInstance: productInstance });
         next();
-    //   });
+
   
       
     } catch (err) {
@@ -57,7 +51,7 @@ export const createProductInstance = async (req, res, next) => {
     try {
       const productInstance = await ProductItances.find({productId:req.params.id});
   
-      res.send({ productInstance:productInstance[0] });
+      res.send({ productInstance:productInstance });
       next();
     } catch (err) {
       debugInfo.message = err.message;
