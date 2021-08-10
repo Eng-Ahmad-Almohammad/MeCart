@@ -15,6 +15,7 @@ export const FETCH_STORE_LIST = "fetch_store_list";
 export const CREATE_STORE_LIST="create_store_list";
 
 export const FETCH_PROFILE = "fetch_profile";
+export const SHOW_SEARCH = "show_search";
 
 export const SIGN_IN = "sign_in";
 export const SIGN_UP = "sign_up";

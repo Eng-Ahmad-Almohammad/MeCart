@@ -26,16 +26,16 @@ export const logout = (req, res, next) => {
 
   try {
 
-    
+
     req.logout();
-    if (successRedirect) { 
+    if (successRedirect) {
       res.redirect(successRedirect); // Redirect & exit
       next();
       return;
     }
   }
   catch (err) {
-    if (failRedirect) { 
+    if (failRedirect) {
       res.redirect(failRedirect); // Redirect & exit
       next();
       return;

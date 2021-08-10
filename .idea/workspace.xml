@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0b81f57-1f90-430f-8c66-920d51f71f1f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/reducers/userReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CardItem/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CardItem/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CardItem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CardItem/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/products/instances/InstanceContentArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/products/instances/InstanceContentArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/shopping/ShoppingContentArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/shopping/ShoppingContentArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/supermarkets/SupermarketContentArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/supermarkets/SupermarketContentArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/restapi/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/restapi/user.js" afterDir="false" />
-    </list>
+    <list default="true" id="e0b81f57-1f90-430f-8c66-920d51f71f1f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,6 +78,7 @@
       <workItem from="1628164114986" duration="1028000" />
       <workItem from="1628165158387" duration="105000" />
       <workItem from="1628166037643" duration="82000" />
+      <workItem from="1628166136427" duration="667000" />
     </task>
     <servers />
   </component>

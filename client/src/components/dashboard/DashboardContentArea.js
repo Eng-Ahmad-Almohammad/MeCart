@@ -23,9 +23,18 @@ class DashboardContentArea extends Component {
   renderContent() {
     return (
       <Container className="content-area">
-        {this.state.cards.map((imageUrl) => {
+        {this.state.cards.map((imageUrl, index) => {
           return (
-          <div> Not Avaliable Now</div>
+          // <div> Not Avaliable Now</div>
+          <CardItem
+                            key={`dashboard-${index}`}
+                            type={ContentAreaTypes.DEFAULT}
+                            imageUrl={imageUrl}
+                            onClick={() => {
+                                this.setState({isModalOpen: !this.state.isModalOpen});
+                                console.log("I clicked the image");
+                            }}
+                        />
           );
         })}
         {this.state.isModalOpen && (

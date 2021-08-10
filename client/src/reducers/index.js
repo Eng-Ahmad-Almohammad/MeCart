@@ -5,6 +5,8 @@ import shoppingListReducer from "./shoppingListReducer";
 import { reducer as formReducer } from 'redux-form';
 import productReducer from './productReducer';
 import storeReducer from './storeReducer';
+import userReducer from "./userReducer";
+import searchReducer from "./searchReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +14,8 @@ export default combineReducers({
   shoppingList: shoppingListReducer,
   form: formReducer,
   product: productReducer,
-  supermarketList:storeReducer
+  stores: storeReducer,
+  users: userReducer,
+  supermarketList:storeReducer,
+  search: searchReducer
 });

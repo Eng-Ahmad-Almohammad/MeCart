@@ -16,6 +16,8 @@ import {
   CREATE_STORE_LIST,
   SIGN_IN,
   SIGN_UP,
+  FETCH_PROFILE,
+  SHOW_SEARCH,
 } from "./types";
 import _ from "lodash";
 
@@ -29,6 +31,10 @@ export const ContentAreaTypes = {
   PRODUCTS: "Products",
   SHOPPING: "Shopping",
   SUPERMARKETS: "Supermarkets",
+  LEADERBOARD: "Leaderboard",
+  SHOPPING_LIST_DETAILS: "Shopping_list_details",
+  USER_PROFILE: "User_Profile",
+  SEARCH: "Search",
   DEFAULT: "Dashboard",
 };
 
@@ -68,6 +74,26 @@ export const signUp = (values, history) => async (dispatch) => {
 
   history.push("/sign-in");
   dispatch({ type: SIGN_UP, payload: res.data });
+};
+
+export const profile = (userId) => async (dispatch) => {
+    const res = await axios.get("/api/users/", {
+        params: {
+            userId: userId,
+        },
+    });
+
+    if (res.status === 200) {
+        dispatch({type: FETCH_PROFILE, payload: res.data.user});
+    }
+};
+
+export const showSearch = () => async (dispatch) => {
+    const res = await axios.get("/api/search");
+    console.log("from get search results====> ", res );
+    if (res.status === 200) {
+      dispatch({ type: SHOW_SEARCH, payload: res.data.search });
+    }
 };
 
 export const createShoppingList = (list) => async (dispatch) => {
