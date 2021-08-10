@@ -9,7 +9,7 @@ import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import LeaderBoardContentArea from "../leaderboard/LeaderBoardContentArea";
 import DashboardContentArea from "./DashboardContentArea";
 
-import Profile from '../profile/Profile'
+// import Profile from '../profile/Profile'
 
 import ListDetails from "../shopping/ListDetails";
 
