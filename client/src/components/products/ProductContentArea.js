@@ -82,6 +82,6 @@ const mapStateToProps = (state => {
 )
 const mapDispatchToProp = (dispatch) => ({
   getData :  () =>  dispatch(getAllProducts()),
-  getItem:(id)=> dispatch(getProductInstance(id))
+  getItem:(id)=> dispatch(getProductInstance(id)),
 })
 export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);

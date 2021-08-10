@@ -17,7 +17,6 @@ class NewProductModal extends Component {
     componentDidMount() {
 
         this.props.fetchShoppingList().then(res =>{
-          console.log('from shopping list ======?',this.props.shoppingList)
           this.setState({ cards: this.props.shoppingList });
         })
       }
