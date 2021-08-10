@@ -4,7 +4,7 @@ import CardItem from "../CardItem";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllProducts,getProductInstance} from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
-import ProductInstance from "./productInstancesArea";
+import ProductInstance from "./instances/productInstancesArea";
 
 
 class ProductContentArea extends Component {
@@ -66,18 +66,7 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ):(
-<<<<<<< HEAD
       <ProductInstance handler={this.handleModal}  item={this.props.item}/>
-=======
-      <div>
-        <Button onClick={()=>
-        this.setState({ isModalOpen: !this.state.isModalOpen })
-        }>
-          close
-        </Button>
-
-      </div>
->>>>>>> d18a5da9 (recent changes)
     )
   }
 }
@@ -92,6 +81,6 @@ const mapStateToProps = (state => {
 )
 const mapDispatchToProp = (dispatch) => ({
   getData :  () =>  dispatch(getAllProducts()),
-  getItem:(id)=> dispatch(getProductInstance(id))
+  getItem:(id)=> dispatch(getProductInstance(id)),
 })
 export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);

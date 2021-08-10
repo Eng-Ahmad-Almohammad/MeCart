@@ -10,6 +10,7 @@ import {
   FETCH_PRODUCT_LIST_FIELD,
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
+  CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
@@ -36,6 +37,7 @@ export const ContentAreaTypes = {
   USER_PROFILE: "User_Profile",
   SEARCH: "Search",
   DEFAULT: "Dashboard",
+  PROFILE: 'Profile'
 };
 
 const updateContentComponentFailed = (attemptComponent) => ({
@@ -141,14 +143,10 @@ export const getAllShoppingList = () => async (dispatch) => {
 };
 
 export const getShoppingList = (listId) => async (dispatch) => {
-  const res = await axios.get("/api/lists/", {
-    params: {
-      listId: listId,
-    },
-  });
-
+  const res = await axios.get(`/api/lists/${listId}`);
+  console.log("from getting one shopping list",{res})
   if (res.status === 200) {
-    dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
+    dispatch({ type: FETCH_SHOPPING_LIST_FIELD, payload: res.data });
   }
 };
 
@@ -167,7 +165,23 @@ export const createProduct = (product) => async (dispatch) => {
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
 };
+export const addProductToShoppingList = (val,id) => async (dispatch) => {
+ const obj={...val,product:id}
+ console.log("from adding to a shopping list======>",obj);
+ console.log("from adding product to a shopping list",obj)
+  const res = await axios(`/api/shoppinglistproduct`, {
+    method: 'post',
+    headers: {
 
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(obj)
+  });
+
+  console.log("from adding to a shopping list======>",{ res });
+
+  dispatch({ type: CREATE_SHOPPING_LIST_PRODUCT_INSTANCE, payload: res.data });
+};
 export const createSupermarket = (supermarket) => async (dispatch) => {
   const res = await axios({
     method:"post",
@@ -178,9 +192,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
     },
     data:JSON.stringify(supermarket)
   });
-  // const res = await axios.post("/api/supermarkets", supermarket);
 
-  console.log({ res });
 
   dispatch({ type: CREATE_STORE_LIST, payload: res.data });
 };
@@ -188,7 +200,6 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
 export const getAllProducts = () => async (dispatch) => {
   const res = await axios.get("/api/products");
 
-  console.log({ res });
 
   if (res.status === 200) {
 

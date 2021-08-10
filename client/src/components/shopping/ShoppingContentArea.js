@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList ,getShoppingList,fetchUser} from "../../actions";
+import { ContentAreaTypes, getAllShoppingList ,getShoppingList} from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -11,7 +11,8 @@ class ShoppingContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards:this.props.shoppingList
+      cards:this.props.shoppingList,
+      shoppingList:{}
       // cards: Array(12)
       //   .fill("")
       //   .map((value, index, array) => {}),
@@ -38,12 +39,11 @@ class ShoppingContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.props.shoppingList.items.map((value) => {
-              console.log("<<<<<< the value >>>>>>>: " + value._id);
               return (
                 <div  onClick={async() =>{
                   await this.props.getItem(value._id);
-                  console.log("from click========>",this.props.item);
-                  this.setState({ isModalOpen: !this.state.isModalOpen });
+                  this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
+                  console.log('from click====',this.state.shoppingList)
                 }}>
                 <CardItem
                   type={ContentAreaTypes.SHOPPING}
@@ -61,12 +61,27 @@ class ShoppingContentArea extends Component {
       </div>
     ):(
       <div>
+        <Row>
         <Button onClick={()=>
         this.setState({ isModalOpen: !this.state.isModalOpen })
         }>
           close
         </Button>
-
+        </Row>
+        <Row>
+          <Container>
+            <div>
+              <p>list name {this.state.shoppingList.shoppingList.name}</p>
+              <p>list description {this.state.shoppingList.shoppingList.description}</p>
+              {
+                this.state.shoppingList.productInstances.map((item,indx)=>{
+                  return <p key={indx}>prodct number {indx+1} price before taxes{item.priceBeforeTax}</p>
+                })
+              }
+            </div>
+          </Container>
+        </Row>
+        
       </div>
     )
   }
@@ -79,7 +94,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
   getItem:(id)=> dispatch(getShoppingList(id))
-  // fetchUser:async ()=>dispatch(await fetchUser())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShoppingContentArea);

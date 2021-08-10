@@ -1,54 +1,21 @@
-// import _ from "lodash";
-// import React from "react";
-// import { connect } from "react-redux";
-// import formFields from "./formFields";
-// import { withRouter } from "react-router-dom";
-// import * as actions from "../../actions";
-//
-// const Profile = ({ onCancel, formValues }) => {
-//   const reviewFields = _.map(formFields, ({ name, label }) => {
-//     return (
-//       <div key={name}>
-//         <label>{label}</label>
-//         <div>{formValues[name]}</div>
-//       </div>
-//     );
-//   });
-//
-//   return (
-//     <div>
-//       <h5>Profile</h5>
-//       {reviewFields}
-//       <button
-//         className="yellow darken-3 white-text btn-flat"
-//         onClick={onCancel}
-//       >
-//         Back
-//       </button>
-//     </div>
-//   );
-// };
-//
-// function mapStateToProps(state) {
-//   return {
-//     formValues: state.form.surveyForm.values,
-//   };
-// }
-//
-// export default Profile;
-
-import React, {Component} from "react";
-
-class Profile extends Component {
-    render() {
-        return <div>
-            <h1>Content for Profile</h1>
-
-            <p>Your points are 3000</p>
-
-
-        </div>
-    }
+import _ from "lodash";
+import React from "react";
+import { connect } from "react-redux";
+import formFields from "./formFields";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions";
+const Profile = ({ user }) => {
+  console.log('useeeeeeeeeer',user)
+  return (
+    <div>
+      <h5>Profile</h5>
+    </div>
+  );
+};
+function mapStateToProps(state) {
+  // console.log('Stattttttte',state);
+  return {
+    user: state.auth,
+  };
 }
-
-export default Profile;
+export default connect(mapStateToProps, actions)(withRouter(Profile));

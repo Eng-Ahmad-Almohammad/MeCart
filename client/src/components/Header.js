@@ -129,6 +129,7 @@ class Header extends Component {
         </NavItem>
 
         <NavItem
+
                     onClick={() => {
                         this.props.updateContentArea(ContentAreaTypes.USER_PROFILE);
                     }}
@@ -139,6 +140,7 @@ class Header extends Component {
                                 this.props.updateContentArea(ContentAreaTypes.SEARCH);
                             }}
                         >Search</NavItem>
+
         <NavFooter />
       </Navbar>
     );
