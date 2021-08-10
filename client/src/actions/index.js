@@ -10,6 +10,7 @@ import {
   FETCH_PRODUCT_LIST_FIELD,
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
+  CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
@@ -167,7 +168,22 @@ export const createProduct = (product) => async (dispatch) => {
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
 };
+export const addProductToShoppingList = (val,id) => async (dispatch) => {
+ const obj={...val,product:id}
+ console.log("from adding product to a shopping list",obj)
+  const res = await axios(`/shoppinglistproduct`, {
+    method: 'post',
+    headers: {
 
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(obj)
+  });
+
+  console.log("from adding to a shopping list======>",{ res });
+
+  dispatch({ type: CREATE_SHOPPING_LIST_PRODUCT_INSTANCE, payload: res.data });
+};
 export const createSupermarket = (supermarket) => async (dispatch) => {
   const res = await axios({
     method:"post",

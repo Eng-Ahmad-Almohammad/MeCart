@@ -70,6 +70,7 @@ export const getAllShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
+  console.log( req.user._id );
 
   try {
     const shoppingLists = await ShoppingLists.find({user : req.user._id});

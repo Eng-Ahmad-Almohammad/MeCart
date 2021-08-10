@@ -10,25 +10,25 @@ export const addProductToShoppingList = async (req, res, next) => {
       function: "replaceShoppingList",
     };
   
-    console.log({ debugInfo });
+    // console.log({ debugInfo });
   
     try {
-      const {unitOfMeasure,quantity, product,shoppingList,productInstanceId} = req.body;
+      const {quantity, product,shoppingList} = req.body;
   
       const updatedList = await ShoppingLists.updateOne(
-        { _id: req.params.listId},
+        { _id:shoppingList},
         // { $set: { name: name, description: description } },
-        {$push:{products:productInstanceId}}
+        {$push:{products:product}}
       );
-      const ShoppingLisPriduct = new ShoppingLisProducts({
-        unitOfMeasure,
+
+      const ShoppingLisProduct = new ShoppingLisProducts({
         quantity,
-        product:productInstanceId,
+        product,
         shoppingList,
         dateAdded: Date.now(),
         dateModified: Date.now(),
     });
-  
+      await ShoppingLisProduct.save()
       res.send({ shoppingList: updatedList });
       next();
     } catch (err) {
@@ -42,7 +42,7 @@ export const addProductToShoppingList = async (req, res, next) => {
 
 const router = Router();
 
-router.put("/productlist/:listId",addProductToShoppingList)
+router.post("/shoppinglistproduct",addProductToShoppingList)
 
 export default router;
 
