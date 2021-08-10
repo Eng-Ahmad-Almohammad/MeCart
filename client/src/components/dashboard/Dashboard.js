@@ -5,6 +5,7 @@ import ProductContentArea from "../products/ProductContentArea";
 import ShoppingContentArea from "../shopping/ShoppingContentArea";
 import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import DashboardContentArea from "./DashboardContentArea";
+import Profile from '../profile/Profile'
 
 import "./style.scss";
 import { Col, Container, Row } from "react-materialize";
@@ -33,6 +34,8 @@ class Dashboard extends Component {
         return <ShoppingContentArea />;
       case ContentAreaTypes.SUPERMARKETS:
         return <SupermarketContentArea />;
+      case ContentAreaTypes.PROFILE:
+        return <Profile />
 
       case ContentAreaTypes.DEFAULT:
       default:

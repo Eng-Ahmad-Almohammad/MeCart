@@ -30,6 +30,7 @@ export const ContentAreaTypes = {
   SHOPPING: "Shopping",
   SUPERMARKETS: "Supermarkets",
   DEFAULT: "Dashboard",
+  PROFILE: 'Profile'
 };
 
 const updateContentComponentFailed = (attemptComponent) => ({

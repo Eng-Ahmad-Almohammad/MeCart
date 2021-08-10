@@ -13,6 +13,7 @@ const InitialState = {
 const dashboardReducer = function (state = InitialState, action) {
   switch (action.type) {
     case UPDATE_CONTENT_COMPONENT_SUCCESS:
+      
       return {
         ...state,
         isFailed: false,
