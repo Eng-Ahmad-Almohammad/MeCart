@@ -8,6 +8,7 @@ const userSchema = new Schema({
   passportId: { type: String, required: true, index: true, unique: true },
   firstName: String,
   lastName: String,
+  avatar: String,
   emails: [{
     type: String,
     trim: true,
@@ -17,9 +18,14 @@ const userSchema = new Schema({
     validate: [validateEmail, 'Please fill a valid email address'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   }],
+  password: String,
+  points: Number,
+  rank: Number,
+  avatar: String,
+  address: String,
 },
-{
-  timestamps: true
-});
+  {
+    timestamps: true
+  });
 
 export default mongoose.model("users", userSchema);
