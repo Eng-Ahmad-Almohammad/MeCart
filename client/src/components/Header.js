@@ -129,11 +129,18 @@ class Header extends Component {
         </NavItem>
 
         <NavItem
-          onClick={() => {
-            this.props.updateContentArea(ContentAreaTypes.PROFILE);
-          }}
-        >
-          Profile</NavItem>
+
+                    onClick={() => {
+                        this.props.updateContentArea(ContentAreaTypes.USER_PROFILE);
+                    }}
+                >Profile</NavItem>
+
+                <NavItem
+                            onClick={() => {
+                                this.props.updateContentArea(ContentAreaTypes.SEARCH);
+                            }}
+                        >Search</NavItem>
+
         <NavFooter />
       </Navbar>
     );

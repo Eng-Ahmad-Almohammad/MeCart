@@ -3,7 +3,7 @@ import { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes,getAllSupermarkets } from "../../actions";
+import { ContentAreaTypes,getAllSupermarkets, getSupermarket } from "../../actions";
 import NewStoreModal from "./modals/NewStoreModal";
 
 class SupermarketContentArea extends Component {
@@ -20,11 +20,11 @@ class SupermarketContentArea extends Component {
       // console.log('Hellllllllllllo',this.props.storeList)
     this.setState({ cards: this.props.supermarketList })
     })
-    
-    
+
+
   }
   render() {
-    return (
+    return !this.state.isModalOpen?(
       <div>
         <Row>
           <Button className="modal-trigger" href="#newStoreModal" node="button">
@@ -36,6 +36,11 @@ class SupermarketContentArea extends Component {
           <Container className="content-area">
             {this.state.cards.map((value) => {
               return (
+                <div  onClick={async() =>{
+                  await this.props.getItem(value._id);
+                  console.log("from click========>",this.props.item);
+                  this.setState({ isModalOpen: !this.state.isModalOpen });
+                }}>
                 <CardItem
                   type={ContentAreaTypes.SUPERMARKETS}
                   imageUrl={value.imageUrl}
@@ -45,12 +50,22 @@ class SupermarketContentArea extends Component {
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }
                 />
+                </div>
               );
             })}
           </Container>
         </Row>
       </div>
-    );
+    ):(
+      <div>
+        <Button onClick={()=>
+        this.setState({ isModalOpen: !this.state.isModalOpen })
+        }>
+          close
+        </Button>
+
+      </div>
+    )
   }
 }
 
@@ -59,6 +74,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProp = (dispatch) => ({
-  getData :  () =>  dispatch(getAllSupermarkets())
+  getData :  () =>  dispatch(getAllSupermarkets()),
+  getItem:(id) => dispatch(getSupermarket(id))
 })
 export default connect(mapStateToProps,mapDispatchToProp)(SupermarketContentArea);

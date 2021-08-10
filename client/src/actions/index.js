@@ -16,6 +16,8 @@ import {
   CREATE_STORE_LIST,
   SIGN_IN,
   SIGN_UP,
+  FETCH_PROFILE,
+  SHOW_SEARCH,
 } from "./types";
 import _ from "lodash";
 
@@ -29,6 +31,10 @@ export const ContentAreaTypes = {
   PRODUCTS: "Products",
   SHOPPING: "Shopping",
   SUPERMARKETS: "Supermarkets",
+  LEADERBOARD: "Leaderboard",
+  SHOPPING_LIST_DETAILS: "Shopping_list_details",
+  USER_PROFILE: "User_Profile",
+  SEARCH: "Search",
   DEFAULT: "Dashboard",
   PROFILE: 'Profile'
 };
@@ -71,21 +77,41 @@ export const signUp = (values, history) => async (dispatch) => {
   dispatch({ type: SIGN_UP, payload: res.data });
 };
 
+export const profile = (userId) => async (dispatch) => {
+    const res = await axios.get("/api/users/", {
+        params: {
+            userId: userId,
+        },
+    });
+
+    if (res.status === 200) {
+        dispatch({type: FETCH_PROFILE, payload: res.data.user});
+    }
+};
+
+export const showSearch = () => async (dispatch) => {
+    const res = await axios.get("/api/search");
+    console.log("from get search results====> ", res );
+    if (res.status === 200) {
+      dispatch({ type: SHOW_SEARCH, payload: res.data.search });
+    }
+};
+
 export const createShoppingList = (list) => async (dispatch) => {
-  
+
 
     const res = await axios({
       method:"post",
       url:"api/lists",
       headers: {
-        
+
         'Content-Type': 'application/json'
       },
       data:JSON.stringify(list)
     });
-  
+
     console.log('from list creation',res);
-  
+
     dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
 };
 
@@ -132,7 +158,7 @@ export const createProduct = (product) => async (dispatch) => {
   const res = await axios(`api/products`, {
     method: 'post',
     headers: {
-      
+
       'Content-Type': 'application/json'
     },
     data: JSON.stringify(product)
@@ -148,7 +174,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
     method:"post",
     url:"/api/supermarkets",
     headers: {
-      
+
       'Content-Type': 'application/json'
     },
     data:JSON.stringify(supermarket)
@@ -166,10 +192,10 @@ export const getAllProducts = () => async (dispatch) => {
   console.log({ res });
 
   if (res.status === 200) {
-    
-     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})  
-    
-   
+
+     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})
+
+
   }
 };
 

@@ -27,7 +27,7 @@ class ProductContentArea extends Component {
     })
   }
 
-  
+
   render() {
     return !this.state.isModalOpen?(
       <div>
@@ -44,7 +44,7 @@ class ProductContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.state.cards.map((value) => {
-              
+
               return  (
                 <div  onClick={async() =>{
                   await this.props.getItem(value._id);
@@ -66,7 +66,18 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ):(
+<<<<<<< HEAD
       <ProductInstance handler={this.handleModal}  item={this.props.item}/>
+=======
+      <div>
+        <Button onClick={()=>
+        this.setState({ isModalOpen: !this.state.isModalOpen })
+        }>
+          close
+        </Button>
+
+      </div>
+>>>>>>> d18a5da9 (recent changes)
     )
   }
 }

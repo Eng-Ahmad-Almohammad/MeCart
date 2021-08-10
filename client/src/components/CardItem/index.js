@@ -9,7 +9,7 @@ import Menu from "./Menu";
 const CardItem = ({
   imageUrl,
   title = "Title",
-  hasMenu,
+  hasMenu = false,
   listItem,
   itemDescription = "Item Description",
   rating = random(0.0, 1.0, true),
@@ -39,17 +39,17 @@ const CardItem = ({
   return (
     <Card
       header={<CardItemHeader imageUrl={imageUrl} />}
-      title={listItem.name || ""}
+      title={title || ""}
       className="hoverable"
       actions={[]}
       onClick={()=>{
        console.log('from click====',listItem)
       }
-       
+
       }
      >
       {showMenu()}
-      <p>{listItem.descriptionOne}</p>
+      <p>{itemDescription}</p>
       <Col s={6} className="left-align">
         <span className="star-rating">
           {stars.map((value) => (

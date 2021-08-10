@@ -1,11 +1,14 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
+import {Button} from "react-materialize";
+import NewProductScanModal from "./NewProductScanModal";
+
 
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
-  
+
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
       <div>
@@ -59,6 +62,14 @@ const SimpleForm = (props) => {
         <button type="button" disabled={pristine || submitting} onClick={reset}>
           Clear Values
         </button>
+        <Button
+                    className="modal-trigger"
+                    href="#newProductScanModal"
+                    node="button"
+                >
+                    Scan
+                </Button>
+                <NewProductScanModal/>
       </div>
     </form>
   );

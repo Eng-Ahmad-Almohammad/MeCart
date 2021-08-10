@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList ,fetchUser} from "../../actions";
+import { ContentAreaTypes, getAllShoppingList ,getShoppingList,fetchUser} from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -19,7 +19,7 @@ class ShoppingContentArea extends Component {
   }
 
   componentDidMount() {
-  
+
     this.props.fetchShoppingList().then(res =>{
       console.log('from shopping list ======?',this.props.shoppingList)
       this.setState({ cards: this.props.shoppingList });
@@ -27,7 +27,7 @@ class ShoppingContentArea extends Component {
   }
 
   render() {
-    return (
+    return !this.state.isModalOpen?(
       <div>
         <Row>
           <Button className="modal-trigger" href="#newListModal" node="button">
@@ -40,6 +40,11 @@ class ShoppingContentArea extends Component {
             {this.props.shoppingList.items.map((value) => {
               console.log("<<<<<< the value >>>>>>>: " + value._id);
               return (
+                <div  onClick={async() =>{
+                  await this.props.getItem(value._id);
+                  console.log("from click========>",this.props.item);
+                  this.setState({ isModalOpen: !this.state.isModalOpen });
+                }}>
                 <CardItem
                   type={ContentAreaTypes.SHOPPING}
                   hasMenu={true}
@@ -48,12 +53,22 @@ class ShoppingContentArea extends Component {
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }
                 />
+                </div>
               );
             })}
           </Container>
         </Row>
       </div>
-    );
+    ):(
+      <div>
+        <Button onClick={()=>
+        this.setState({ isModalOpen: !this.state.isModalOpen })
+        }>
+          close
+        </Button>
+
+      </div>
+    )
   }
 }
 
@@ -63,6 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
+  getItem:(id)=> dispatch(getShoppingList(id))
   // fetchUser:async ()=>dispatch(await fetchUser())
 });
 

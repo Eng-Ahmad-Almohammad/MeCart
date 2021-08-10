@@ -18,7 +18,7 @@ const InitialState = {
 const productReducer = function (state = InitialState, action) {
   switch (action.type) {
     case FETCH_PRODUCT_LIST:
-    
+
       return {
         ...state,
         isFailed: false,
@@ -37,6 +37,7 @@ const productReducer = function (state = InitialState, action) {
       };
     case FETCH_PRODUCT_LIST_FIELD:
       console.log("FETCH_PRODUCT_LIST_FIELD");
+      break;
     case FETCH_PRODUCT_INSTANCE:
       console.log("from reducer========>",action.payload)
       return{

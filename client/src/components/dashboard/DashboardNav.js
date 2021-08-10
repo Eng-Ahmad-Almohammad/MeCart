@@ -40,6 +40,14 @@ class DashboardNav extends Component {
         >
           Stores
         </SideNavItem>
+        <SideNavItem
+                    icon={<Icon>leaderboard</Icon>}
+                    onClick={() => {
+                        this.props.onSelect(ContentAreaTypes.LEADERBOARD);
+                    }}
+                >
+                    Leaderboard
+                </SideNavItem>
 
         <NavFooter />
       </SideNav>
