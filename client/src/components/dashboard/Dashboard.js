@@ -8,7 +8,11 @@ import SearchPage from "../search/SearchPage";
 import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import LeaderBoardContentArea from "../leaderboard/LeaderBoardContentArea";
 import DashboardContentArea from "./DashboardContentArea";
+
+import Profile from '../profile/Profile'
+
 import ListDetails from "../shopping/ListDetails";
+
 
 import "./style.scss";
 import { Col, Container, Row } from "react-materialize";
@@ -37,6 +41,11 @@ class Dashboard extends Component {
         return <ShoppingContentArea />;
       case ContentAreaTypes.SUPERMARKETS:
         return <SupermarketContentArea />;
+
+      case ContentAreaTypes.PROFILE:
+        return <Profile />
+
+
         case ContentAreaTypes.LEADERBOARD:
                 return <LeaderBoardContentArea/>;
                 case ContentAreaTypes.USER_PROFILE:
@@ -45,6 +54,7 @@ class Dashboard extends Component {
                 return <SearchPage/>;
             case ContentAreaTypes.SHOPPING_LIST_DETAILS:
                 return <ListDetails listId={this.props.dashboard.params}/>;
+
       case ContentAreaTypes.DEFAULT:
       default:
         return <DashboardContentArea />;

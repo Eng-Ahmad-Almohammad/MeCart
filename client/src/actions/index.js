@@ -36,6 +36,7 @@ export const ContentAreaTypes = {
   USER_PROFILE: "User_Profile",
   SEARCH: "Search",
   DEFAULT: "Dashboard",
+  PROFILE: 'Profile'
 };
 
 const updateContentComponentFailed = (attemptComponent) => ({
