@@ -8,9 +8,6 @@ import SearchPage from "../search/SearchPage";
 import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import LeaderBoardContentArea from "../leaderboard/LeaderBoardContentArea";
 import DashboardContentArea from "./DashboardContentArea";
-
-
-
 import ListDetails from "../shopping/ListDetails";
 
 
