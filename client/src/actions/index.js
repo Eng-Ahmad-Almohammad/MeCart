@@ -71,10 +71,10 @@ export const signIn = (values, history) => async (dispatch) => {
 };
 
 export const signUp = (values, history) => async (dispatch) => {
-  console.log("sign up values are: " + values);
+  console.log("sign up values are: " , values);
   const res = await axios.post("/api/sign-up", values);
 
-  history.push("/sign-in");
+  // history.push("/sign-in");
   dispatch({ type: SIGN_UP, payload: res.data });
 };
 
