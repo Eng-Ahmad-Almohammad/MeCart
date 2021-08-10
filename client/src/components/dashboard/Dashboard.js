@@ -3,13 +3,13 @@ import React, { Component } from "react";
 import DashboardNav from "./DashboardNav";
 import ProductContentArea from "../products/ProductContentArea";
 import ShoppingContentArea from "../shopping/ShoppingContentArea";
-import Profile from "../profile/Profile";
+// import Profile from "../profile/Profile";
 import SearchPage from "../search/SearchPage";
 import SupermarketContentArea from "../supermarkets/SupermarketContentArea";
 import LeaderBoardContentArea from "../leaderboard/LeaderBoardContentArea";
 import DashboardContentArea from "./DashboardContentArea";
 
-// import Profile from '../profile/Profile'
+import Profile from '../profile/Profile'
 
 import ListDetails from "../shopping/ListDetails";
 
