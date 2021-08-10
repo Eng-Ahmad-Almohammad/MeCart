@@ -66,7 +66,6 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ):(
-
       <ProductInstance handler={this.handleModal}  item={this.props.item}/>
     )
   }
