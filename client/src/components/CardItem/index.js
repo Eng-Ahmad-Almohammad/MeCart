@@ -43,7 +43,7 @@ const CardItem = ({
       className="hoverable"
       actions={[]}
       onClick={()=>{
-       console.log('from click====',listItem)
+
       }
 
       }

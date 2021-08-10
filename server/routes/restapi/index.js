@@ -3,6 +3,7 @@ import supermarketRoutes from "./supermarket";
 import productRoutes from "./product";
 import shoppingListRoutes from "./list";
 import productInstance from "./productInstance";
+import shoppinglistproduct from "./shoppingListProductIns";
 import { Router } from "express";
 
 const requestLogger = (req, res, next) => {
@@ -23,5 +24,7 @@ router.use(productRoutes);
 router.use(shoppingListRoutes);
 
 router.use(productInstance);
+
+router.use(shoppinglistproduct);
 
 export default router;

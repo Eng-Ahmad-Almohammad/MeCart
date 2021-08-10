@@ -11,6 +11,8 @@ export const FETCH_SHOPPING_CONTENT = "fetch_shopping_content";
 export const FETCH_SHOPPING_LIST_FIELD = "fetch_shopping_list_field";
 export const CREATE_SHOPPING_LIST = "create_shopping_list";
 
+export const CREATE_SHOPPING_LIST_PRODUCT_INSTANCE="create_shopping_list_product_instance"
+
 export const FETCH_STORE_LIST = "fetch_store_list";
 export const CREATE_STORE_LIST="create_store_list";
 

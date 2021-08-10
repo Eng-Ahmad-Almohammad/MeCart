@@ -4,6 +4,8 @@ import { authenticatedUser } from "./user";
 const mongoose = require("mongoose");
 
 const ShoppingLists = mongoose.model("shoppingLists");
+const ProductInstances = mongoose.model("productInstances");
+const Products = mongoose.model("products");
 
 export const createShoppingList = async (req, res, next) => {
   const debugInfo = {
@@ -47,12 +49,20 @@ export const getShoppingList = async (req, res, next) => {
   }
 
   try {
-    const shoppingList = await ShoppingLists.findById(req.params.listId).populate('products').where({ user: req.user._id });
+    const shoppingList = await (await ShoppingLists.findById(req.params.listId).populate('productInstances').where({ user: req.user._id }));
     if (!shoppingList) {
       res.status(404).send({ error: 'Shopping list not found' });
       return;
     }
-    res.send({ shoppingList: shoppingList });
+    const productInstances= await ProductInstances.find({
+      '_id':{$in:shoppingList.products}
+    });
+    //we need to populate three collections here to get the product/product instance and the shopping list
+    // const products=await Products.find({
+    //   '_id':{$in:productInstances.productId}
+    // })
+    // console.log("from api====>",{products})
+    res.send({ shoppingList: shoppingList ,productInstances:productInstances});
     next();
   } catch (err) {
     debugInfo.message = err.message;
@@ -70,6 +80,7 @@ export const getAllShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
+  console.log( req.user._id );
 
   try {
     const shoppingLists = await ShoppingLists.find({user : req.user._id});

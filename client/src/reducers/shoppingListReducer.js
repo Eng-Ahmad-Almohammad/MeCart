@@ -7,7 +7,8 @@ import {
 
 const InitialState = {
   isFailed: false,
-  items: []
+  items: [],
+  shoppingList:{}
 };
 
 const shoppingListReducer = function (state = InitialState, action) {
@@ -22,7 +23,10 @@ const shoppingListReducer = function (state = InitialState, action) {
     case FETCH_SHOPPING_CONTENT:
       return state;
     case FETCH_SHOPPING_LIST_FIELD:
-      return state;
+      return {
+        ...state,
+        shoppingList:action.payload
+      };
     case CREATE_SHOPPING_LIST:
       return state;
     default:

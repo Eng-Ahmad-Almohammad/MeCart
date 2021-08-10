@@ -4,7 +4,7 @@ import CardItem from "../CardItem";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllProducts,getProductInstance} from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
-import ProductInstance from "./productInstancesArea";
+import ProductInstance from "./instances/productInstancesArea";
 
 
 class ProductContentArea extends Component {
@@ -81,6 +81,6 @@ const mapStateToProps = (state => {
 )
 const mapDispatchToProp = (dispatch) => ({
   getData :  () =>  dispatch(getAllProducts()),
-  getItem:(id)=> dispatch(getProductInstance(id))
+  getItem:(id)=> dispatch(getProductInstance(id)),
 })
 export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);
