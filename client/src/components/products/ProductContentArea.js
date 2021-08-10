@@ -66,18 +66,7 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ):(
-<<<<<<< HEAD
       <ProductInstance handler={this.handleModal}  item={this.props.item}/>
-=======
-      <div>
-        <Button onClick={()=>
-        this.setState({ isModalOpen: !this.state.isModalOpen })
-        }>
-          close
-        </Button>
-
-      </div>
->>>>>>> d18a5da9 (recent changes)
     )
   }
 }
