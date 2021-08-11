@@ -15,6 +15,7 @@ import {
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
   CREATE_STORE_LIST,
+  FETCH_LEADERBOARD,
   SIGN_IN,
   SIGN_UP,
   FETCH_PROFILE,
@@ -52,6 +53,19 @@ const updateContentComponentSuccess = (newComponent) => ({
   type: UPDATE_CONTENT_COMPONENT_SUCCESS,
   payload: newComponent,
 });
+
+export const fetchLeaderboard =  () => async (dispatch) =>{
+  const res = await axios.get("/api/leaderboard");
+
+  
+  if (res.status === 200) {
+    
+
+     dispatch({type: FETCH_LEADERBOARD, payload: res.data.users})
+
+
+  }
+}
 
 export const updateContentComponent = (component) => {
   const newComponent = _.find(ContentAreaTypes, (v) => v === component);

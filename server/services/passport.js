@@ -27,7 +27,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ passportType: profile.provider, passportId: profile.id });
-        console.log('Profillllllllllle', profile)
+       
         if (existingUser) {
           return done(null, existingUser);
         }
