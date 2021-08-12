@@ -8,6 +8,7 @@ import storeReducer from './storeReducer';
 import userReducer from "./userReducer";
 import searchReducer from "./searchReducer";
 import categoryReducer from "./categoryReducer";
+import leaderBoardReducer from "./leaderboardReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
   users: userReducer,
   supermarketList:storeReducer,
   search: searchReducer,
-  category:categoryReducer
+  category:categoryReducer,
+  leaderboard: leaderBoardReducer
 });
