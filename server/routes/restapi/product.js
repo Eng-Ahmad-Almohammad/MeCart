@@ -1,6 +1,14 @@
 import { Router } from "express";
 import multer from "multer";
+let random = require('mongoose-simple-random');
+
+let s = new Schema({
+  message: String
+});
+s.plugin(random);
 const mongoose = require("mongoose");
+
+RandomObjects= mongoose.model('products', s);
 
 import Products from "../../models/Product";
 import {getImageBucket, getImageStorage, ImageStorageMiddleware} from "../../services/database-utils";
@@ -26,7 +34,7 @@ export const createProduct = async (req, res, next) => {
         descriptionOne,
         descriptionTwo,
         // files: req.files.map(f => f.id),
-        _category: category,
+        category,
         dateAdded: Date.now(),
         dateModified: Date.now(),
       });
@@ -149,6 +157,31 @@ export const replaceProduct = async (req, res, next) => {
   return;
 };
 
+export const getRandomProducts = async (req, res, next) => {
+  const debugInfo = {
+    data: req.body,
+    function: "getRandomProducts",
+  };
+
+  console.log({ debugInfo });
+
+  try {
+    RandomObjects.findRandom({}, {}, {count: 5}, function(err, results) {
+      if (err) console.log(err);
+      else res.send({ products:  results });
+    });
+  
+    next();
+  } catch (err) {
+    debugInfo.message = err.message;
+    console.log({ debugInfo });
+    res.status(500).send(err.message);
+  }
+
+  return;
+};
+
+
 export const deleteProduct = async (req, res, next) => {
   const debugInfo = {
     data: req.body,
@@ -175,6 +208,7 @@ const router = Router();
 
 router.post("/products", createProduct);
 router.get("/products", getAllProducts);
+router.get("/random_products", getRandomProducts);
 router.get("/products/:productId", getProduct);
 router.put("/products/:productId", replaceProduct);
 router.delete("/products/:productId", deleteProduct);

@@ -1,7 +1,8 @@
 import { random } from "lodash";
 import React, { Component } from "react";
 import { Button, Container, Modal } from "react-materialize";
-import { ContentAreaTypes } from "../../actions";
+import { ContentAreaTypes ,getAllProducts} from "../../actions";
+import { connect } from "react-redux";
 import CardItem from "../CardItem";
 
 class DashboardContentArea extends Component {
@@ -10,17 +11,20 @@ class DashboardContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards: Array(12)
-        .fill("")
-        .map((value, index, array) => {
-          return `https://picsum.photos/${random(200, 300)}/${random(
-            250,
-            350
-          )}`;
-        }),
+      cards:this.props.storeList
     };
   }
+
+  componentDidMount(){
+    
+    this.props.getData().then(res =>{
+      
+    this.setState({ cards:this.props.storeList })
+    })
+  } 
+
   renderContent() {
+    console.log("from dashboardd===========?",this.state.cards)
     return (
       <Container className="content-area">
         {this.state.cards.map((imageUrl, index) => {
@@ -29,7 +33,10 @@ class DashboardContentArea extends Component {
           <CardItem
                             key={`dashboard-${index}`}
                             type={ContentAreaTypes.DEFAULT}
-                            imageUrl={imageUrl}
+                            imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
+                              250,
+                              350
+                            )}`}
                             onClick={() => {
                                 this.setState({isModalOpen: !this.state.isModalOpen});
                                 console.log("I clicked the image");
@@ -75,4 +82,15 @@ class DashboardContentArea extends Component {
   }
 }
 
-export default DashboardContentArea;
+const mapStateToProps = (state => {
+  return {
+  storeList: state.product.product
+  }
+
+}
+)
+const mapDispatchToProp = (dispatch) => ({
+  getData :  () =>  dispatch(getAllProducts())
+})
+
+export default connect(mapStateToProps,mapDispatchToProp)(DashboardContentArea);

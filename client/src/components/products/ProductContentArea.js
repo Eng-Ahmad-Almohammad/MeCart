@@ -51,10 +51,12 @@ class ProductContentArea extends Component {
                   this.setState({ isModalOpen: !this.state.isModalOpen });
                 }}>
                 <CardItem
-                  type={ContentAreaTypes.PRODUCTS} //
+                  type={ContentAreaTypes.PRODUCTS} 
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
+                  title={value.name}
+                  itemDescription={value.descriptionOne}
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }
