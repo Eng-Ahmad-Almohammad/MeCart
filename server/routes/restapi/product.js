@@ -159,7 +159,6 @@ export const getRandomProducts = async (req, res, next) => {
   console.log({ debugInfo });
 
   try {
-<<<<<<< HEAD
     // const products = await Products.find();
     let resultArray=[];
 
@@ -188,13 +187,11 @@ export const getRandomProducts = async (req, res, next) => {
       console.log(randomproduct)
 
     }
-=======
     RandomObjects.findRandom({}, {}, {count: 5}, function(err, results) {
       if (err) console.log(err);
       else res.send({ products:  results });
     });
 
->>>>>>> a0f168a5 (error fixes)
     next();
   } catch (err) {
     debugInfo.message = err.message;
