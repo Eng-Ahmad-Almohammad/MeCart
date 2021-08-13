@@ -1,14 +1,8 @@
 import { Router } from "express";
 import multer from "multer";
-let random = require('mongoose-simple-random');
-
-let s = new Schema({
-  message: String
-});
-s.plugin(random);
 const mongoose = require("mongoose");
+const RanProducts = mongoose.model("products");
 
-RandomObjects= mongoose.model('products', s);
 
 import Products from "../../models/Product";
 import {getImageBucket, getImageStorage, ImageStorageMiddleware} from "../../services/database-utils";
@@ -166,11 +160,34 @@ export const getRandomProducts = async (req, res, next) => {
   console.log({ debugInfo });
 
   try {
-    RandomObjects.findRandom({}, {}, {count: 5}, function(err, results) {
-      if (err) console.log(err);
-      else res.send({ products:  results });
-    });
+    // const products = await Products.find();
+    let resultArray=[];
+
+    // let rand1 = Math.floor(Math.random() * (products.length));
+    // let rand2 = Math.floor(Math.random() * (products.length));
+    // let rand3 = Math.floor(Math.random() * (products.length));
+    // let rand4 = Math.floor(Math.random() * (products.length));
+    // let rand5 = Math.floor(Math.random() * (products.length));
+    // let rand6 = Math.floor(Math.random() * (products.length));
+    // let rand7 = Math.floor(Math.random() * (products.length));
+    // let rand8 = Math.floor(Math.random() * (products.length));
+    // let rand9 = Math.floor(Math.random() * (products.length));
+    for (let i = 0; i < 6; i++) {
+      
+     let randomproduct= RanProducts.countDocuments().exec(async (err, count)=>{
   
+        var random = Math.floor(Math.random() * count);
+      
+       return ( RanProducts.findOne().skip(random).exec((err, result)=>{
+      
+          return  result
+      
+        }));
+  
+      });
+      console.log(randomproduct)
+
+    }
     next();
   } catch (err) {
     debugInfo.message = err.message;

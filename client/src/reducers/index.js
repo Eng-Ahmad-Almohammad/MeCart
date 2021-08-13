@@ -7,6 +7,10 @@ import productReducer from './productReducer';
 import storeReducer from './storeReducer';
 import userReducer from "./userReducer";
 import searchReducer from "./searchReducer";
+<<<<<<< HEAD
+import categoryReducer from "./categoryReducer";
+=======
+>>>>>>> b317e87caa4e7ef4c0a79c17de019dc2dc2ab4e8
 import leaderBoardReducer from "./leaderboardReducer";
 
 export default combineReducers({
@@ -19,5 +23,9 @@ export default combineReducers({
   users: userReducer,
   supermarketList:storeReducer,
   search: searchReducer,
+<<<<<<< HEAD
+  category:categoryReducer,
+=======
+>>>>>>> b317e87caa4e7ef4c0a79c17de019dc2dc2ab4e8
   leaderboard: leaderBoardReducer
 });
