@@ -13,12 +13,14 @@ class LeaderBoardContentArea extends Component {
     componentDidMount(){
         this.props.getData().then(res =>{
        console.log('Usssssssssers',this.props.leaderBorder)
-       this.setState({
-           users:[{name:`${this.props.leaderBorder[0].firstName} ${this.props.leaderBorder[0].lastName}`, score:this.props.leaderBorder[0].points},
-        {name: `${this.props.leaderBorder[1].firstName} ${this.props.leaderBorder[1].lastName}`, score:this.props.leaderBorder[1].points}
-        ],
-        paginate:1
+       let data = {
+           users:[],
+           paginate:1
+       }
+       this.props.leaderBorder.forEach(val =>{
+           data.users.push({name:`${val.firstName} ${val.lastName}`,score:val.points})
        })
+       this.setState(data)
         })
       }
 
