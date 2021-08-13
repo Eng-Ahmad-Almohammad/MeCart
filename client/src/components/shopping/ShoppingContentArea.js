@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { random } from "lodash";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
@@ -49,6 +50,10 @@ class ShoppingContentArea extends Component {
                   type={ContentAreaTypes.SHOPPING}
                   hasMenu={true}
                   listItem={value}
+                  imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
+                    250,
+                    350
+                  )}`}
                   onClick={() =>
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }

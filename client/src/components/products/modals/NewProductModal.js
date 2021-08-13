@@ -6,6 +6,19 @@ import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
 class NewProductModal extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+
+        category:this.props.category
+    }
+}
+  componentDidMount() {
+
+    this.props.getCategories().then(res =>{
+      this.setState({ cards: this.props.category });
+    })
+  }
   render() {
     return (
       <Modal
@@ -29,20 +42,23 @@ class NewProductModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.newList} />
+          <SimpleForm onNewListSubmit={this.props.newList} category={this.state.category} />
         </div>
       </Modal>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  newList: (vals) => {
-   
-    dispatch(actions.createProduct(vals))},
+const mapStateToProps = (state) => ({
+  category: state.category.categories,
 });
 
-const modalComponent = connect(null, mapDispatchToProps)(NewProductModal);
+const mapDispatchToProps = (dispatch) => ({
+  newList: (vals) =>  dispatch(actions.createProduct(vals)),
+  getCategories:()=>dispatch(actions.getAllCategories())
+});
+
+const modalComponent = connect(mapStateToProps, mapDispatchToProps)(NewProductModal);
 
 export default reduxForm({
   form: "simpleForm",

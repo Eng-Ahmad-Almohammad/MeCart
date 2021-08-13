@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 class Menu extends Component {
   deleteItem(id) {
-    console.log("<<<<<the id is>>>>>: " + id);
     this.props.deleteList(id);
   }
 

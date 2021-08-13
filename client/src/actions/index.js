@@ -8,6 +8,8 @@ import {
   FETCH_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
+
+  FETCH_CATEGORY,
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
   CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
@@ -257,4 +259,11 @@ export const getProductInstance = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/productInstance/${productId}`);
   console.log('from fetch instance',{res})
   dispatch({ type:FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
+};
+
+export const getAllCategories = () => async (dispatch) => {
+
+  const res = await axios.get("/api/category");
+  console.log("from category fetc=====>",{res})
+  dispatch({ type: FETCH_CATEGORY, payload: res.data.categories});
 };

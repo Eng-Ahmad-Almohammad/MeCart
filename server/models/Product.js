@@ -15,10 +15,10 @@ const productSchema = new Schema({
     type: String,
     trim: true,
   },
-  category: [{
+  category: {
     type: Schema.Types.ObjectId,
     ref: "categories"
-  }],
+  },
   ranks: [{ type: Schema.Types.ObjectId, ref: "rankings" }],
   files: [{ type: Schema.Types.ObjectId, ref: "images.files"}]
 },
