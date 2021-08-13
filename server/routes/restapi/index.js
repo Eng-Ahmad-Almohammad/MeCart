@@ -4,7 +4,7 @@ import productRoutes from "./product";
 import shoppingListRoutes from "./list";
 import productInstance from "./productInstance";
 import shoppinglistproduct from "./shoppingListProductIns";
-import category from "./category";
+import leaderboardRoutes from './leaderboard';
 import { Router } from "express";
 
 const requestLogger = (req, res, next) => {
@@ -28,6 +28,6 @@ router.use(productInstance);
 
 router.use(shoppinglistproduct);
 
-router.use(category);
+router.use(leaderboardRoutes)
 
 export default router;
