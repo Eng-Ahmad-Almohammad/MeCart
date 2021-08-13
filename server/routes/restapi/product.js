@@ -3,7 +3,6 @@ import multer from "multer";
 const mongoose = require("mongoose");
 const RanProducts = mongoose.model("products");
 
-
 import Products from "../../models/Product";
 import {getImageBucket, getImageStorage, ImageStorageMiddleware} from "../../services/database-utils";
 
