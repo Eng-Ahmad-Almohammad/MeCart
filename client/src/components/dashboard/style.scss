@@ -5,6 +5,7 @@
 }
 #dashboard .col {
   padding: 0;
+  float: right;
 }
 #dashboard #dashboard-container {
   width: 100%;
@@ -46,3 +47,14 @@
   justify-content: space-around;
   align-items: flex-start;
 }
+
+
+@media only screen and (min-width: 993px) {
+  #headache1 {
+    width: 100%;
+  }
+  #headache2 {
+    width: calc(100% - 187px);
+  }
+}
+

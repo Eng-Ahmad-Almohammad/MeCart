@@ -67,12 +67,19 @@ class Dashboard extends Component {
     return (
       <Row id="dashboard">
         {!menuMinimized && (
-          <Col s={0} l={2}>
+          <Col s={0} l={2} id='headache1'>
             <DashboardNav onSelect={this.props.updateContentArea} />
           </Col>
         )}
-        <Col s={12} l={10}>
-          <Container id="dashboard-container">{this.renderContent()}</Container>
+        <Col
+        s={12} l={10}
+        id='headache2'
+        >
+          <Container id="dashboard-container"
+          style={{
+            maxWidth: '2000px',
+          }}
+          >{this.renderContent()}</Container>
         </Col>
       </Row>
     );

@@ -36,6 +36,7 @@ class ProductContentArea extends Component {
             className="modal-trigger"
             href="#newProductModal"
             node="button"
+            style={{marginLeft: "40px"}}
           >
             New Product
           </Button>

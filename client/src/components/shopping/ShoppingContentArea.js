@@ -31,7 +31,7 @@ class ShoppingContentArea extends Component {
     return !this.state.isModalOpen?(
       <div>
         <Row>
-          <Button className="modal-trigger" href="#newListModal" node="button">
+          <Button className="modal-trigger" href="#newListModal" node="button" style={{marginLeft: "40px"}}>
             New List
           </Button>
           <NewListModal />
