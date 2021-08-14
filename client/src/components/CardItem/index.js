@@ -13,6 +13,8 @@ const CardItem = ({
   listItem,
   itemDescription = "Item Description",
   rating = random(0.0, 1.0, true),
+  type,
+  handler,
 }) => {
   rating = rating * 5.0;
 
@@ -32,7 +34,7 @@ const CardItem = ({
 
   const showMenu = () => {
     if (menu && listItem && listItem._id) {
-      return <Menu itemId={listItem._id} />;
+      return <Menu handler={handler} itemId={listItem._id} itemType = {type} />;
     }
   };
 

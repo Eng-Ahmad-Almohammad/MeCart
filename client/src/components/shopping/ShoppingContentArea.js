@@ -20,15 +20,22 @@ class ShoppingContentArea extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = ()=>{
 
     this.props.fetchShoppingList().then(res =>{
       console.log('from shopping list ======?',this.props.shoppingList)
       this.setState({ cards: this.props.shoppingList });
     })
   }
+ 
+  
+  handlerShopingList = () =>{
+    this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
+  }
+
 
   render() {
+    
     return !this.state.isModalOpen?(
       <div>
         <Row>
@@ -41,19 +48,19 @@ class ShoppingContentArea extends Component {
           <Container className="content-area">
             {this.props.shoppingList.items.map((value) => {
               return (
-                <div  onClick={async() =>{
-                  await this.props.getItem(value._id);
-                  this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
-                  console.log('from click====',this.state.shoppingList)
-                }}>
+                <div>
                 <CardItem
                   type={ContentAreaTypes.SHOPPING}
                   hasMenu={true}
                   listItem={value}
+<<<<<<< HEAD
+                  handler = {this.handlerShopingList}
+=======
                   imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
                     250,
                     350
                   )}`}
+>>>>>>> main
                   onClick={() =>
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }
@@ -98,7 +105,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
-  getItem:(id)=> dispatch(getShoppingList(id))
+ 
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShoppingContentArea);
