@@ -48,11 +48,16 @@ class ProductContentArea extends Component {
               return  (
                 <div>
                 <CardItem
-                  type={ContentAreaTypes.PRODUCTS} //
+                  type={ContentAreaTypes.PRODUCTS} 
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
+<<<<<<< HEAD
                   handler={this.handleModal}
+=======
+                  title={value.name}
+                  itemDescription={value.descriptionOne}
+>>>>>>> main
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }
@@ -65,7 +70,6 @@ class ProductContentArea extends Component {
       </div>
     ):(
       <ProductInstance handler={this.handleModal}  item={this.props.item}/>
-
     )
   }
 }

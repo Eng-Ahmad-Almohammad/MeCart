@@ -10,6 +10,7 @@ import LeaderBoardContentArea from "../leaderboard/LeaderBoardContentArea";
 import DashboardContentArea from "./DashboardContentArea";
 import ListDetails from "../shopping/ListDetails";
 
+
 import "./style.scss";
 import { Col, Container, Row } from "react-materialize";
 import { ContentAreaTypes, updateContentComponent } from "../../actions";
@@ -37,6 +38,11 @@ class Dashboard extends Component {
         return <ShoppingContentArea />;
       case ContentAreaTypes.SUPERMARKETS:
         return <SupermarketContentArea />;
+
+      case ContentAreaTypes.PROFILE:
+        return <Profile />
+
+
         case ContentAreaTypes.LEADERBOARD:
                 return <LeaderBoardContentArea/>;
                 case ContentAreaTypes.USER_PROFILE:
@@ -45,6 +51,7 @@ class Dashboard extends Component {
                 return <SearchPage/>;
             case ContentAreaTypes.SHOPPING_LIST_DETAILS:
                 return <ListDetails listId={this.props.dashboard.params}/>;
+
       case ContentAreaTypes.DEFAULT:
       default:
         return <DashboardContentArea />;

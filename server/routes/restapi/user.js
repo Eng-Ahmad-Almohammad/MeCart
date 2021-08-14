@@ -100,7 +100,7 @@ export const signIn = (req, res, next) => {
 
 export const signUp = (req, res, next) => {
   // TODO: complete this
-
+  console.log('Useeeeeeeeeeeer', req.body)
   res.send({ user: req.user });
   next();
 };

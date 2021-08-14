@@ -8,6 +8,8 @@ import {
   FETCH_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
+
+  FETCH_CATEGORY,
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
   CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
@@ -15,6 +17,7 @@ import {
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
   CREATE_STORE_LIST,
+  FETCH_LEADERBOARD,
   SIGN_IN,
   SIGN_UP,
   FETCH_PROFILE,
@@ -37,6 +40,7 @@ export const ContentAreaTypes = {
   USER_PROFILE: "User_Profile",
   SEARCH: "Search",
   DEFAULT: "Dashboard",
+  PROFILE: 'Profile'
 };
 
 const updateContentComponentFailed = (attemptComponent) => ({
@@ -51,6 +55,19 @@ const updateContentComponentSuccess = (newComponent) => ({
   type: UPDATE_CONTENT_COMPONENT_SUCCESS,
   payload: newComponent,
 });
+
+export const fetchLeaderboard =  () => async (dispatch) =>{
+  const res = await axios.get("/api/leaderboard");
+
+  
+  if (res.status === 200) {
+    
+
+     dispatch({type: FETCH_LEADERBOARD, payload: res.data.users})
+
+
+  }
+}
 
 export const updateContentComponent = (component) => {
   const newComponent = _.find(ContentAreaTypes, (v) => v === component);
@@ -70,10 +87,10 @@ export const signIn = (values, history) => async (dispatch) => {
 };
 
 export const signUp = (values, history) => async (dispatch) => {
-  console.log("sign up values are: " + values);
+  console.log("sign up values are: " , values);
   const res = await axios.post("/api/sign-up", values);
 
-  history.push("/sign-in");
+  // history.push("/sign-in");
   dispatch({ type: SIGN_UP, payload: res.data });
 };
 
@@ -242,4 +259,11 @@ export const getProductInstance = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/productInstance/${productId}`);
   console.log('from fetch instance',{res})
   dispatch({ type:FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
+};
+
+export const getAllCategories = () => async (dispatch) => {
+
+  const res = await axios.get("/api/category");
+  console.log("from category fetc=====>",{res})
+  dispatch({ type: FETCH_CATEGORY, payload: res.data.categories});
 };

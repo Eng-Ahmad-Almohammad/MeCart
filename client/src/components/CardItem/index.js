@@ -8,7 +8,7 @@ import Menu from "./Menu";
 
 const CardItem = ({
   imageUrl,
-  title = "Title",
+  title ,
   hasMenu = false,
   listItem,
   itemDescription = "Item Description",
