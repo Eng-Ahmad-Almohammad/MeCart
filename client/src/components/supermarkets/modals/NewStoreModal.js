@@ -6,6 +6,8 @@ import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
 class NewStoreModal extends Component {
+
+  
   render() {
     return (
       <Modal

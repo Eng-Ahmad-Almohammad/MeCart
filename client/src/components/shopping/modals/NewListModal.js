@@ -6,6 +6,8 @@ import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
 class NewListModal extends Component {
+   
+  
 
   render() {
     return (
@@ -30,7 +32,7 @@ class NewListModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.newList} />
+          <SimpleForm  onNewListSubmit={this.props.newList} />
         </div>
       </Modal>
     );

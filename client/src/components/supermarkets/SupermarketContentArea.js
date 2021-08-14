@@ -13,6 +13,7 @@ class SupermarketContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards: this.props.supermarketList,
+      change:false,
     };
   }
   componentDidMount(){
@@ -24,7 +25,9 @@ class SupermarketContentArea extends Component {
     
 
   }
-
+   
+  
+ 
 
   handlerStoresList = () =>{
     this.setState({ isModalOpen: !this.state.isModalOpen });
@@ -39,7 +42,7 @@ class SupermarketContentArea extends Component {
           <Button className="modal-trigger" href="#newStoreModal" node="button">
             New Store
           </Button>
-          <NewStoreModal />
+          <NewStoreModal handler={this.handler} />
         </Row>
         <Row>
           <Container className="content-area">

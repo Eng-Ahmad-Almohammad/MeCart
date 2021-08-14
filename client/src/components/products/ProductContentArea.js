@@ -14,9 +14,12 @@ class ProductContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards:this.props.storeList,
-      ProductIn:{}
+      ProductIn:{},
+     
     };
   }
+
+  
 
   handleModal=()=>{
     this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -39,7 +42,7 @@ class ProductContentArea extends Component {
           >
             New Product
           </Button>
-          <NewProductModal />
+          <NewProductModal/>
         </Row>
         <Row>
           <Container className="content-area">
@@ -52,12 +55,9 @@ class ProductContentArea extends Component {
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
-<<<<<<< HEAD
                   handler={this.handleModal}
-=======
                   title={value.name}
                   itemDescription={value.descriptionOne}
->>>>>>> main
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }

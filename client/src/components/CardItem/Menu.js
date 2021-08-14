@@ -43,6 +43,7 @@ class Menu extends Component {
         }
         
       >
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
          <a
          onClick={async() =>{
            if (this.props.itemType === 'Products'){
@@ -62,10 +63,12 @@ class Menu extends Component {
           <Icon>more</Icon>
           Ditails
         </a>
-        <a href="#">
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
+        <a>
           <Icon>edit</Icon>
           Edit
         </a>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
             this.deleteItem(this.props.itemId);
@@ -74,10 +77,7 @@ class Menu extends Component {
           <Icon>delete</Icon>
           Delete
         </a>
-        <a href="#">
-          <Icon>content_copy</Icon>
-          Duplicate
-        </a>
+        
       </Dropdown>
     );
   }
