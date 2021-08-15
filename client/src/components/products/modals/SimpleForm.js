@@ -3,12 +3,12 @@ import { Field, reduxForm } from "redux-form";
 
 import {Button} from "react-materialize";
 import NewProductScanModal from "./NewProductScanModal";
+import cookieSession from "cookie-session";
 
 
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
-
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
       <div>
@@ -48,10 +48,15 @@ const SimpleForm = (props) => {
         <label>Category</label>
         <div>
           <Field style={{display: 'inline-block'}} name="category" component="select">
-            <option></option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            {
+              props.category.map((item,indx)=>{
+                return <option value={item._id} key={indx}>{item.name}</option>
+              })
+            }
+            {/* <option></option>
+            <option value="food">Food</option>
+            <option value="clothes">Clothes</option>
+            <option value="drug">Drugs</option> */}
           </Field>
         </div>
       </div>

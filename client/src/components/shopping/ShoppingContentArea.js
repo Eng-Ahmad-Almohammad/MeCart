@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { chain, random } from "lodash";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList ,getShoppingList} from "../../actions";
+import { ContentAreaTypes, getAllShoppingList } from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -12,14 +13,15 @@ class ShoppingContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards:this.props.shoppingList,
-      shoppingList:{}
+      shoppingList:{},
+     
       // cards: Array(12)
       //   .fill("")
       //   .map((value, index, array) => {}),
     };
   }
 
-  componentDidMount() {
+  componentDidMount = ()=>{
 
     this.props.fetchShoppingList().then(res =>{
       console.log('from shopping list ======?',this.props.shoppingList)
@@ -27,28 +29,39 @@ class ShoppingContentArea extends Component {
     })
   }
 
+  rerender = () =>{
+    this.setState({change: !this.state.change})
+  }
+
+  handlerShopingList = () =>{
+    this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
+  }
+
+
   render() {
+    
     return !this.state.isModalOpen?(
       <div>
         <Row>
           <Button className="modal-trigger" href="#newListModal" node="button" style={{marginLeft: "40px"}}>
             New List
           </Button>
-          <NewListModal />
+          <NewListModal handler={this.rerender}/>
         </Row>
         <Row>
           <Container className="content-area">
             {this.props.shoppingList.items.map((value) => {
               return (
-                <div  onClick={async() =>{
-                  await this.props.getItem(value._id);
-                  this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
-                  console.log('from click====',this.state.shoppingList)
-                }}>
+                <div>
                 <CardItem
                   type={ContentAreaTypes.SHOPPING}
                   hasMenu={true}
                   listItem={value}
+                  handler = {this.handlerShopingList}
+                  imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
+                    250,
+                    350
+                  )}`}
                   onClick={() =>
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }
@@ -93,7 +106,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
-  getItem:(id)=> dispatch(getShoppingList(id))
+ 
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShoppingContentArea);

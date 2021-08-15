@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllProducts,getProductInstance} from "../../actions";
+import { ContentAreaTypes, getAllProducts} from "../../actions";
 import NewProductModal from "./modals/NewProductModal";
 import ProductInstance from "./instances/productInstancesArea";
 
@@ -14,9 +14,12 @@ class ProductContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards:this.props.storeList,
-      ProductIn:{}
+      ProductIn:{},
+     
     };
   }
+
+  
 
   handleModal=()=>{
     this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -40,22 +43,22 @@ class ProductContentArea extends Component {
           >
             New Product
           </Button>
-          <NewProductModal />
+          <NewProductModal/>
         </Row>
         <Row>
           <Container className="content-area">
             {this.state.cards.map((value) => {
 
               return  (
-                <div  onClick={async() =>{
-                  await this.props.getItem(value._id);
-                  this.setState({ isModalOpen: !this.state.isModalOpen });
-                }}>
+                <div>
                 <CardItem
-                  type={ContentAreaTypes.PRODUCTS} //
+                  type={ContentAreaTypes.PRODUCTS} 
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
+                  handler={this.handleModal}
+                  title={value.name}
+                  itemDescription={value.descriptionOne}
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }
@@ -82,6 +85,6 @@ const mapStateToProps = (state => {
 )
 const mapDispatchToProp = (dispatch) => ({
   getData :  () =>  dispatch(getAllProducts()),
-  getItem:(id)=> dispatch(getProductInstance(id)),
+  
 })
 export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);

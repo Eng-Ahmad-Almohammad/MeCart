@@ -13,6 +13,7 @@ class SupermarketContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards: this.props.supermarketList,
+      change:false,
     };
   }
   componentDidMount(){
@@ -21,8 +22,19 @@ class SupermarketContentArea extends Component {
     this.setState({ cards: this.props.supermarketList })
     })
 
+    
 
   }
+   
+  
+ 
+
+  handlerStoresList = () =>{
+    this.setState({ isModalOpen: !this.state.isModalOpen });
+    }
+
+
+
   render() {
     return !this.state.isModalOpen?(
       <div>
@@ -30,22 +42,19 @@ class SupermarketContentArea extends Component {
           <Button className="modal-trigger" href="#newStoreModal" node="button" style={{marginLeft: "40px"}}>
             New Store
           </Button>
-          <NewStoreModal />
+          <NewStoreModal handler={this.handler} />
         </Row>
         <Row>
           <Container className="content-area">
             {this.state.cards.map((value) => {
               return (
-                <div  onClick={async() =>{
-                  await this.props.getItem(value._id);
-                  console.log("from click========>",this.props.item);
-                  this.setState({ isModalOpen: !this.state.isModalOpen });
-                }}>
+                <div>
                 <CardItem
                   type={ContentAreaTypes.SUPERMARKETS}
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
+                  handler = {this.handlerStoresList}
                   onClick={() =>
                     this.setState({ isModalOpen: !this.state.isModalOpen })
                   }
@@ -63,7 +72,7 @@ class SupermarketContentArea extends Component {
         }>
           close
         </Button>
-
+        <h1>Hello From Here</h1>
       </div>
     )
   }
