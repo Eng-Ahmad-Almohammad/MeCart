@@ -1,0 +1,74 @@
+.card {
+    position: relative;
+    margin: 0.5rem 0 1rem 0;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+
+}
+
+
+.card .card-content {
+    padding: 24px;
+    border-radius: 0 0 2px 2px;
+    height: 80px;
+    z-index: 1;
+    background: rgba(238, 110, 115,0.9);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    opacity: .7;
+    transition: 0.3s;
+    color: white;
+}
+
+.card .card-content > * {
+    height: 0;
+    opacity: 0;
+    transition: 00.3s;
+}
+.card .card-content .card-title {
+    opacity: 1;
+}
+
+.card:hover > .card-content {
+    opacity: 1;
+    height: auto;
+}
+
+.card:hover > .card-content > * {
+    opacity: 1;
+    height: auto;
+}
+
+.card .card-image img {
+    display: block;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    height: 300px;
+}
+
+.card .card-image {
+    position: absolute !important;
+    width: 200px;
+    top: 0;
+}
+
+.card .card-action {
+    visibility: hidden;
+}
+
+.card .card-content .card-title {
+    font-weight: bold;
+}

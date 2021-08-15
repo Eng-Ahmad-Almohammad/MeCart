@@ -6,10 +6,11 @@ import { connect } from "react-redux";
 
 class Menu extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.setState({type: this.props.itemType , 
-                    itemId: this.props.itemId,
+    this.setState({
+      type: this.props.itemType,
+      itemId: this.props.itemId,
     })
   }
 
@@ -41,27 +42,27 @@ class Menu extends Component {
             <Icon tiny>more_vert</Icon>
           </Button>
         }
-        
+
       >
-         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
-         <a
-         onClick={async() =>{
-           if (this.props.itemType === 'Products'){
-          await this.props.getItem(this.props.itemId);
-         this.props.handler();
-           }
-           else if (this.props.itemType === 'Shopping'){
-            await this.props.getShopItem(this.props.itemId);
-            this.props.handler();
-           }
-           else if (this.props.itemType === 'Supermarkets') {
-            await this.props.getStoreItem(this.props.itemId);
-            this.props.handler();
-           }
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
+        <a
+          onClick={async () => {
+            if (this.props.itemType === 'Products') {
+              await this.props.getItem(this.props.itemId);
+              this.props.handler();
+            }
+            else if (this.props.itemType === 'Shopping') {
+              await this.props.getShopItem(this.props.itemId);
+              this.props.handler();
+            }
+            else if (this.props.itemType === 'Supermarkets') {
+              await this.props.getStoreItem(this.props.itemId);
+              this.props.handler();
+            }
           }}
         >
           <Icon>more</Icon>
-          Ditails
+          Details
         </a>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a>
@@ -77,7 +78,7 @@ class Menu extends Component {
           <Icon>delete</Icon>
           Delete
         </a>
-        
+
       </Dropdown>
     );
   }
@@ -85,18 +86,18 @@ class Menu extends Component {
 
 const mapStateToProps = (state => {
   return {
-  
-  item:state.product.item,
-  shoppingList: state.shoppingList,
+
+    item: state.product.item,
+    shoppingList: state.shoppingList,
   }
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
   deleteList: (id) => dispatch(actions.deleteShoppingList(id)),
-  getItem:(id)=> dispatch(actions.getProductInstance(id)),
-  getShopItem:(id)=> dispatch(actions.getShoppingList(id)),
-  getStoreItem:(id) => dispatch(actions.getSupermarket(id))
+  getItem: (id) => dispatch(actions.getProductInstance(id)),
+  getShopItem: (id) => dispatch(actions.getShoppingList(id)),
+  getStoreItem: (id) => dispatch(actions.getSupermarket(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
