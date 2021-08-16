@@ -52,12 +52,9 @@ class ProductContentArea extends Component {
                   imageUrl={value.imageUrl}
                   hasMenu={true}
                   listItem={value}
-<<<<<<< HEAD
                   handler={this.handleModal}
-=======
                   title={value.name}
                   itemDescription={value.descriptionOne}
->>>>>>> main
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }

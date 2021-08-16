@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Icon, Button, Dropdown } from "react-materialize";
 import DeleteConfirmModal from "../confirmation/DeleteConfirmModal";
@@ -74,10 +75,7 @@ class Menu extends Component {
           <Icon>delete</Icon>
           Delete
         </a>
-        <a href="#">
-          <Icon>content_copy</Icon>
-          Duplicate
-        </a>
+        
       </Dropdown>
     );
   }
