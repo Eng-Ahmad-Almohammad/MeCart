@@ -130,6 +130,7 @@ export const createShoppingList = (list) => async (dispatch) => {
     console.log('from list creation',res);
 
     dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
+    dispatch(getAllShoppingList())
 };
 
 export const deleteShoppingList = (listId) => async (dispatch) => {
@@ -180,6 +181,9 @@ export const createProduct = (product) => async (dispatch) => {
   console.log({ res });
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
+  dispatch(getAllProducts())
+  
+  
 };
 export const addProductToShoppingList = (val,id) => async (dispatch) => {
  const obj={...val,product:id}
@@ -211,6 +215,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
 
 
   dispatch({ type: CREATE_STORE_LIST, payload: res.data });
+  dispatch(getAllSupermarkets())
 };
 
 export const getAllProducts = () => async (dispatch) => {
@@ -218,7 +223,7 @@ export const getAllProducts = () => async (dispatch) => {
 
 
   if (res.status === 200) {
-
+      
      dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})
 
 

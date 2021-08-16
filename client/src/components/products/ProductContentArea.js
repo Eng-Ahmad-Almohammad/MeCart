@@ -14,9 +14,12 @@ class ProductContentArea extends Component {
     this.state = {
       isModalOpen: false,
       cards:this.props.storeList,
-      ProductIn:{}
+      ProductIn:{},
+     
     };
   }
+
+  
 
   handleModal=()=>{
     this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -36,10 +39,11 @@ class ProductContentArea extends Component {
             className="modal-trigger"
             href="#newProductModal"
             node="button"
+            style={{marginLeft: "40px"}}
           >
             New Product
           </Button>
-          <NewProductModal />
+          <NewProductModal/>
         </Row>
         <Row>
           <Container className="content-area">

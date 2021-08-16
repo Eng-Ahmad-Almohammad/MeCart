@@ -1,0 +1,100 @@
+  #wave:before {
+    content: "";
+    display: block;
+    position: absolute;
+    /* border-radius: 100% 50%; */
+    width: 110%;
+    height: 136px;
+    background-color: rgb(66,65,65);
+    right: 0;
+    top: calc(37vh - 104px);
+    transform: skew(
+0deg
+, 
+-4deg
+);
+  }
+  #wave:after {
+    content: "";
+    display: block;
+    position: absolute;
+    /* border-radius: 100% 50%; */
+    width: 125%;
+    height: 250px;
+    background-color: white;
+    left: -5%;
+    top: calc(37vh - 75px);
+    transform: skew( 
+0deg
+ , 
+-2deg
+ );
+  }
+  /* #f4b119 */
+  /* rgb(254,199,36) */
+  /* 18 4 0 */
+  /* linear-gradient(184deg, rgba(254,199,36,1) 0%, rgba(212,165,30,1) 100%, rgba(18,4,0,1) 100%); */
+  /* linear-gradient(184deg, rgba(79,55,9,1) 0%, rgba(18,4,0,1) 100%); */
+
+  @keyframes float {
+    0% {
+      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+      transform: translatey(0px);
+    }
+    50% {
+      box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+      transform: translatey(-20px);
+    }
+    100% {
+      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+      transform: translatey(0px);
+    }
+  }
+
+  .flo{
+    animation: float 6s ease-in-out infinite;
+  }
+
+  form{
+    width: 80%;
+    margin: 20px 0;
+  }
+
+  fieldset{
+    border-radius: 10px;
+    border: 2px solid rgb(239, 110, 112);
+  }
+
+  legend{
+    padding: 0 15px;
+  }
+
+  
+  .scroll::-webkit-scrollbar-track
+  {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+  
+  .scroll::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+  
+  .scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: rgb(66,65,65);
+  }
+  
+  #submit{
+    width: 25%;
+    font-size: 2.5vh;
+    background: rgb(239, 110, 112);
+    border: none;
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+  }
