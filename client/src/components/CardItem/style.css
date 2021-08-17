@@ -29,7 +29,6 @@
 }
 
 .card .card-content > * {
-    height: 0;
     opacity: 0;
     transition: 00.3s;
 }
@@ -39,7 +38,7 @@
 
 .card:hover > .card-content {
     opacity: 1;
-    height: auto;
+    height: 200px;
 }
 
 .card:hover > .card-content > * {
