@@ -19,12 +19,19 @@ class ProductContentArea extends Component {
     };
   }
 
-  
+  componentDidUpdate = (prevProps) =>{
+    if (prevProps.storeList.length !== this.props.storeList.length){
+     console.log(prevProps.storeList , this.props.storeList)
+      this.props.getData().then(res =>{
+        this.setState({ cards: this.props.storeList })
+        })
+    }
+  }
 
   handleModal=()=>{
-    this.setState({ isModalOpen: !this.state.isModalOpen })
+    this.setState({ isModalOpen: !this.state.isModalOpen, ProductIn: this.props.storeList.product })
   }
-  componentDidMount(){
+  componentDidMount = () =>{
     this.props.getData().then(res =>{
     this.setState({ cards: this.props.storeList })
     })

@@ -5,6 +5,7 @@ import {
   UPDATE_CONTENT_COMPONENT_SUCCESS,
   FETCH_PRODUCT_LIST,
   CREATE_PRODUCT_LIST,
+  DELETE_PRODUCT,
   FETCH_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
@@ -12,11 +13,13 @@ import {
   FETCH_CATEGORY,
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
+  DELETE_SHOPING_LIST,
   CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
   CREATE_STORE_LIST,
+  DELETE_STORE,
   FETCH_LEADERBOARD,
   SIGN_IN,
   SIGN_UP,
@@ -141,7 +144,38 @@ export const deleteShoppingList = (listId) => async (dispatch) => {
     },
   });
 
-  dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
+  if (res.status === 200) {
+    dispatch({type:DELETE_SHOPING_LIST , payload:res.data})
+    dispatch(getAllShoppingList());
+  }
+};
+
+export const deleteProduct = (productId) => async (dispatch) => {
+  console.log("<<<<<< delete product >>>>>> : " + productId);
+  const res = await axios.delete("/api/products/", {
+    params: {
+      productId: productId,
+    },
+  });
+
+  if (res.status === 200) {
+    dispatch({type:DELETE_PRODUCT , payload:res.data})
+    dispatch(getAllProducts());
+  }
+};
+
+export const deleteStore = (StoreId) => async (dispatch) => {
+  console.log("<<<<<< delete StoreId >>>>>> : " + StoreId);
+  const res = await axios.delete("/api/supermarkets/", {
+    params: {
+      StoreId: StoreId,
+    },
+  });
+
+  if (res.status === 200) {
+    dispatch({type:DELETE_STORE , payload:res.data})
+    dispatch(getAllSupermarkets());
+  }
 };
 
 export const updateShoppingList = (listId, list) => async (dispatch) => {

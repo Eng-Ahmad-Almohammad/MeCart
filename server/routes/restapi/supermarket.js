@@ -149,11 +149,12 @@ export const deleteSupermarket = async (req, res, next) => {
     data: req.body,
     function: "deleteSupermarket",
   };
+  // console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.query.StoreId)
 
   console.log({ debugInfo });
 
   try {
-    await Store.deleteOne({ _products: req.body.id });
+    await Store.deleteOne({ _id:  req.query.StoreId});
 
     res.send("Record deleted");
     next();
@@ -172,6 +173,6 @@ router.post("/supermarkets", createSupermarket);
 router.get("/supermarkets", getAllSupermarkets);
 router.get("/supermarkets/:supermarketId", getSupermarket);
 router.put("/supermarkets/:supermarketId", replaceSupermarket);
-router.delete("/supermarkets/:supermarketId", deleteSupermarket);
+router.delete("/supermarkets/", deleteSupermarket);
 
 export default router;
