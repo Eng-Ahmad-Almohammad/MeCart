@@ -1,7 +1,10 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { fetchLeaderboard } from '../../actions'
-import Leaderboard from 'react-leaderboard';
+// import Leaderboard from 'react-leaderboard';
+import './style.css'
+import CustomLeaderboard from './Leaderboard'
+
 
 class LeaderBoardContentArea extends Component {
     constructor(props) {
@@ -15,10 +18,10 @@ class LeaderBoardContentArea extends Component {
             console.log('Usssssssssers', this.props.leaderBorder)
             let data = {
                 users: [],
-                paginate: 10
+                paginate: 5
             }
             this.props.leaderBorder.forEach(val => {
-                data.users.push({ name: `${val.firstName} ${val.lastName}`, score: val.points })
+                data.users.push({ name: `${val.firstName} ${val.lastName}`, score: val.points, avatar: val.avatar })
             })
             this.setState(data)
         })
@@ -31,8 +34,9 @@ class LeaderBoardContentArea extends Component {
         console.log('Rendeeeer', this.state.users)
         if (this.state) {
             return (
-                <div className="content-area">
-                    <Leaderboard users={this.state.users} paginate={this.state.paginate} />
+                <div className="content-area-leader">
+                    {/* <Leaderboard users={this.state.users} paginate={this.state.paginate} /> */}
+                    <CustomLeaderboard users={this.state.users} paginate={this.state.paginate} />
                 </div>
             );
         }
