@@ -72,7 +72,16 @@ class Menu extends Component {
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
+            if(this.props.itemType === 'Shopping'){
             this.deleteItem(this.props.itemId);
+            }
+            else if (this.props.itemType === 'Products'){
+             this.props.deleteProduct(this.props.itemId)
+               }
+            
+            else if (this.props.itemType === 'Supermarkets') {
+            this.props.deleteStore(this.props.itemId);
+            }
           }}
         >
           <Icon>delete</Icon>
@@ -95,6 +104,8 @@ const mapStateToProps = (state => {
 
 const mapDispatchToProps = (dispatch) => ({
   deleteList: (id) => dispatch(actions.deleteShoppingList(id)),
+  deleteProduct: (id) => dispatch(actions.deleteProduct(id)),
+  deleteStore : (id) => dispatch(actions.deleteStore(id)),
   getItem:(id)=> dispatch(actions.getProductInstance(id)),
   getShopItem:(id)=> dispatch(actions.getShoppingList(id)),
   getStoreItem:(id) => dispatch(actions.getSupermarket(id))

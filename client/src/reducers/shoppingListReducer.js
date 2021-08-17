@@ -2,7 +2,8 @@ import {
   FETCH_SHOPPING_LIST,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
-  CREATE_SHOPPING_LIST
+  CREATE_SHOPPING_LIST,
+  DELETE_SHOPING_LIST,
 } from "../actions/types";
 
 const InitialState = {
@@ -12,7 +13,7 @@ const InitialState = {
 };
 
 const shoppingListReducer = function (state = InitialState, action) {
-  console.log("the action is: " + action);
+  // console.log("the action is: " + action);
   switch (action.type) {
     case FETCH_SHOPPING_LIST:
       return {
@@ -28,6 +29,8 @@ const shoppingListReducer = function (state = InitialState, action) {
         shoppingList:action.payload
       };
     case CREATE_SHOPPING_LIST:
+      return state;
+    case DELETE_SHOPING_LIST:
       return state;
     default:
       return state;

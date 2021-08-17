@@ -4,7 +4,8 @@ import {
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
   CREATE_PRODUCT_LIST,
-  FETCH_PRODUCT_INSTANCE
+  FETCH_PRODUCT_INSTANCE,
+  DELETE_PRODUCT,
 } from "../actions/types";
 
 const InitialState = {
@@ -46,6 +47,8 @@ const productReducer = function (state = InitialState, action) {
       }
     case CREATE_PRODUCT_LIST:
         return state;
+    case DELETE_PRODUCT:
+      return state;
     default:
       return state;
   }

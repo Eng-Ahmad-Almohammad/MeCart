@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const RanProducts = mongoose.model("products");
 
 import Products from "../../models/Product";
+import ProductInstance from '../../models/ProductInstance';
 import {getImageBucket, getImageStorage, ImageStorageMiddleware} from "../../services/database-utils";
 
 export const createProduct = async (req, res, next) => {
@@ -104,7 +105,7 @@ export const getAllProducts = async (req, res, next) => {
 
   try {
     const products = await Products.find();
-    console.log(products)
+    // console.log(products)
     res.send({ products: products });
     next();
   } catch (err) {
@@ -210,10 +211,11 @@ export const deleteProduct = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-
+  // console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.query.productId)
   try {
-    await Products.deleteOne({ _id: req.body.id });
-
+   await Products.deleteOne({ _id: req.query.productId });
+    // console.log(res)
+    await ProductInstance.deleteMany({productId: req.query.productId})
     res.send("Record deleted");
     next();
   } catch (err) {
@@ -232,6 +234,6 @@ router.get("/products", getAllProducts);
 router.get("/random_products", getRandomProducts);
 router.get("/products/:productId", getProduct);
 router.put("/products/:productId", replaceProduct);
-router.delete("/products/:productId", deleteProduct);
+router.delete("/products/", deleteProduct);
 
 export default router;

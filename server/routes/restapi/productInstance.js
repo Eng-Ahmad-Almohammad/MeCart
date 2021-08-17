@@ -13,20 +13,20 @@ export const createProductInstance = async (req, res, next) => {
   
     try {
         
-        const {priceBeforeTax, priceAfterTax, unitOfMeasure, measurement } = req.body;
+        const {id,priceBeforeTax, priceAfterTax, unitOfMeasure, measurement } = req.body;
         
         const productInstances = new ProductItances({
             priceBeforeTax,
             priceAfterTax,
             unitOfMeasure,
             measurement,
-            productId:req.params.id,
+            productId:id,
            dateAdded: Date.now(),
            dateModified: Date.now(),
         });
     
         await productInstances.save();
-        res.send({ productInstance: productInstance });
+        res.send({ productInstance: productInstances });
         next();
 
   
@@ -63,6 +63,6 @@ export const createProductInstance = async (req, res, next) => {
   };
 
   const router = Router();
-  router.post("/productInstance/:id", createProductInstance);//the id added here just for now
+  router.post("/productInstance/", createProductInstance);//the id added here just for now
   router.get("/productInstance/:id",getProductInstance);
   export default router;
