@@ -39,6 +39,7 @@ class NewListModal extends Component {
   }
 }
 
+
 const mapDispatchToProps = (dispatch) => ({
   newList: (vals) => dispatch(actions.createShoppingList(vals)),
 });

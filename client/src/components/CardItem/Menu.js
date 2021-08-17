@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Icon, Button, Dropdown } from "react-materialize";
 import DeleteConfirmModal from "../confirmation/DeleteConfirmModal";
@@ -72,7 +73,16 @@ class Menu extends Component {
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
+            if(this.props.itemType === 'Shopping'){
             this.deleteItem(this.props.itemId);
+            }
+            else if (this.props.itemType === 'Products'){
+             this.props.deleteProduct(this.props.itemId)
+               }
+            
+            else if (this.props.itemType === 'Supermarkets') {
+            this.props.deleteStore(this.props.itemId);
+            }
           }}
         >
           <Icon>delete</Icon>
@@ -95,9 +105,12 @@ const mapStateToProps = (state => {
 
 const mapDispatchToProps = (dispatch) => ({
   deleteList: (id) => dispatch(actions.deleteShoppingList(id)),
-  getItem: (id) => dispatch(actions.getProductInstance(id)),
-  getShopItem: (id) => dispatch(actions.getShoppingList(id)),
-  getStoreItem: (id) => dispatch(actions.getSupermarket(id))
+
+  deleteProduct: (id) => dispatch(actions.deleteProduct(id)),
+  deleteStore : (id) => dispatch(actions.deleteStore(id)),
+  getItem:(id)=> dispatch(actions.getProductInstance(id)),
+  getShopItem:(id)=> dispatch(actions.getShoppingList(id)),
+  getStoreItem:(id) => dispatch(actions.getSupermarket(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

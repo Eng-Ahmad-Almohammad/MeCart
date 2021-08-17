@@ -13,7 +13,7 @@ class NewProductModal extends Component {
         category:this.props.category
     }
 }
-  componentDidMount() {
+  componentDidMount =() => {
 
     this.props.getCategories().then(res =>{
       this.setState({ cards: this.props.category });

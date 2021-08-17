@@ -131,7 +131,7 @@ export const deleteShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-
+  // console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.params.listId)
   try {
     await ShoppingLists.deleteOne({ _shoppingLists: req.params.listId });
 
