@@ -59,14 +59,14 @@ const updateContentComponentSuccess = (newComponent) => ({
   payload: newComponent,
 });
 
-export const fetchLeaderboard =  () => async (dispatch) =>{
+export const fetchLeaderboard = () => async (dispatch) => {
   const res = await axios.get("/api/leaderboard");
 
-  
-  if (res.status === 200) {
-    
 
-     dispatch({type: FETCH_LEADERBOARD, payload: res.data.users})
+  if (res.status === 200) {
+
+
+    dispatch({ type: FETCH_LEADERBOARD, payload: res.data.users })
 
 
   }
@@ -90,7 +90,7 @@ export const signIn = (values, history) => async (dispatch) => {
 };
 
 export const signUp = (values, history) => async (dispatch) => {
-  console.log("sign up values are: " , values);
+  console.log("sign up values are: ", values);
   const res = await axios.post("/api/sign-up", values);
 
   // history.push("/sign-in");
@@ -98,42 +98,42 @@ export const signUp = (values, history) => async (dispatch) => {
 };
 
 export const profile = (userId) => async (dispatch) => {
-    const res = await axios.get("/api/users/", {
-        params: {
-            userId: userId,
-        },
-    });
+  const res = await axios.get("/api/users/", {
+    params: {
+      userId: userId,
+    },
+  });
 
-    if (res.status === 200) {
-        dispatch({type: FETCH_PROFILE, payload: res.data.user});
-    }
+  if (res.status === 200) {
+    dispatch({ type: FETCH_PROFILE, payload: res.data.user });
+  }
 };
 
 export const showSearch = () => async (dispatch) => {
-    const res = await axios.get("/api/search");
-    console.log("from get search results====> ", res );
-    if (res.status === 200) {
-      dispatch({ type: SHOW_SEARCH, payload: res.data.search });
-    }
+  const res = await axios.get("/api/search");
+  console.log("from get search results====> ", res);
+  if (res.status === 200) {
+    dispatch({ type: SHOW_SEARCH, payload: res.data.search });
+  }
 };
 
 export const createShoppingList = (list) => async (dispatch) => {
 
 
-    const res = await axios({
-      method:"post",
-      url:"api/lists",
-      headers: {
+  const res = await axios({
+    method: "post",
+    url: "api/lists",
+    headers: {
 
-        'Content-Type': 'application/json'
-      },
-      data:JSON.stringify(list)
-    });
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(list)
+  });
 
-    console.log('from list creation',res);
+  console.log('from list creation', res);
 
-    dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
-    dispatch(getAllShoppingList())
+  dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
+  dispatch(getAllShoppingList())
 };
 
 export const deleteShoppingList = (listId) => async (dispatch) => {
@@ -145,7 +145,7 @@ export const deleteShoppingList = (listId) => async (dispatch) => {
   });
 
   if (res.status === 200) {
-    dispatch({type:DELETE_SHOPING_LIST , payload:res.data})
+    dispatch({ type: DELETE_SHOPING_LIST, payload: res.data })
     dispatch(getAllShoppingList());
   }
 };
@@ -159,7 +159,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
   });
 
   if (res.status === 200) {
-    dispatch({type:DELETE_PRODUCT , payload:res.data})
+    dispatch({ type: DELETE_PRODUCT, payload: res.data })
     dispatch(getAllProducts());
   }
 };
@@ -173,7 +173,7 @@ export const deleteStore = (StoreId) => async (dispatch) => {
   });
 
   if (res.status === 200) {
-    dispatch({type:DELETE_STORE , payload:res.data})
+    dispatch({ type: DELETE_STORE, payload: res.data })
     dispatch(getAllSupermarkets());
   }
 };
@@ -187,7 +187,7 @@ export const updateShoppingList = (listId, list) => async (dispatch) => {
 
 export const getAllShoppingList = () => async (dispatch) => {
   const res = await axios.get("/api/lists");
-  console.log("from get all lists====> ", res );
+  console.log("from get all lists====> ", res);
   if (res.status === 200) {
     dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
   }
@@ -195,7 +195,7 @@ export const getAllShoppingList = () => async (dispatch) => {
 
 export const getShoppingList = (listId) => async (dispatch) => {
   const res = await axios.get(`/api/lists/${listId}`);
-  console.log("from getting one shopping list",{res})
+  console.log("from getting one shopping list", { res })
   if (res.status === 200) {
     dispatch({ type: FETCH_SHOPPING_LIST_FIELD, payload: res.data });
   }
@@ -216,13 +216,13 @@ export const createProduct = (product) => async (dispatch) => {
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
   dispatch(getAllProducts())
-  
-  
+
+
 };
-export const addProductToShoppingList = (val,id) => async (dispatch) => {
- const obj={...val,product:id}
- console.log("from adding to a shopping list======>",obj);
- console.log("from adding product to a shopping list",obj)
+export const addProductToShoppingList = (val, id) => async (dispatch) => {
+  const obj = { ...val, product: id }
+  console.log("from adding to a shopping list======>", obj);
+  console.log("from adding product to a shopping list", obj)
   const res = await axios(`/api/shoppinglistproduct`, {
     method: 'post',
     headers: {
@@ -232,19 +232,19 @@ export const addProductToShoppingList = (val,id) => async (dispatch) => {
     data: JSON.stringify(obj)
   });
 
-  console.log("from adding to a shopping list======>",{ res });
+  console.log("from adding to a shopping list======>", { res });
 
   dispatch({ type: CREATE_SHOPPING_LIST_PRODUCT_INSTANCE, payload: res.data });
 };
 export const createSupermarket = (supermarket) => async (dispatch) => {
   const res = await axios({
-    method:"post",
-    url:"/api/supermarkets",
+    method: "post",
+    url: "/api/supermarkets",
     headers: {
 
       'Content-Type': 'application/json'
     },
-    data:JSON.stringify(supermarket)
+    data: JSON.stringify(supermarket)
   });
 
 
@@ -257,8 +257,8 @@ export const getAllProducts = () => async (dispatch) => {
 
 
   if (res.status === 200) {
-      
-     dispatch({type: FETCH_PRODUCT_LIST, payload: res.data.products})
+
+    dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products })
 
 
   }
@@ -267,7 +267,7 @@ export const getAllProducts = () => async (dispatch) => {
 export const getAllSupermarkets = () => async (dispatch) => {
   const res = await axios.get("/api/supermarkets");
 
-  console.log("from supermarkets store",{ res });
+  console.log("from supermarkets store", { res });
 
   if (res.status === 200) {
     dispatch({ type: FETCH_STORE_LIST, payload: res.data.supermarkets });
@@ -296,13 +296,13 @@ export const getProduct = (productId) => async (dispatch) => {
 
 export const getProductInstance = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/productInstance/${productId}`);
-  console.log('from fetch instance',{res})
-  dispatch({ type:FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
+  console.log('from fetch instance', { res })
+  dispatch({ type: FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
 };
 
 export const getAllCategories = () => async (dispatch) => {
 
   const res = await axios.get("/api/category");
-  console.log("from category fetc=====>",{res})
-  dispatch({ type: FETCH_CATEGORY, payload: res.data.categories});
+  console.log("from category fetc=====>", { res })
+  dispatch({ type: FETCH_CATEGORY, payload: res.data.categories });
 };

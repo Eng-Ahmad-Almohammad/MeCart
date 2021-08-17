@@ -111,6 +111,7 @@ class Header extends Component {
         >
           <Icon left>shopping_basket</Icon> Products
         </NavItem>
+
         <NavItem
           className="hide-on-large-only"
           onClick={() => {
@@ -118,6 +119,14 @@ class Header extends Component {
           }}
         >
           <Icon left>store</Icon> Supermarkets
+        </NavItem>
+
+        <NavItem
+          onClick={() => {
+            this.props.updateContentArea(ContentAreaTypes.LEADERBOARD);
+          }}
+        >
+          <Icon left>leaderboard</Icon> Leaderboard
         </NavItem>
         <NavItem className="hide-on-large-only" divider />
         <NavItem
@@ -130,16 +139,16 @@ class Header extends Component {
 
         <NavItem
 
-                    onClick={() => {
-                        this.props.updateContentArea(ContentAreaTypes.USER_PROFILE);
-                    }}
-                >Profile</NavItem>
+          onClick={() => {
+            this.props.updateContentArea(ContentAreaTypes.USER_PROFILE);
+          }}
+        >Profile</NavItem>
 
-                <NavItem
-                            onClick={() => {
-                                this.props.updateContentArea(ContentAreaTypes.SEARCH);
-                            }}
-                        >Search</NavItem>
+        <NavItem
+          onClick={() => {
+            this.props.updateContentArea(ContentAreaTypes.SEARCH);
+          }}
+        >Search</NavItem>
 
         <NavFooter />
       </Navbar>
