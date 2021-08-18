@@ -1,0 +1,108 @@
+.content-area-leader{
+    width: 100%;
+}
+
+#mainD{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh 10%;
+}
+
+#leaderboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    min-width: 300px;
+    border-radius: 10px;
+}
+#leaderboard .rankers:last-child{
+    border-radius: 0 0 10px 10px;
+}
+
+#leaderboard #title{
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+    background: rgb(66, 65, 65);
+    color: whitesmoke;
+    border-radius: 10px 10px 0 0;
+}
+
+.rankers{
+    display: flex;
+    width: 100%;
+    background: linear-gradient(175deg, rgba(238,110,115,1) 0%, rgba(203,93,97,1) 100%);
+    padding: 5px 0;
+    border-bottom: 1px solid;
+}
+
+.rankers .rank{
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    color: whitesmoke;
+}
+.rankers .avatar{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+
+}
+.rankers .avatar img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.rankers .name{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    font-size: large;
+    color: whitesmoke;
+    text-align: center;
+
+}
+.rankers .score{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    font-size: large;
+    color: whitesmoke;
+
+}
+
+#control {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+#page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: large;
+}
+
+.cb{
+    font-size: large;
+    background: rgb(66, 65, 65);
+    border: none;
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+
+}

@@ -8,7 +8,7 @@ const InitialState = {
 };
 
 const userReducer = function (state = InitialState, action) {
-    console.log("the action is: " + action);
+    // console.log("the action is: " + action);
     switch (action.type) {
         case FETCH_PROFILE:
             return state;

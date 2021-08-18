@@ -6,6 +6,9 @@ import {
   CREATE_PRODUCT_LIST,
   FETCH_PRODUCT_INSTANCE,
   FETCH_CATEGORY
+
+  DELETE_PRODUCT,
+
 } from "../actions/types";
 
 const InitialState = {
@@ -53,6 +56,8 @@ const productReducer = function (state = InitialState, action) {
         category: [...action.payload],
       };
     case CREATE_PRODUCT_LIST:
+        return state;
+    case DELETE_PRODUCT:
       return state;
     default:
       return state;

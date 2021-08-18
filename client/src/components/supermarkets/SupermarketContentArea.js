@@ -26,7 +26,17 @@ class SupermarketContentArea extends Component {
 
   }
    
-  
+  componentDidUpdate = (prevProps) =>{
+    if (prevProps.supermarketList.length !== this.props.supermarketList.length){
+    console.log(prevProps.supermarketList)
+     console.log( this.props.supermarketList)
+     
+      this.props.getData().then(res =>{
+        this.setState({ cards: this.props.supermarketList })
+        })
+    }
+  }
+
  
 
   handlerStoresList = () =>{

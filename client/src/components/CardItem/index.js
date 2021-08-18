@@ -4,11 +4,12 @@ import { Card, Col, Icon, Button, Dropdown } from "react-materialize";
 
 import CardItemHeader from "./CardItemHeader";
 import "./styles.scss";
+import "./style.css";
 import Menu from "./Menu";
 
 const CardItem = ({
   imageUrl,
-  title ,
+  title,
   hasMenu = false,
   listItem,
   itemDescription = "Item Description",
@@ -34,7 +35,7 @@ const CardItem = ({
 
   const showMenu = () => {
     if (menu && listItem && listItem._id) {
-      return <Menu handler={handler} itemId={listItem._id} itemType = {type} />;
+      return <Menu handler={handler} itemId={listItem._id} itemType={type} />;
     }
   };
 
@@ -44,24 +45,47 @@ const CardItem = ({
       title={title || ""}
       className="hoverable"
       actions={[]}
-      onClick={()=>{
+      onClick={() => {
 
       }
 
       }
-     >
-      {showMenu()}
-      <p>{itemDescription}</p>
-      <Col s={6} className="left-align">
-        <span className="star-rating">
-          {stars.map((value) => (
-            <Icon>{value}</Icon>
-          ))}
-        </span>
-      </Col>
-      <Col s={6} className="right-align">
-        <span>$10.00</span>
-      </Col>
+    >
+      <div
+        style={{
+          display: 'flex',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '60%',
+          }}
+        >
+          <Col s={6} className="left-align"
+            style={{
+              width: '100%',
+            }}
+          >
+            <span className="star-rating">
+              {stars.map((value) => (
+                <Icon>{value}</Icon>
+              ))}
+            </span>
+          </Col>
+          <Col>
+            <span>$10.00</span>
+          </Col>
+        </div>
+        {showMenu()}
+
+      </div>
+      <p
+        style={{
+          margin: '2px'
+        }}
+      >{itemDescription}</p>
     </Card>
   );
 };

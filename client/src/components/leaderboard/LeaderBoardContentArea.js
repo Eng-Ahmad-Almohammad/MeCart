@@ -1,7 +1,10 @@
-import {connect} from "react-redux";
-import React, {Component} from "react";
-import {fetchLeaderboard} from '../../actions'
-import Leaderboard from 'react-leaderboard';
+import { connect } from "react-redux";
+import React, { Component } from "react";
+import { fetchLeaderboard } from '../../actions'
+// import Leaderboard from 'react-leaderboard';
+import './style.css'
+import CustomLeaderboard from './Leaderboard'
+
 
 class LeaderBoardContentArea extends Component {
     constructor(props) {
@@ -9,37 +12,38 @@ class LeaderBoardContentArea extends Component {
         this.state = false
     }
 
-    
-    componentDidMount(){
-        this.props.getData().then(res =>{
-       console.log('Usssssssssers',this.props.leaderBorder)
-       let data = {
-           users:[],
-           paginate:1
-       }
-       this.props.leaderBorder.forEach(val =>{
-           data.users.push({name:`${val.firstName} ${val.lastName}`,score:val.points})
-       })
-       this.setState(data)
-        })
-      }
 
-      
+    componentDidMount() {
+        this.props.getData().then(res => {
+            console.log('Usssssssssers', this.props.leaderBorder)
+            let data = {
+                users: [],
+                paginate: 5
+            }
+            this.props.leaderBorder.forEach(val => {
+                data.users.push({ name: `${val.firstName} ${val.lastName}`, score: val.points, avatar: val.avatar })
+            })
+            this.setState(data)
+        })
+    }
+
+
 
 
     render() {
-        console.log('Rendeeeer',this.state.users)
-        if (this.state){
+        console.log('Rendeeeer', this.state.users)
+        if (this.state) {
+            return (
+                <div className="content-area-leader">
+                    {/* <Leaderboard users={this.state.users} paginate={this.state.paginate} /> */}
+                    <CustomLeaderboard users={this.state.users} paginate={this.state.paginate} />
+                </div>
+            );
+        }
         return (
             <div className="content-area">
-                <Leaderboard users={this.state.users} paginate={this.state.paginate}/>
+                Wait a minute
             </div>
-        );
-        }
-        return(
-            <div className="content-area">
-            Wait a minute
-        </div>
         )
     }
 }
@@ -49,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getData:  () =>  dispatch(fetchLeaderboard()),
+    getData: () => dispatch(fetchLeaderboard()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderBoardContentArea);

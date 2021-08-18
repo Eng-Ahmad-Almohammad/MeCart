@@ -3,6 +3,7 @@ import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllProducts,getAllCategories} from "../../actions";
+
 import NewProductModal from "./modals/NewProductModal";
 import ProductInstance from "./instances/productInstancesArea";
 
@@ -13,18 +14,27 @@ class ProductContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
+
       cards:this.props.storeList,
       ProductIn:{},
       categories:[]
     };
   }
 
-  
+
+  componentDidUpdate = (prevProps) =>{
+    if (prevProps.storeList.length !== this.props.storeList.length){
+     console.log(prevProps.storeList , this.props.storeList)
+      this.props.getData().then(res =>{
+        this.setState({ cards: this.props.storeList })
+        })
+    }
+  }
 
   handleModal=()=>{
-    this.setState({ isModalOpen: !this.state.isModalOpen })
+    this.setState({ isModalOpen: !this.state.isModalOpen, ProductIn: this.props.storeList.product })
   }
-  componentDidMount(){
+  componentDidMount = () =>{
     this.props.getData().then(res =>{
     this.setState({ cards: this.props.storeList })
     });
@@ -36,45 +46,49 @@ class ProductContentArea extends Component {
 
 
   render() {
-    return !this.state.isModalOpen?(
+    return !this.state.isModalOpen ? (
       <div>
         <Row>
           <Button
             className="modal-trigger"
             href="#newProductModal"
             node="button"
-            style={{marginLeft: "40px"}}
+            style={{ marginLeft: "40px" }}
           >
             New Product
           </Button>
           <NewProductModal category={this.state.categories}/>
         </Row>
-        <Row>
+        <Row
+          style={{
+            overflow: 'hidden',
+          }}
+        >
           <Container className="content-area">
             {this.state.cards.map((value) => {
 
-              return  (
+              return (
                 <div>
-                <CardItem
-                  type={ContentAreaTypes.PRODUCTS} 
-                  imageUrl={value.imageUrl}
-                  hasMenu={true}
-                  listItem={value}
-                  handler={this.handleModal}
-                  title={value.name}
-                  itemDescription={value.descriptionOne}
+                  <CardItem
+                    type={ContentAreaTypes.PRODUCTS}
+                    imageUrl={value.imageUrl}
+                    hasMenu={true}
+                    listItem={value}
+                    handler={this.handleModal}
+                    title={value.name}
+                    itemDescription={value.descriptionOne}
                   // onClick={() =>
                   //   this.setState({ isModalOpen: !this.state.isModalOpen })
                   // }
-                />
+                  />
                 </div>
               )
             })}
           </Container>
         </Row>
       </div>
-    ):(
-      <ProductInstance handler={this.handleModal}  item={this.props.item}/>
+    ) : (
+      <ProductInstance handler={this.handleModal} item={this.props.item} />
     )
   }
 }
@@ -84,6 +98,7 @@ const mapStateToProps = (state => {
   storeList: state.product.product,
   item:state.product.item,
   category: state.product.category,
+
   }
 
 }
@@ -91,5 +106,6 @@ const mapStateToProps = (state => {
 const mapDispatchToProp = (dispatch) => ({
   getData :  () =>  dispatch(getAllProducts()),
   getCategories:()=>dispatch(getAllCategories())
+
 })
-export default connect(mapStateToProps,mapDispatchToProp)(ProductContentArea);
+export default connect(mapStateToProps, mapDispatchToProp)(ProductContentArea);

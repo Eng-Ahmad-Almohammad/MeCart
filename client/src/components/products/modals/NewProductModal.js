@@ -13,6 +13,7 @@ class NewProductModal extends Component {
         category:this.props.category
     }
 }
+
   render() {
     return (
       <Modal

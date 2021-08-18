@@ -29,9 +29,17 @@ class ShoppingContentArea extends Component {
     })
   }
 
-  rerender = () =>{
-    this.setState({change: !this.state.change})
+  componentDidUpdate = (prevProps) =>{
+    if (prevProps.shoppingList.length !== this.props.shoppingList.length){
+    console.log(prevProps.shoppingList)
+     console.log( this.props.shoppingList)
+     
+      this.props.fetchShoppingList().then(res =>{
+        this.setState({ cards: this.props.shoppingList })
+        })
+    }
   }
+ 
 
   handlerShopingList = () =>{
     this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
@@ -46,7 +54,7 @@ class ShoppingContentArea extends Component {
           <Button className="modal-trigger" href="#newListModal" node="button" style={{marginLeft: "40px"}}>
             New List
           </Button>
-          <NewListModal handler={this.rerender}/>
+          <NewListModal/>
         </Row>
         <Row>
           <Container className="content-area">

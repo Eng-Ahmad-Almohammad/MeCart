@@ -76,81 +76,91 @@ const Profile = ({ user }) => {
         style={{
           margin: '4vh 0',
           display: 'flex',
+          flexDirection: 'column',
           flexWrap: 'wrap',
           width: '100%',
           justifyContent: 'space-around',
-
-
+          alignItems: 'center',
         }}
       >
         <div
-          className="flo"
           style={{
-            backgroundColor: 'rgb(239, 110, 112)',
-            borderRadius: '50%',
-            width: '15vh',
-            height: '15vh',
             display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
+            flexWrap: 'wrap',
+            width: '100%',
+            justifyContent: 'space-around',
           }}
         >
-          <h5
+          <div
+            className="flo"
             style={{
-              textAlign: 'center',
-              fontSize: '3.5vh',
-              margin: '0',
-              color: 'white',
+              backgroundColor: 'rgb(239, 110, 112)',
+              borderRadius: '50%',
+              width: '15vh',
+              height: '15vh',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
             }}
-          >Points</h5>
-          <h5
-            style={{
-              textAlign: 'center',
-              fontSize: '3.5vh',
-              color: 'white',
-            }}>
-            <CountUp
+          >
+            <h5
               style={{
                 textAlign: 'center',
+                fontSize: '3.5vh',
+                margin: '0',
+                color: 'white',
               }}
-              start={0}
-              end={user.points}
-              duration={2} />
-          </h5>
-        </div>
-        <div
-          className="flo"
-          style={{
-            backgroundColor: 'rgb(239, 110, 112)',
-            borderRadius: '50%',
-            width: '15vh',
-            height: '15vh',
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }}>
-          <h5
-            style={{
-              textAlign: 'center',
-              fontSize: '3.5vh',
-              margin: '0',
-              color: 'white',
-            }}
-          >Rank</h5>
-          <h5
-            style={{
-              textAlign: 'center',
-              fontSize: '3.5vh',
-              color: 'white',
-            }}>
-            <CountUp
+            >Points</h5>
+            <h5
               style={{
                 textAlign: 'center',
+                fontSize: '3.5vh',
+                color: 'white',
+              }}>
+              <CountUp
+                style={{
+                  textAlign: 'center',
+                }}
+                start={0}
+                end={user.points}
+                duration={2} />
+            </h5>
+          </div>
+          <div
+            className="flo"
+            style={{
+              backgroundColor: 'rgb(239, 110, 112)',
+              borderRadius: '50%',
+              width: '15vh',
+              height: '15vh',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }}>
+            <h5
+              style={{
+                textAlign: 'center',
+                fontSize: '3.5vh',
+                margin: '0',
+                color: 'white',
               }}
-              start={0}
-              end={user.rank}
-              duration={2} />
-          </h5>
+            >Rank</h5>
+            <h5
+              style={{
+                textAlign: 'center',
+                fontSize: '3.5vh',
+                color: 'white',
+              }}>
+              <CountUp
+                style={{
+                  textAlign: 'center',
+                }}
+                start={0}
+                end={user.rank}
+                duration={2} />
+            </h5>
+          </div>
+
         </div>
 
         <form>
