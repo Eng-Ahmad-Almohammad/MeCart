@@ -7,6 +7,7 @@ import {
   CREATE_PRODUCT_LIST,
   DELETE_PRODUCT,
   FETCH_PRODUCT_INSTANCE,
+  CREATE_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
 
@@ -216,8 +217,6 @@ export const createProduct = (product) => async (dispatch) => {
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
   dispatch(getAllProducts())
-
-
 };
 
 export const addProductToShoppingList = (val,id) => async (dispatch) => {
@@ -293,7 +292,22 @@ export const getProduct = (productId) => async (dispatch) => {
 
   dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
 };
+export const createProductInstance = (data,id) => async (dispatch) => {
+  const obj={...data,id:id}
+  const res = await axios(`api/productInstance`, {
+    method: 'post',
+    headers: {
 
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(obj)
+  });
+
+  console.log("from creating instances====>",{ res });
+
+  dispatch({ type: CREATE_PRODUCT_INSTANCE, payload: res.data });
+  dispatch(getProductInstance(id))
+};
 export const getProductInstance = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/productInstance/${productId}`);
   console.log('from fetch instance', { res })

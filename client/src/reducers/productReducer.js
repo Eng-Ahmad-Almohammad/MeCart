@@ -6,7 +6,8 @@ import {
   CREATE_PRODUCT_LIST,
   FETCH_PRODUCT_INSTANCE,
   FETCH_CATEGORY,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  CREATE_PRODUCT_INSTANCE,
 
 } from "../actions/types";
 
@@ -37,16 +38,16 @@ const productReducer = function (state = InitialState, action) {
         isFailed: true,
         component: action.payload.component,
         failedComponent: action.payload.failedComponent,
-        item: {}
+        item: []
       };
-    case FETCH_PRODUCT_LIST_FIELD:
-      console.log("FETCH_PRODUCT_LIST_FIELD");
-      break;
+    case CREATE_PRODUCT_INSTANCE:
+      return{
+        ...state
+      }
     case FETCH_PRODUCT_INSTANCE:
-      console.log("from reducer========>", action.payload)
       return {
         ...state,
-        item: action.payload,
+        item: [...action.payload],
       }
     case FETCH_CATEGORY:
 
