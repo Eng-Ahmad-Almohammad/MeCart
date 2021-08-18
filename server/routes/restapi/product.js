@@ -2,7 +2,8 @@ import { Router } from "express";
 import multer from "multer";
 const mongoose = require("mongoose");
 const RanProducts = mongoose.model("products");
-
+import  ShoppingLisProduct from "../../models/ShoppingListProduct";
+import ShoppingLists from "../../models/ShoppingList"
 import Products from "../../models/Product";
 import ProductInstance from '../../models/ProductInstance';
 import {getImageBucket, getImageStorage, ImageStorageMiddleware} from "../../services/database-utils";
@@ -215,7 +216,10 @@ export const deleteProduct = async (req, res, next) => {
   try {
    await Products.deleteOne({ _id: req.query.productId });
     // console.log(res)
+    const instaces= await ProductInstance.find({productId: req.query.productId}).distinct('_id');
     await ProductInstance.deleteMany({productId: req.query.productId})
+    await ShoppingLisProduct.remove({ product  : { $in:instaces} })
+    await ShoppingLists.updateMany({products:{$in: instaces }}, { $pullAll: { 'products':instaces}})
     res.send("Record deleted");
     next();
   } catch (err) {

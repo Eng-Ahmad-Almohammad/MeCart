@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 
 const ShoppingLists = mongoose.model("shoppingLists");
 const ProductInstances = mongoose.model("productInstances");
-const Products = mongoose.model("products");
+const ShoppingListPro = mongoose.model("shoppingListProducts");
+import ShoppingListProducts from "../../models/ShoppingListProduct"
 
 export const createShoppingList = async (req, res, next) => {
   const debugInfo = {
@@ -58,11 +59,11 @@ export const getShoppingList = async (req, res, next) => {
       '_id':{$in:shoppingList.products}
     });
     //we need to populate three collections here to get the product/product instance and the shopping list
-    // const products=await Products.find({
-    //   '_id':{$in:productInstances.productId}
-    // })
+    const shoppingProducts=await ShoppingListPro.find({
+      shoppingList:req.params.listId
+    })
     // console.log("from api====>",{products})
-    res.send({ shoppingList: shoppingList ,productInstances:productInstances});
+    res.send({ shoppingList: shoppingList ,productInstances:productInstances,shoppingProducts:shoppingProducts});
     next();
   } catch (err) {
     debugInfo.message = err.message;
@@ -131,10 +132,10 @@ export const deleteShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-  // console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.params.listId)
+   console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.query.listId)
   try {
     await ShoppingLists.deleteOne({ _shoppingLists: req.params.listId });
-
+   await ShoppingListProducts.deleteMany({ shoppingList: req.params.listId})
     res.send("Record deleted");
     next();
   } catch (err) {

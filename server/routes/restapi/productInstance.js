@@ -63,6 +63,6 @@ export const createProductInstance = async (req, res, next) => {
   };
 
   const router = Router();
-  router.post("/productInstance/", createProductInstance);//the id added here just for now
+  router.post("/productInstance", createProductInstance);//the id added here just for now
   router.get("/productInstance/:id",getProductInstance);
   export default router;

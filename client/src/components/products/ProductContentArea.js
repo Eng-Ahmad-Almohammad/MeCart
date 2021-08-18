@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllProducts,getAllCategories} from "../../actions";
+import { ContentAreaTypes, getAllProducts, getAllCategories } from "../../actions";
 
 import NewProductModal from "./modals/NewProductModal";
-import ProductInstance from "./instances/productInstancesArea";
+import ProductInstance from "../instances/productInstancesArea";
 
 
 class ProductContentArea extends Component {
@@ -15,32 +15,32 @@ class ProductContentArea extends Component {
     this.state = {
       isModalOpen: false,
 
-      cards:this.props.storeList,
-      ProductIn:{},
-      categories:[]
+      cards: this.props.storeList,
+      ProductIn: [],
+      categories: [],
+      productId:""
     };
   }
 
 
-  componentDidUpdate = (prevProps) =>{
-    if (prevProps.storeList.length !== this.props.storeList.length){
-     console.log(prevProps.storeList , this.props.storeList)
-      this.props.getData().then(res =>{
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.storeList.length !== this.props.storeList.length) {
+      this.props.getData().then(res => {
         this.setState({ cards: this.props.storeList })
-        })
+      })
     }
   }
 
-  handleModal=()=>{
-    this.setState({ isModalOpen: !this.state.isModalOpen, ProductIn: this.props.storeList.product })
+  handleModal = (id) => {
+    this.setState({ isModalOpen: !this.state.isModalOpen, ProductIn: this.props.storeList.product,productId:id})
   }
-  componentDidMount = () =>{
-    this.props.getData().then(res =>{
-    this.setState({ cards: this.props.storeList })
+  componentDidMount = () => {
+    this.props.getData().then(res => {
+      this.setState({ cards: this.props.storeList })
     });
-    this.props.getCategories().then(res =>{
+    this.props.getCategories().then(res => {
       console.log(this.props.category);
-      this.setState({categories: this.props.category })
+      this.setState({ categories: this.props.category })
     })
   }
 
@@ -57,7 +57,7 @@ class ProductContentArea extends Component {
           >
             New Product
           </Button>
-          <NewProductModal category={this.state.categories}/>
+          <NewProductModal category={this.state.categories} />
         </Row>
         <Row
           style={{
@@ -77,9 +77,6 @@ class ProductContentArea extends Component {
                     handler={this.handleModal}
                     title={value.name}
                     itemDescription={value.descriptionOne}
-                  // onClick={() =>
-                  //   this.setState({ isModalOpen: !this.state.isModalOpen })
-                  // }
                   />
                 </div>
               )
@@ -88,24 +85,24 @@ class ProductContentArea extends Component {
         </Row>
       </div>
     ) : (
-      <ProductInstance handler={this.handleModal} item={this.props.item} />
+      <ProductInstance handler={this.handleModal} item={this.props.item} id={this.state.productId} />
     )
   }
 }
 
 const mapStateToProps = (state => {
   return {
-  storeList: state.product.product,
-  item:state.product.item,
-  category: state.product.category,
+    storeList: state.product.product,
+    item: state.product.item,
+    category: state.product.category,
 
   }
 
 }
 )
 const mapDispatchToProp = (dispatch) => ({
-  getData :  () =>  dispatch(getAllProducts()),
-  getCategories:()=>dispatch(getAllCategories())
+  getData: () => dispatch(getAllProducts()),
+  getCategories: () => dispatch(getAllCategories())
 
 })
 export default connect(mapStateToProps, mapDispatchToProp)(ProductContentArea);

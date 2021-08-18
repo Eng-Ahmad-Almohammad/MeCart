@@ -2,7 +2,7 @@ import { Modal } from "react-materialize";
 import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import * as actions from "../../../../actions";
+import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
 class NewProductModal extends Component {

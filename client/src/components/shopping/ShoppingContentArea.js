@@ -47,7 +47,7 @@ class ShoppingContentArea extends Component {
 
 
   render() {
-    
+     console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.props.shoppingList.shoppingList)
     return !this.state.isModalOpen?(
       <div>
         <Row>
@@ -96,7 +96,7 @@ class ShoppingContentArea extends Component {
               <p>list description {this.state.shoppingList.shoppingList.description}</p>
               {
                 this.state.shoppingList.productInstances.map((item,indx)=>{
-                  return <p key={indx}>prodct number {indx+1} price before taxes{item.priceBeforeTax}</p>
+                  return <p key={indx}>prodct number {indx+1} price before taxes{item.priceBeforeTax}and quantity {this.state.shoppingList.shoppingProducts[indx].quantity}</p>
                 })
               }
             </div>

@@ -50,7 +50,7 @@ class Menu extends Component {
           onClick={async () => {
             if (this.props.itemType === 'Products') {
               await this.props.getItem(this.props.itemId);
-              this.props.handler();
+              this.props.handler(this.props.itemId);
             }
             else if (this.props.itemType === 'Shopping') {
               await this.props.getShopItem(this.props.itemId);
