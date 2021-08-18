@@ -187,8 +187,6 @@ export const createProduct = (product) => async (dispatch) => {
 };
 export const addProductToShoppingList = (val,id) => async (dispatch) => {
  const obj={...val,product:id}
- console.log("from adding to a shopping list======>",obj);
- console.log("from adding product to a shopping list",obj)
   const res = await axios(`/api/shoppinglistproduct`, {
     method: 'post',
     headers: {
@@ -215,7 +213,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
 
 
   dispatch({ type: CREATE_STORE_LIST, payload: res.data });
-  dispatch(getAllSupermarkets())
+  dispatch(async()=> await getAllSupermarkets())
 };
 
 export const getAllProducts = () => async (dispatch) => {
@@ -269,6 +267,6 @@ export const getProductInstance = (productId) => async (dispatch) => {
 export const getAllCategories = () => async (dispatch) => {
 
   const res = await axios.get("/api/category");
-  console.log("from category fetc=====>",{res})
+  console.log("from category fetch=====>",{res})
   dispatch({ type: FETCH_CATEGORY, payload: res.data.categories});
 };

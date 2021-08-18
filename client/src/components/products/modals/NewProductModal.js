@@ -13,12 +13,6 @@ class NewProductModal extends Component {
         category:this.props.category
     }
 }
-  componentDidMount() {
-
-    this.props.getCategories().then(res =>{
-      this.setState({ cards: this.props.category });
-    })
-  }
   render() {
     return (
       <Modal
@@ -42,23 +36,20 @@ class NewProductModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.newList} category={this.state.category} />
+          <SimpleForm onNewListSubmit={this.props.newList} category={this.props.category} />
         </div>
       </Modal>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  category: state.category.categories,
-});
 
 const mapDispatchToProps = (dispatch) => ({
   newList: (vals) =>  dispatch(actions.createProduct(vals)),
-  getCategories:()=>dispatch(actions.getAllCategories())
+  
 });
 
-const modalComponent = connect(mapStateToProps, mapDispatchToProps)(NewProductModal);
+const modalComponent = connect(null, mapDispatchToProps)(NewProductModal);
 
 export default reduxForm({
   form: "simpleForm",
