@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Button, Container, Row } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllProducts } from "../../actions";
+import { ContentAreaTypes, getAllProducts,getAllCategories} from "../../actions";
+
 import NewProductModal from "./modals/NewProductModal";
 import ProductInstance from "./instances/productInstancesArea";
 
@@ -13,9 +14,10 @@ class ProductContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards: this.props.storeList,
-      ProductIn: {},
 
+      cards:this.props.storeList,
+      ProductIn:{},
+      categories:[]
     };
   }
 
@@ -35,6 +37,10 @@ class ProductContentArea extends Component {
   componentDidMount = () =>{
     this.props.getData().then(res =>{
     this.setState({ cards: this.props.storeList })
+    });
+    this.props.getCategories().then(res =>{
+      console.log(this.props.category);
+      this.setState({categories: this.props.category })
     })
   }
 
@@ -51,7 +57,7 @@ class ProductContentArea extends Component {
           >
             New Product
           </Button>
-          <NewProductModal />
+          <NewProductModal category={this.state.categories}/>
         </Row>
         <Row
           style={{
@@ -89,14 +95,17 @@ class ProductContentArea extends Component {
 
 const mapStateToProps = (state => {
   return {
-    storeList: state.product.product,
-    item: state.product.item
+  storeList: state.product.product,
+  item:state.product.item,
+  category: state.product.category,
+
   }
 
 }
 )
 const mapDispatchToProp = (dispatch) => ({
-  getData: () => dispatch(getAllProducts()),
+  getData :  () =>  dispatch(getAllProducts()),
+  getCategories:()=>dispatch(getAllCategories())
 
 })
 export default connect(mapStateToProps, mapDispatchToProp)(ProductContentArea);

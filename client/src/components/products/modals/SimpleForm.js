@@ -53,10 +53,6 @@ const SimpleForm = (props) => {
                 return <option value={item._id} key={indx}>{item.name}</option>
               })
             }
-            {/* <option></option>
-            <option value="food">Food</option>
-            <option value="clothes">Clothes</option>
-            <option value="drug">Drugs</option> */}
           </Field>
         </div>
       </div>
