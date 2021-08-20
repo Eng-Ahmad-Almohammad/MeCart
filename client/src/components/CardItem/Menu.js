@@ -97,7 +97,7 @@ class Menu extends Component {
 const mapStateToProps = (state => {
   return {
 
-    item: state.product.item,
+ 
     shoppingList: state.shoppingList,
   }
 

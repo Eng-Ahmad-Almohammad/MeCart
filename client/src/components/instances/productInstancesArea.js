@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Button, Container, Row, Col } from "react-materialize";
 import AddToListModal from "./add_modal/NewShoppingListItem";
 import NewIsntaceModal from "./new_modal/newInstance"
 import { CardTitle, Card, Icon } from "react-materialize";
+import {deleteInstance, getProductInstance} from '../../actions'
+
 class ProductInstance extends Component {
 
     constructor(props) {
@@ -12,8 +15,23 @@ class ProductInstance extends Component {
         }
     }
 
+
+    componentDidUpdate = (prevProps) => {
+        console.log('Ahmmmmmmmmmad',prevProps.item.length , this.props.item.length)
+        if (prevProps.item.length !== this.props.item.length) {
+            this.props.getItem(this.props.id).then(res => {
+              this.setState({ cards: this.props.storeList })
+            })
+          }
+    }
+    
+    delete =  (id, productID) => {
+        // console.log('Ahmmmmmmmmmmmad' , id)
+        this.props.deleteInstance(id,productID)
+    }
+
     render() {
-        console.log(this.props.item);
+        // console.log('Ahmmmmmmmmmmmmad',this.props.id);
         return (
             <div>
 
@@ -80,6 +98,17 @@ class ProductInstance extends Component {
                                                             Add to shopping list
                                                         </Button>
                                                         <AddToListModal item={instance} />
+                                                        <Button
+                                                                                                                       
+                                                           onClick={()=>this.delete(instance._id, this.props.id)}
+                                                            style={{
+                                                                display: "inline-block",
+                                                                textAlign: "center",
+                                                                fontSize: "10px"
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </Button>
                                                     </>
                                                 }
                                                 revealIcon={<Icon>more_vert</Icon>}
@@ -100,7 +129,22 @@ class ProductInstance extends Component {
         )
     }
 }
-export default ProductInstance;
+
+const mapStateToProps =( state =>{
+    return {
+    item : state.product.item
+
+    }
+})
+
+
+const mapDispatchToProp = (dispatch) => ({
+    getItem:(id)=> dispatch(getProductInstance(id)),
+    deleteInstance:  (id , productID) =>   dispatch(deleteInstance(id,productID))
+  
+  })
+export default connect(mapStateToProps, mapDispatchToProp)(ProductInstance);
+
 
 
 

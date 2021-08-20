@@ -8,6 +8,7 @@ import {
   DELETE_PRODUCT,
   FETCH_PRODUCT_INSTANCE,
   CREATE_PRODUCT_INSTANCE,
+  DELETE_PRODUCT_INSTANCE,
   FETCH_PRODUCT_CONTENT,
   FETCH_PRODUCT_LIST_FIELD,
 
@@ -178,6 +179,22 @@ export const deleteStore = (StoreId) => async (dispatch) => {
     dispatch(getAllSupermarkets());
   }
 };
+
+export const deleteInstance = (InstanceId, productId) => async (dispatch) => {
+  console.log("<<<<<< delete Instance >>>>>> : " + productId);
+  const res = await axios.delete("/api/productInstance/", {
+    params: {
+      InstanceId: InstanceId,
+    },
+  });
+
+  if (res.status === 200) {
+    dispatch({ type: DELETE_PRODUCT_INSTANCE, payload: res.data })
+    dispatch(getProductInstance(productId))
+  }
+};
+
+
 
 export const updateShoppingList = (listId, list) => async (dispatch) => {
   console.log("<<<<<< update shopping list >>>>>> : " + listId);

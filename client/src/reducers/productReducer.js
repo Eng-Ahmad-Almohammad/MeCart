@@ -8,6 +8,7 @@ import {
   FETCH_CATEGORY,
   DELETE_PRODUCT,
   CREATE_PRODUCT_INSTANCE,
+  DELETE_PRODUCT_INSTANCE,
 
 } from "../actions/types";
 
@@ -59,6 +60,8 @@ const productReducer = function (state = InitialState, action) {
         return state;
     case DELETE_PRODUCT:
       return state;
+    case DELETE_PRODUCT_INSTANCE:
+      return state
     default:
       return state;
   }

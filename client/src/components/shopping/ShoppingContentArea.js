@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { chain, random } from "lodash";
-import { Button, Container, Row } from "react-materialize";
+import { Button, Container, Row, Col, CardTitle, Card, Icon } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllShoppingList } from "../../actions";
@@ -47,7 +47,7 @@ class ShoppingContentArea extends Component {
 
 
   render() {
-     console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.props.shoppingList.shoppingList)
+     console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.state.shoppingList)
     return !this.state.isModalOpen?(
       <div>
         <Row>
@@ -94,11 +94,56 @@ class ShoppingContentArea extends Component {
             <div>
               <p>list name {this.state.shoppingList.shoppingList.name}</p>
               <p>list description {this.state.shoppingList.shoppingList.description}</p>
-              {
-                this.state.shoppingList.productInstances.map((item,indx)=>{
-                  return <p key={indx}>prodct number {indx+1} price before taxes{item.priceBeforeTax}and quantity {this.state.shoppingList.shoppingProducts[indx].quantity}</p>
-                })
-              }
+              <Row>
+                    <Container className="content-area">
+                        {
+                             this.state.shoppingList.productInstances.map((item,indx) => {
+
+                                return (
+                                    <Row>
+                                        <Col
+                                            m={12}
+                                            s={12}
+                                        >
+                                            <Card
+                                                closeIcon={<Icon>close</Icon>}
+                                                header={<CardTitle image="https://materializecss.com/images/sample-1.jpg" reveal waves="light" />}
+                                                reveal={
+                                                    <>
+                                                        <p>priceBeforeTax {item.priceBeforeTax}</p>
+                                                        <p>priceAfterTax {item.priceAfterTax}</p>
+                                                        <p>unitOfMeasure {item.unitOfMeasure}</p>
+                                                        <p>measurement {item.measurement}</p>
+                                                        <p>quantity {this.state.shoppingList.shoppingProducts[indx].quantity}</p>
+
+                                                        <Button
+                                                                                                                       
+                                                           onClick={()=>this.delete(item._id, this.props.id)}
+                                                            style={{
+                                                                display: "inline-block",
+                                                                textAlign: "center",
+                                                                fontSize: "10px"
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                    </>
+                                                }
+                                                revealIcon={<Icon>more_vert</Icon>}
+                                                title="Card Title"
+                                            >
+                                                <p>
+
+                                                </p>
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                )
+                            })
+                        }
+                    </Container>
+                </Row>
+             
             </div>
           </Container>
         </Row>
@@ -114,6 +159,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
+  
  
 });
 

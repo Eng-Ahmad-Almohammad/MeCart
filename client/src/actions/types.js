@@ -7,6 +7,7 @@ export const CREATE_PRODUCT_LIST = "create_product_list";
 export const DELETE_PRODUCT = 'delete_product';
 export const FETCH_PRODUCT_INSTANCE="fetch_product_instance";
 export const CREATE_PRODUCT_INSTANCE="create_product_instance";
+export const DELETE_PRODUCT_INSTANCE= "delete_product_instance";
 
 export const FETCH_CATEGORY="fetch_category"
 
