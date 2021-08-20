@@ -1,0 +1,7 @@
+@import "~materialize-css";
+
+.star-rating,
+.star-rating .material-icons {
+  @extend .left-align;
+  font-size: 1em;
+}
