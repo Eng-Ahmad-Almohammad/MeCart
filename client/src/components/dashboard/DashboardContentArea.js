@@ -1,7 +1,7 @@
 import { random } from "lodash";
 import React, { Component } from "react";
 import { Button, Container, Modal } from "react-materialize";
-import { ContentAreaTypes ,getAllProducts} from "../../actions";
+import { ContentAreaTypes, getAllProducts } from "../../actions";
 import { connect } from "react-redux";
 import CardItem from "../CardItem";
 
@@ -11,37 +11,37 @@ class DashboardContentArea extends Component {
 
     this.state = {
       isModalOpen: false,
-      cards:this.props.storeList
+      cards: this.props.storeList
     };
   }
 
-  componentDidMount(){
-    
-    this.props.getData().then(res =>{
-      
-    this.setState({ cards:this.props.storeList })
+  componentDidMount() {
+
+    this.props.getData().then(res => {
+
+      this.setState({ cards: this.props.storeList })
     })
-  } 
+  }
 
   renderContent() {
-    console.log("from dashboardd===========?",this.state.cards)
+    console.log("from dashboardd===========?", this.state.cards)
     return (
       <Container className="content-area">
         {this.state.cards.map((imageUrl, index) => {
           return (
-          // <div> Not Avaliable Now</div>
-          <CardItem
-                            key={`dashboard-${index}`}
-                            type={ContentAreaTypes.DEFAULT}
-                            imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
-                              250,
-                              350
-                            )}`}
-                            onClick={() => {
-                                this.setState({isModalOpen: !this.state.isModalOpen});
-                                console.log("I clicked the image");
-                            }}
-                        />
+            // <div> Not Avaliable Now</div>
+            <CardItem
+              key={`dashboard-${index}`}
+              type={ContentAreaTypes.DEFAULT}
+              imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
+                250,
+                350
+              )}`}
+              onClick={() => {
+                this.setState({ isModalOpen: !this.state.isModalOpen });
+                console.log("I clicked the image");
+              }}
+            />
           );
         })}
         {this.state.isModalOpen && (
@@ -84,13 +84,13 @@ class DashboardContentArea extends Component {
 
 const mapStateToProps = (state => {
   return {
-  storeList: state.product.product
+    storeList: state.product.product
   }
 
 }
 )
 const mapDispatchToProp = (dispatch) => ({
-  getData :  () =>  dispatch(getAllProducts())
+  getData: () => dispatch(getAllProducts())
 })
 
-export default connect(mapStateToProps,mapDispatchToProp)(DashboardContentArea);
+export default connect(mapStateToProps, mapDispatchToProp)(DashboardContentArea);

@@ -4,7 +4,8 @@ import { Icon, Button, Dropdown } from "react-materialize";
 import DeleteConfirmModal from "../../confirmation/DeleteConfirmModal";
 import * as actions from "../../../actions";
 import { connect } from "react-redux";
-
+import Show from "../../Show";
+import NewStoreModal from "../modals/NewStoreModal"
 class Menu extends Component {
 
   constructor(props) {
@@ -22,7 +23,7 @@ class Menu extends Component {
   render() {
     return (
       <Dropdown
-        id={this.props.itemId}
+        id={this.props.itemId._id}
         options={{
           alignment: "left",
           autoTrigger: true,
@@ -49,15 +50,15 @@ class Menu extends Component {
         <a
           onClick={async () => {
             if (this.props.itemType === 'Products') {
-              await this.props.getItem(this.props.itemId);
-              this.props.handler(this.props.itemId);
+              await this.props.getItem(this.props.itemId._id);
+              this.props.handler(this.props.itemId._id);
             }
             else if (this.props.itemType === 'Shopping') {
-              await this.props.getShopItem(this.props.itemId);
+              await this.props.getShopItem(this.props.itemId._id);
               this.props.handler();
             }
             else if (this.props.itemType === 'Supermarkets') {
-              await this.props.getStoreItem(this.props.itemId);
+              await this.props.getStoreItem(this.props.itemId._id);
               this.props.handler();
             }
           }}
@@ -66,22 +67,33 @@ class Menu extends Component {
           Details
         </a>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
-        <a>
+        
+        <Show condition={this.props.itemType === "Supermarkets"}>
+        <a 
+        className="modal-trigger"
+        href="#newStoreModal" 
+        node="button" 
+        onClick={async () => {
+          console.log(this.props.itemType);
+        }}
+        >
           <Icon>edit</Icon>
           Edit
         </a>
+        <NewStoreModal />
+        </Show>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
             if (this.props.itemType === 'Shopping') {
-              this.deleteItem(this.props.itemId);
+              this.deleteItem(this.props.itemId._id);
             }
             else if (this.props.itemType === 'Products') {
-              this.props.deleteProduct(this.props.itemId)
+              this.props.deleteProduct(this.props.itemId._id)
             }
 
             else if (this.props.itemType === 'Supermarkets') {
-              this.props.deleteStore(this.props.itemId);
+              this.props.deleteStore(this.props.itemId._id);
             }
           }}
         >

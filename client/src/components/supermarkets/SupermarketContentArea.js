@@ -1,7 +1,7 @@
 import { Component } from "react";
 
 import { Button, Container, Row, Card, Col, Icon } from "react-materialize";
-import CardItem from "./card/index";
+import CardItem from "../CardItem/index";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllSupermarkets, getSupermarket } from "../../actions";
 import NewStoreModal from "./modals/NewStoreModal";
@@ -53,7 +53,7 @@ class SupermarketContentArea extends Component {
           <Button className="modal-trigger" href="#newStoreModal" node="button" style={{ marginLeft: "40px" }}>
             New Store
           </Button>
-          <NewStoreModal handler={this.handler} />
+          <NewStoreModal  />
         </Row>
         <Row>
           <Container className="content-area">
@@ -61,17 +61,6 @@ class SupermarketContentArea extends Component {
               console.log('dsad', value);
               return (
                 <div>
-                  {/* <CardItem
-                    type={ContentAreaTypes.SUPERMARKETS}
-                    imageUrl={value.imageUrl}
-                    hasMenu={true}
-                    listItem={value}
-                    className="hoverable"
-                    handler={this.handlerStoresList}
-                    onClick={() =>
-                      this.setState({ isModalOpen: !this.state.isModalOpen })
-                    }
-                  /> */}
                   <CardItem
                     type={ContentAreaTypes.SUPERMARKETS}
                     hasMenu={true}

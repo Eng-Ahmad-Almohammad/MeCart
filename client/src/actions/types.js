@@ -21,6 +21,7 @@ export const CREATE_SHOPPING_LIST_PRODUCT_INSTANCE="create_shopping_list_product
 
 export const FETCH_STORE_LIST = "fetch_store_list";
 export const CREATE_STORE_LIST="create_store_list";
+export const FETCH_STORE_LIST_FEILD="fetch_store_list_feild";
 export const DELETE_STORE = 'delete_store';
 export const FETCH_LEADERBOARD = 'fetch_leaderboard';
 export const FETCH_LEADERBOARD_FIELD = "fetch_leaderboard_field";

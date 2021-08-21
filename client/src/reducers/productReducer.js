@@ -18,7 +18,8 @@ const InitialState = {
   failedComponent: null,
   product: [],
   item: {},
-  category:[]
+  category:[],
+  oneProduct:{}
 };
 
 const productReducer = function (state = InitialState, action) {
@@ -31,7 +32,9 @@ const productReducer = function (state = InitialState, action) {
         component: action.payload,
         failedComponent: null,
         product: [...action.payload],
-        item: {}
+        item: {},
+        category:[],
+       oneProduct:{}
       };
     case FETCH_PRODUCT_CONTENT:
       return {
@@ -39,7 +42,9 @@ const productReducer = function (state = InitialState, action) {
         isFailed: true,
         component: action.payload.component,
         failedComponent: action.payload.failedComponent,
-        item: []
+        item: [],
+        category:[],
+       oneProduct:{}
       };
     case CREATE_PRODUCT_INSTANCE:
       return{
@@ -49,6 +54,11 @@ const productReducer = function (state = InitialState, action) {
       return {
         ...state,
         item: [...action.payload],
+      }
+    case FETCH_PRODUCT_LIST_FIELD:
+       return {
+          ...state,
+        oneProduct: {...action.payload},
       }
     case FETCH_CATEGORY:
 

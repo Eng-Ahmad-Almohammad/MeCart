@@ -9,12 +9,12 @@ class NewProductModal extends Component {
   constructor(props){
     super(props);
     this.state={
-
-        category:this.props.category
+     category:this.props.category
     }
 }
-
+ 
   render() {
+    
     return (
       <Modal
         bottomSheet={false}
@@ -37,20 +37,25 @@ class NewProductModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.newList} category={this.props.category} />
+          <SimpleForm onNewListSubmit={this.props.product?this.props.updateList:this.props.newList} category={this.props.category} initialValues={this.props.product} />
         </div>
       </Modal>
     );
   }
 }
 
+const mapStateToProps = (state => {
+  return {
+   product: state.product.oneProduct,
+  }
 
+})
 const mapDispatchToProps = (dispatch) => ({
   newList: (vals) =>  dispatch(actions.createProduct(vals)),
-  
+  updateList: (vals) =>  dispatch(actions.replaceProduct(vals)),
 });
 
-const modalComponent = connect(null, mapDispatchToProps)(NewProductModal);
+const modalComponent = connect(mapStateToProps, mapDispatchToProps)(NewProductModal);
 
 export default reduxForm({
   form: "simpleForm",

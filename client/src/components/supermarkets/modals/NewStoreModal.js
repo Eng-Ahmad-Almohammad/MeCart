@@ -9,6 +9,7 @@ class NewStoreModal extends Component {
 
   
   render() {
+    console.log("from storee====>",this.props.store)
     return (
       <Modal
         bottomSheet={false}
@@ -31,18 +32,24 @@ class NewStoreModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.newList} />
+          <SimpleForm onNewListSubmit={this.props.store?this.props.updateList:this.props.newList} initialValues={this.props.store} />
         </div>
       </Modal>
     );
   }
 }
+const mapStateToProps = (state => {
+  return {
+   store: state.stores.oneStore,
+  }
 
+})
 const mapDispatchToProps = (dispatch) => ({
   newList: (vals) => dispatch(actions.createSupermarket(vals)),
+  updateList: (vals) => dispatch(actions.replaceSupermarket(vals)),
 });
 
-const modalComponent = connect(null, mapDispatchToProps)(NewStoreModal);
+const modalComponent = connect(mapStateToProps, mapDispatchToProps)(NewStoreModal);
 
 export default reduxForm({
   form: "simpleForm",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import configuration from "../../../config";
+import { connect } from "react-redux";
 
 const containerStyle = {
   width: "400px",
@@ -170,6 +171,14 @@ const SimpleForm = (props) => {
   );
 };
 
-export default reduxForm({
+const mapStateToProps = (state => {
+  return {
+   store: state.stores.oneStore,
+  }
+
+})
+
+export default connect(mapStateToProps, null)(reduxForm({
   form: "simple",
-})(SimpleForm);
+  enableReinitialize: true
+})(SimpleForm));
