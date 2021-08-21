@@ -1,6 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Field, reduxForm } from "redux-form";
-
+import { connect } from "react-redux";
 import {Button} from "react-materialize";
 import NewProductScanModal from "./NewProductScanModal";
 import cookieSession from "cookie-session";
@@ -9,6 +9,7 @@ import cookieSession from "cookie-session";
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
+  console.log("from simmmpllle fooorrrrmmmmm=====>",props.product)
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
       <div>
@@ -19,6 +20,7 @@ const SimpleForm = (props) => {
             component="input"
             type="text"
             placeholder="List Name"
+            value={props.product.name}
           />
         </div>
       </div>
@@ -76,6 +78,14 @@ const SimpleForm = (props) => {
   );
 };
 
-export default reduxForm({
+const mapStateToProps = (state => {
+  return {
+   product: state.product.oneProduct,
+  }
+
+})
+
+export default connect(mapStateToProps, null)( reduxForm({
   form: "simple",
-})(SimpleForm);
+  enableReinitialize: true
+})(SimpleForm));

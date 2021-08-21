@@ -58,8 +58,8 @@ export const getSupermarket = async (req, res, next) => {
   console.log({ debugInfo });
 
   try {
-    const supermarket = await Store.find({
-      _supermarkets: req.body.id,
+    const supermarket = await Store.findById({
+      _id: req.params.supermarketId,
     });
 
     res.send({ supermarket: supermarket });
@@ -117,7 +117,7 @@ export const replaceSupermarket = async (req, res, next) => {
     } = req.body;
 
     const updatedSupermarket = await Store.updateOne(
-      { _id: req.body.id },
+      { _id: req.body._id },
       {
         $set: {
           owner: owner,
@@ -172,7 +172,7 @@ const router = Router();
 router.post("/supermarkets", createSupermarket);
 router.get("/supermarkets", getAllSupermarkets);
 router.get("/supermarkets/:supermarketId", getSupermarket);
-router.put("/supermarkets/:supermarketId", replaceSupermarket);
+router.put("/supermarkets", replaceSupermarket);
 router.delete("/supermarkets/", deleteSupermarket);
 
 export default router;

@@ -22,6 +22,7 @@ import {
   FETCH_SHOPPING_LIST_FIELD,
   FETCH_STORE_LIST,
   CREATE_STORE_LIST,
+  FETCH_STORE_LIST_FEILD,
   DELETE_STORE,
   FETCH_LEADERBOARD,
   SIGN_IN,
@@ -96,7 +97,6 @@ export const signUp = (values, history) => async (dispatch) => {
   console.log("sign up values are: ", values);
   const res = await axios.post("/api/sign-up", values);
 
-  // history.push("/sign-in");
   dispatch({ type: SIGN_UP, payload: res.data });
 };
 
@@ -140,7 +140,6 @@ export const createShoppingList = (list) => async (dispatch) => {
 };
 
 export const deleteShoppingList = (listId) => async (dispatch) => {
-  console.log("<<<<<< delete shopping list >>>>>> : " + listId);
   const res = await axios.delete("/api/lists/", {
     params: {
       listId: listId,
@@ -154,7 +153,6 @@ export const deleteShoppingList = (listId) => async (dispatch) => {
 };
 
 export const deleteProduct = (productId) => async (dispatch) => {
-  console.log("<<<<<< delete product >>>>>> : " + productId);
   const res = await axios.delete("/api/products/", {
     params: {
       productId: productId,
@@ -168,7 +166,6 @@ export const deleteProduct = (productId) => async (dispatch) => {
 };
 
 export const deleteStore = (StoreId) => async (dispatch) => {
-  console.log("<<<<<< delete StoreId >>>>>> : " + StoreId);
   const res = await axios.delete("/api/supermarkets/", {
     params: {
       StoreId: StoreId,
@@ -182,7 +179,6 @@ export const deleteStore = (StoreId) => async (dispatch) => {
 };
 
 export const deleteInstance = (InstanceId, productId) => async (dispatch) => {
-  console.log("<<<<<< delete Instance >>>>>> : " + productId);
   const res = await axios.delete("/api/productInstance/", {
     params: {
       InstanceId: InstanceId,
@@ -212,7 +208,6 @@ export const deleteInstanceFromList = (InstanceId, listId) => async (dispatch) =
 
 
 export const updateShoppingList = (listId, list) => async (dispatch) => {
-  console.log("<<<<<< update shopping list >>>>>> : " + listId);
   const res = await axios.put(`/api/lists/${listId}`, list);
 
   dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data });
@@ -220,7 +215,6 @@ export const updateShoppingList = (listId, list) => async (dispatch) => {
 
 export const getAllShoppingList = () => async (dispatch) => {
   const res = await axios.get("/api/lists");
-  console.log("from get all lists====> ", res);
   if (res.status === 200) {
     dispatch({ type: FETCH_SHOPPING_LIST, payload: res.data.shoppingLists });
   }
@@ -245,7 +239,6 @@ export const createProduct = (product) => async (dispatch) => {
     data: JSON.stringify(product)
   });
 
-  console.log({ res });
 
   dispatch({ type: CREATE_PRODUCT_LIST, payload: res.data });
   dispatch(getAllProducts())
@@ -295,6 +288,18 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
+export const replaceSupermarket=(supermarket)=>async (dispatch)=>{
+  const res = await axios(`api/supermarkets`, {
+    method: 'put',
+    headers: {
+
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(supermarket)
+  });
+
+  dispatch(getAllSupermarkets())
+}
 export const getAllSupermarkets = () => async (dispatch) => {
   const res = await axios.get("/api/supermarkets");
 
@@ -306,23 +311,29 @@ export const getAllSupermarkets = () => async (dispatch) => {
 };
 
 export const getSupermarket = (supermarketId) => async (dispatch) => {
-  const res = await axios.get("/api/supermarkets/", {
-    params: {
-      supermarketId: supermarketId,
-    },
-  });
-
-  dispatch({ type: FETCH_STORE_LIST, payload: res.data.supermarkets });
+  const res = await axios.get(`/api/supermarkets/${supermarketId}`);
+   console.log("from get supermarket===>",{res})
+  dispatch({ type:FETCH_STORE_LIST_FEILD, payload: res.data.supermarket });
 };
 
-export const getProduct = (productId) => async (dispatch) => {
-  const res = await axios.get("/api/products/", {
-    params: {
-      productId: productId,
+export const replaceProduct=(product)=>async(dispatch)=>{
+  const res = await axios(`api/products`, {
+    method: 'put',
+    headers: {
+
+      'Content-Type': 'application/json'
     },
+    data: JSON.stringify(product)
   });
 
-  dispatch({ type: FETCH_PRODUCT_LIST, payload: res.data.products });
+  dispatch(getAllProducts())
+}
+
+export const getProduct = (productId) => async (dispatch) => {
+  const res = await axios.get(`/api/products/${productId}`, {
+  });
+   console.log("from get product",{res})
+  dispatch({ type:FETCH_PRODUCT_LIST_FIELD, payload: res.data.product });
 };
 export const createProductInstance = (data,id) => async (dispatch) => {
   const obj={...data,id:id}

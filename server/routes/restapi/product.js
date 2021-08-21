@@ -59,7 +59,7 @@ export const getProduct = async (req, res, next) => {
   console.log({ debugInfo });
 
   try {
-    const product = await Products.findById(req.body.id);
+    const product = await Products.findById(req.params.productId);
 
     res.send({ product: product });
     next();
@@ -130,7 +130,7 @@ export const replaceProduct = async (req, res, next) => {
     const { name, descriptionOne, descriptionTwo, category } = req.body;
 
     const updatedProduct = await Products.updateOne(
-      { _id: req.body.id },
+      { _id: req.body._id },
       {
         $set: {
           name: name,
@@ -237,7 +237,7 @@ router.post("/products", createProduct);
 router.get("/products", getAllProducts);
 router.get("/random_products", getRandomProducts);
 router.get("/products/:productId", getProduct);
-router.put("/products/:productId", replaceProduct);
+router.put("/products", replaceProduct);
 router.delete("/products/", deleteProduct);
 
 export default router;

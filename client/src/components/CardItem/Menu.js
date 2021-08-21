@@ -4,6 +4,9 @@ import { Icon, Button, Dropdown } from "react-materialize";
 import DeleteConfirmModal from "../confirmation/DeleteConfirmModal";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import Show from "../Show";
+import NewProductModal from "../products/modals/NewProductModal";
+import NewStoreModal from "../supermarkets/modals/NewStoreModal"
 
 class Menu extends Component {
 
@@ -14,12 +17,10 @@ class Menu extends Component {
       itemId: this.props.itemId,
     })
   }
-
-  deleteItem(id) {
-    this.props.deleteList(id);
-  }
+ 
 
   render() {
+    console.log(this.props.itemType)
     return (
       <Dropdown
         id={this.props.itemId}
@@ -50,7 +51,7 @@ class Menu extends Component {
           onClick={async () => {
             if (this.props.itemType === 'Products') {
               await this.props.getItem(this.props.itemId);
-              this.props.handler(this.props.itemId);
+              this.props.handler(this.props.itemId._id);
             }
             else if (this.props.itemType === 'Shopping') {
               await this.props.getShopItem(this.props.itemId);
@@ -66,10 +67,35 @@ class Menu extends Component {
           Details
         </a>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
-        <a>
+        <Show condition={this.props.itemType === 'Products'}>
+        <a 
+        className="modal-trigger"
+        href="#newProductModal"
+        node="button"
+        onClick={async () => {
+          await this.props.getProduct(this.props.itemId)
+        }}
+        >
           <Icon>edit</Icon>
           Edit
         </a>
+        <NewProductModal category={this.props.category}/>
+        </Show>
+
+        <Show condition={this.props.itemType === "Supermarkets"}>
+        <a 
+        className="modal-trigger"
+        href="#newStoreModal" 
+        node="button" 
+        onClick={async () => {
+          await this.props.getStore(this.props.itemId)
+        }}
+        >
+          <Icon>edit</Icon>
+          Edit
+        </a>
+        <NewStoreModal />
+        </Show>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
@@ -96,9 +122,8 @@ class Menu extends Component {
 
 const mapStateToProps = (state => {
   return {
-
- 
     shoppingList: state.shoppingList,
+    category: state.product.category,
   }
 
 })
@@ -110,7 +135,10 @@ const mapDispatchToProps = (dispatch) => ({
   deleteStore : (id) => dispatch(actions.deleteStore(id)),
   getItem:(id)=> dispatch(actions.getProductInstance(id)),
   getShopItem:(id)=> dispatch(actions.getShoppingList(id)),
-  getStoreItem:(id) => dispatch(actions.getSupermarket(id))
+  getStoreItem:(id) => dispatch(actions.getSupermarket(id)),
+
+  getProduct:(id)=>dispatch(actions.getProduct(id)),
+  getStore:(id)=>dispatch(actions.getSupermarket(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

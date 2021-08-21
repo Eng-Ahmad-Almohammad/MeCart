@@ -24,7 +24,7 @@ const CardItem = ({
 
   const showMenu = () => {
     if (menu && listItem && listItem._id) {
-      return <Menu handler={handler} itemId={listItem._id} itemType={type} />;
+      return <Menu handler={handler} itemId={listItem} itemType={type} />;
     }
   };
 
