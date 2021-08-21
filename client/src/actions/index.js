@@ -16,6 +16,7 @@ import {
   FETCH_SHOPPING_LIST,
   CREATE_SHOPPING_LIST,
   DELETE_SHOPING_LIST,
+  DELETE_INSTANCE_FROM_SHOPPING_LIST,
   CREATE_SHOPPING_LIST_PRODUCT_INSTANCE,
   FETCH_SHOPPING_CONTENT,
   FETCH_SHOPPING_LIST_FIELD,
@@ -191,6 +192,20 @@ export const deleteInstance = (InstanceId, productId) => async (dispatch) => {
   if (res.status === 200) {
     dispatch({ type: DELETE_PRODUCT_INSTANCE, payload: res.data })
     dispatch(getProductInstance(productId))
+  }
+};
+
+export const deleteInstanceFromList = (InstanceId, listId) => async (dispatch) => {
+  console.log("<<<<<< delete Instance >>>>>> : " , InstanceId, listId);
+  const res = await axios.delete("/api/shoppinglistproduct/", {
+    params: {
+      InstanceId: InstanceId,
+    },
+  });
+
+  if (res.status === 200) {
+    dispatch({ type: DELETE_INSTANCE_FROM_SHOPPING_LIST, payload: res.data })
+    dispatch(getShoppingList(listId))
   }
 };
 

@@ -2,6 +2,7 @@ import { Router } from "express";
 const mongoose = require("mongoose");
 
 import ShoppingLisProducts from "../../models/ShoppingListProduct";
+import shpoingList from '../../models/ShoppingList'
 const ShoppingLists = mongoose.model("shoppingLists");
 
 export const addProductToShoppingList = async (req, res, next) => {
@@ -40,9 +41,35 @@ export const addProductToShoppingList = async (req, res, next) => {
     return;
 };
 
+
+export const deleteInstanceFromList = async (req, res, next) => {
+  const debugInfo = {
+    data: req.query,
+    function: "deleteInstanceFromList",
+  };
+
+  // console.log('Product Instanceeeee', req.query.InstanceId)
+  console.log({ debugInfo });
+
+  try {
+    
+    await ShoppingLisProducts.deleteMany({ product: req.query.InstanceId })
+    await shpoingList.updateMany({ products: { $in: req.query.InstanceId } }, { $pullAll: { 'products': [req.query.InstanceId] } })
+    res.send('Record deleted');
+    next();
+  } catch (err) {
+    debugInfo.message = err.message;
+    console.log({ debugInfo });
+    res.status(500).send(err.message);
+  }
+
+  return;
+}
+
+
 const router = Router();
 
 router.post("/shoppinglistproduct",addProductToShoppingList)
-
+router.delete('/shoppinglistproduct', deleteInstanceFromList)
 export default router;
 

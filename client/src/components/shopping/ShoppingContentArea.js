@@ -3,7 +3,7 @@ import { chain, random } from "lodash";
 import { Button, Container, Row, Col, CardTitle, Card, Icon } from "react-materialize";
 import CardItem from "../CardItem";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList } from "../../actions";
+import { ContentAreaTypes, getAllShoppingList,deleteInstanceFromList } from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -40,6 +40,9 @@ class ShoppingContentArea extends Component {
     }
   }
  
+  delete = (id, listId) => {
+    this.props.delete(id,listId);
+  }
 
   handlerShopingList = () =>{
     this.setState({ isModalOpen: !this.state.isModalOpen,shoppingList:this.props.shoppingList.shoppingList });
@@ -114,11 +117,12 @@ class ShoppingContentArea extends Component {
                                                         <p>priceAfterTax {item.priceAfterTax}</p>
                                                         <p>unitOfMeasure {item.unitOfMeasure}</p>
                                                         <p>measurement {item.measurement}</p>
+                                                        {console.log('Ahmmmad', this.state.shoppingList.shoppingProducts)}
                                                         <p>quantity {this.state.shoppingList.shoppingProducts[indx].quantity}</p>
 
                                                         <Button
                                                                                                                        
-                                                           onClick={()=>this.delete(item._id, this.props.id)}
+                                                           onClick={()=>this.delete(item._id, this.state.shoppingList.shoppingList._id )}
                                                             style={{
                                                                 display: "inline-block",
                                                                 textAlign: "center",
@@ -159,7 +163,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList:  () => dispatch( getAllShoppingList()),
-  
+  delete: (id,listId) => dispatch(deleteInstanceFromList(id, listId))
  
 });
 
