@@ -4,6 +4,7 @@ import {
   FETCH_SHOPPING_LIST_FIELD,
   CREATE_SHOPPING_LIST,
   DELETE_SHOPING_LIST,
+  DELETE_INSTANCE_FROM_SHOPPING_LIST
 } from "../actions/types";
 
 const InitialState = {
@@ -31,6 +32,8 @@ const shoppingListReducer = function (state = InitialState, action) {
     case CREATE_SHOPPING_LIST:
       return state;
     case DELETE_SHOPING_LIST:
+      return state;
+    case DELETE_INSTANCE_FROM_SHOPPING_LIST:
       return state;
     default:
       return state;

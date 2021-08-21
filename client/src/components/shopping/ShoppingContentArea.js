@@ -3,7 +3,7 @@ import { chain, random } from "lodash";
 import { Button, Container, Row, Col, CardTitle, Card, Icon } from "react-materialize";
 import CardItem from "./card/index";
 import { connect } from "react-redux";
-import { ContentAreaTypes, getAllShoppingList } from "../../actions";
+import { ContentAreaTypes, getAllShoppingList, deleteInstanceFromList, getShoppingList } from "../../actions";
 import NewListModal from "./modals/NewListModal";
 
 class ShoppingContentArea extends Component {
@@ -29,6 +29,9 @@ class ShoppingContentArea extends Component {
     })
   }
 
+
+ 
+
   componentDidUpdate = (prevProps) => {
     if (prevProps.shoppingList.length !== this.props.shoppingList.length) {
       console.log(prevProps.shoppingList)
@@ -38,6 +41,14 @@ class ShoppingContentArea extends Component {
         this.setState({ cards: this.props.shoppingList })
       })
     }
+ 
+  }
+
+
+
+  delete = (id, listId) => {
+
+    this.props.delete(id, listId);
   }
 
 
@@ -47,7 +58,7 @@ class ShoppingContentArea extends Component {
 
 
   render() {
-    console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", this.state.shoppingList)
+    console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", this.props.shoppingList)
     return !this.state.isModalOpen ? (
       <div>
         <Row>
@@ -108,12 +119,11 @@ class ShoppingContentArea extends Component {
         <Row>
           <Container>
             <div>
-              <p>list name {this.state.shoppingList.shoppingList.name}</p>
-              <p>list description {this.state.shoppingList.shoppingList.description}</p>
+
               <Row>
                 <Container className="content-area">
                   {
-                    this.state.shoppingList.productInstances.map((item, indx) => {
+                    this.props.shoppingList.shoppingList.productInstances.map((item, indx) => {
 
                       return (
                         <Row>
@@ -134,7 +144,7 @@ class ShoppingContentArea extends Component {
 
                                   <Button
 
-                                    onClick={() => this.delete(item._id, this.props.id)}
+                                    onClick={() => this.delete(item._id, this.state.shoppingList.shoppingList._id)}
                                     style={{
                                       display: "inline-block",
                                       textAlign: "center",
@@ -175,7 +185,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchShoppingList: () => dispatch(getAllShoppingList()),
-
+  delete: (id, listId) => dispatch(deleteInstanceFromList(id, listId)),
+  getItems: (id) => dispatch(getShoppingList(id))
 
 });
 
