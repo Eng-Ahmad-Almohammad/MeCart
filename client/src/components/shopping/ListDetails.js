@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class ListDetails extends Component {
     render() {
-        return <h1>Content for list >>> {this.props.listId}</h1>
+        return <h1>Content for list {'>>>'} {this.props.listId}</h1>
     }
 }
 
