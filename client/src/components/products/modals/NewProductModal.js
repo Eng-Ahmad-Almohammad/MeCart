@@ -14,7 +14,7 @@ class NewProductModal extends Component {
 }
  
   render() {
-    console.log('Produccct',this.props.product)
+    
     return (
       <Modal
         bottomSheet={false}

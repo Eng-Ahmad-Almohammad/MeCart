@@ -39,7 +39,7 @@ class ProductContentArea extends Component {
       this.setState({ cards: this.props.storeList })
     });
     this.props.getCategories().then(res => {
-      console.log(this.props.category);
+      
       this.setState({ categories: this.props.category })
     })
   }

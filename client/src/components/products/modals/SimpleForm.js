@@ -9,7 +9,7 @@ import NewProductScanModal from "./NewProductScanModal";
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
-  console.log("from simmmpllle fooorrrrmmmmm=====>",props.product)
+  
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
       <div>
