@@ -16,7 +16,7 @@ class SignIn extends Component {
   updateField = (event, newValue, previousValue, name) => {
     var newState = {};
     newState[name] = newValue;
-    console.log({ newValue, previousValue, name });
+    
     this.setState(newState);
   };
 

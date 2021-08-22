@@ -14,7 +14,7 @@ class NewProductModal extends Component {
 }
  
   render() {
-    
+    console.log('Produccct',this.props.product)
     return (
       <Modal
         bottomSheet={false}
@@ -37,7 +37,7 @@ class NewProductModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.product?this.props.updateList:this.props.newList} category={this.props.category} initialValues={this.props.product} />
+          <SimpleForm onNewListSubmit={Object.keys(this.props.product).length !== 0?this.props.updateList:this.props.newList} category={this.props.category} initialValues={this.props.product} />
         </div>
       </Modal>
     );

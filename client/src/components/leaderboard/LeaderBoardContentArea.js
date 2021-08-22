@@ -15,7 +15,7 @@ class LeaderBoardContentArea extends Component {
 
     componentDidMount() {
         this.props.getData().then(res => {
-            console.log('Usssssssssers', this.props.leaderBorder)
+          
             let data = {
                 users: [],
                 paginate: 5
@@ -31,7 +31,7 @@ class LeaderBoardContentArea extends Component {
 
 
     render() {
-        console.log('Rendeeeer', this.state.users)
+        
         if (this.state) {
             return (
                 <div className="content-area-leader">

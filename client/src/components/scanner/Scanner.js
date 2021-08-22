@@ -38,6 +38,7 @@ const SupportedFormats = [
 ];
 
 const BarCodeScanner = ({onUpdate}) => {
+    // eslint-disable-next-line no-unused-vars
     const [hints, setHints] = useState(() => {
         const newHints = new Map();
         newHints.set(DecodeHintType.POSSIBLE_FORMATS, SupportedFormats);
@@ -48,16 +49,16 @@ const BarCodeScanner = ({onUpdate}) => {
 
     useEffect(() => {
         if (hints === null) {
-            console.log("Hints null");
+            
             return;
         }
         if (CodeReader === null) {
-            console.log("CodeReader null");
+            
             setCodeReader(new BrowserMultiFormatReader(hints));
             return;
         }
 
-        console.log("CodeReader ready");
+       
         CodeReader.decodeOnceFromVideoDevice(undefined, 'video')
             .then((result) => {
                 /* istanbul ignore next */
@@ -70,6 +71,7 @@ const BarCodeScanner = ({onUpdate}) => {
             CodeReader.reset()
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hints, CodeReader])
 
     return (
@@ -91,7 +93,7 @@ class Scanner extends Component {
     }
 
     handleScan(data) {
-        console.log({scannerData: data})
+        
         this.setState({
             result: JSON.stringify(data),
         })
@@ -107,7 +109,7 @@ class Scanner extends Component {
             <div>
                 <BarCodeScanner
                     onUpdate={(err, result) => {
-                        console.log({err, result})
+                        
                         if (err) {
                             this.handleError(err);
                         }

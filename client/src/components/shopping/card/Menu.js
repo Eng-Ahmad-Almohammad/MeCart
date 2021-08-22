@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Icon, Button, Dropdown } from "react-materialize";
-import DeleteConfirmModal from "../../confirmation/DeleteConfirmModal";
 import * as actions from "../../../actions";
 import { connect } from "react-redux";
 

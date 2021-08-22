@@ -24,14 +24,14 @@ class DashboardContentArea extends Component {
   }
 
   renderContent() {
-    console.log("from dashboardd===========?", this.state.cards)
+   
     return (
       <Container className="content-area">
         {this.state.cards.map((imageUrl, index) => {
           return (
             // <div> Not Avaliable Now</div>
             <CardItem
-              key={`dashboard-${index}`}
+              key={`dashboard-${imageUrl._id}`}
               type={ContentAreaTypes.DEFAULT}
               imageUrl={`https://picsum.photos/${random(200, 300)}/${random(
                 250,
@@ -39,7 +39,7 @@ class DashboardContentArea extends Component {
               )}`}
               onClick={() => {
                 this.setState({ isModalOpen: !this.state.isModalOpen });
-                console.log("I clicked the image");
+               
               }}
             />
           );

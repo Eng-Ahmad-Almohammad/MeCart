@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { Button, Container, Row, Card, Col, Icon } from "react-materialize";
+import { Button, Container, Row,  Col,} from "react-materialize";
 import CardItem from "../CardItem/index";
 import { connect } from "react-redux";
 import { ContentAreaTypes, getAllSupermarkets, getSupermarket } from "../../actions";
@@ -19,7 +19,7 @@ class SupermarketContentArea extends Component {
   }
   componentDidMount() {
     this.props.getData().then(res => {
-      // console.log('Hellllllllllllo',this.props.storeList)
+   
       this.setState({ cards: this.props.supermarketList })
     })
 
@@ -29,8 +29,7 @@ class SupermarketContentArea extends Component {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.supermarketList.length !== this.props.supermarketList.length) {
-      console.log(prevProps.supermarketList)
-      console.log(this.props.supermarketList)
+      
 
       this.props.getData().then(res => {
         this.setState({ cards: this.props.supermarketList })
@@ -58,7 +57,7 @@ class SupermarketContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.state.cards.map((value) => {
-              console.log('dsad', value);
+              
               return (
                 <div>
                   <CardItem

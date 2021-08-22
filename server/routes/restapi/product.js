@@ -21,8 +21,8 @@ export const createProduct = async (req, res, next) => {
     const uploader = multer({ storage: imageStorage });
     await uploader.any()(req, res, async () => {
       console.log({files: req.files})
-
-      const { name, descriptionOne, descriptionTwo, category } = req.body;
+      const name = req.body.name.toLowerCase()
+      const {  descriptionOne, descriptionTwo, category } = req.body;
 
       const product = new Products({
         name,

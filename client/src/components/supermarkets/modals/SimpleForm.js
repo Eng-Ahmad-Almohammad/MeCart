@@ -20,6 +20,7 @@ const SimpleForm = (props) => {
     googleMapsApiKey: configuration.googleMapAPI,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [map, setMap] = React.useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
@@ -61,17 +62,7 @@ const SimpleForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit((val) => props.onNewListSubmit(val))}>
-      <div>
-        <label>Owner</label>
-        <div>
-          <Field
-            name="owner"
-            component="input"
-            type="text"
-            placeholder="Owner"
-          />
-        </div>
-      </div>
+     
       <div>
         <label>Name</label>
         <div>

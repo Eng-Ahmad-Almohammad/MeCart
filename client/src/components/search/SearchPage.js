@@ -1,40 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 import SearchBar from './SearchBar';
-import CountryList from './CountryList';
+import SearchList from './SearchList';
+import * as actions from '../../actions'
+
 
 const SearchPage = (props) => {
-  const [input, setInput] = useState('');
-  const [countryListDefault, setCountryListDefault] = useState();
-  const [countryList, setCountryList] = useState();
-
-  const fetchData = async () => {
-    return await fetch('https://restcountries.eu/rest/v2/all')
-      .then(response => response.json())
-      .then(data => {
-         setCountryList(data)
-         setCountryListDefault(data)
-       });}
-
+ 
+ 
   const updateInput = async (input) => {
-     const filtered = countryListDefault.filter(country => {
-      return country.name.toLowerCase().includes(input.toLowerCase())
-     })
-     setInput(input);
-     setCountryList(filtered);
+  await props.getData(input,props.dashboard)
+ 
   }
 
-  useEffect( () => {fetchData()},[]);
 
   return (
     <>
-      <h1>Country List</h1>
+      <h1>{props.dashboard} List</h1>
       <SearchBar
-       input={input}
-       onChange={updateInput}
+      
+       onSubmit={updateInput}
       />
-      <CountryList countryList={countryList}/>
+      {props.products?  <SearchList products={props.products}/> : <h1>You can search now</h1> }
+     
     </>
    );
 }
 
-export default SearchPage
+const mapStateToProps = (state) =>{ 
+ 
+ return {
+  products: state.search.results,
+ 
+  dashboard: state.dashboard.oldComponent,
+
+};
+}
+const mapDispatchToProp = (dispatch) => ({
+  getData: (search,type) => dispatch(actions.showSearch(search,type)),
+  
+})
+export default connect(mapStateToProps, mapDispatchToProp)(SearchPage);

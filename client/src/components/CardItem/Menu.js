@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Icon, Button, Dropdown } from "react-materialize";
-import DeleteConfirmModal from "../confirmation/DeleteConfirmModal";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import Show from "../Show";
@@ -20,7 +19,7 @@ class Menu extends Component {
  
 
   render() {
-    console.log(this.props.itemType)
+   
     return (
       <Dropdown
         id={this.props.itemId}

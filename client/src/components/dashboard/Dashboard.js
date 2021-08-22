@@ -19,10 +19,17 @@ import { toast } from "react-toastify";
 import { Redirect } from "react-router";
 
 class Dashboard extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state={
+      contentArea :''
+    }
+  }
   isLoggedIn() {
     return this.props.auth !== null;
   }
+  
+  
   componentDidUpdate() {
     if (this.props.dashboard.isFailed) {
       toast.error("Sorry, cannot find that screen. 😟");
@@ -32,6 +39,7 @@ class Dashboard extends Component {
 
   renderContent() {
     switch (this.props.dashboard.component) {
+      
       case ContentAreaTypes.PRODUCTS:
         return <ProductContentArea />;
       case ContentAreaTypes.SHOPPING:

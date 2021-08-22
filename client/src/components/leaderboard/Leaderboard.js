@@ -21,7 +21,7 @@ const CustomLeaderboard = ({ users, paginate }) => {
         return (
 
             users.slice(start, start + paginate).map((element, index) => {
-                console.log(element.name);
+               
                 return (
                     <div className='rankers'>
                         <div className='rank'>

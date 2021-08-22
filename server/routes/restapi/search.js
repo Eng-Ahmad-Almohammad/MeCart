@@ -1,18 +1,21 @@
 import { Router } from "express";
 const mongoose = require("mongoose");
-import SearchResults from '../../models/SearchResults'
+import Products from '../../models/Product'
+import Store from '../../models/Stores'
+
 
 export const getSearchResults = async (req, res, next) => {
   const debugInfo = {
-    data: req.body,
+    data: req.query,
     function: "getSearchResults",
   };
 
   console.log({ debugInfo });
 
   try {
-    const results = await SearchResults.find();
-
+    
+    const results = req.query.type === 'Supermarkets' ? await Store.find({$or:[{name: req.query.search}, {address: req.query.search }]}) : await Products.find({name: req.query.search });
+    console.log(results)
     res.send({ results: results });
     next();
   } catch (err) {
@@ -26,6 +29,6 @@ export const getSearchResults = async (req, res, next) => {
 
 const router = Router();
 
-router.get("/search", getSearchResults);
+router.get("/search/", getSearchResults);
 
 export default router;

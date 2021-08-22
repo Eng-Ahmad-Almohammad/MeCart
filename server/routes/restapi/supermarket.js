@@ -9,11 +9,10 @@ export const createSupermarket = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-
+  const name = req.body.name.toLowerCase();
+  const address = req.body.address.toLowerCase();
   try {
     const {
-      name,
-      address,
       number,
       logo,
       businessInfo,

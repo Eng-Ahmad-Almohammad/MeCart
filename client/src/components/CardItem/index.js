@@ -1,6 +1,6 @@
 import { random } from "lodash";
 import React, { useState } from "react";
-import { Card, Col, Icon, Button, Dropdown } from "react-materialize";
+import { Card, Col, Icon, } from "react-materialize";
 
 import CardItemHeader from "./CardItemHeader";
 import "./styles.scss";
@@ -19,6 +19,7 @@ const CardItem = ({
 }) => {
   rating = rating * 5.0;
 
+  // eslint-disable-next-line no-unused-vars
   const [menu, setMenu] = useState(hasMenu);
 
   const stars = [];

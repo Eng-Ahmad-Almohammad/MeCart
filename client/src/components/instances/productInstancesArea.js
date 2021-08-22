@@ -17,7 +17,7 @@ class ProductInstance extends Component {
 
 
     componentDidUpdate = (prevProps) => {
-        console.log('Ahmmmmmmmmmad',prevProps.item.length , this.props.item.length)
+        
         if (prevProps.item.length !== this.props.item.length) {
             this.props.getItem(this.props.id).then(res => {
               this.setState({ cards: this.props.storeList })
@@ -26,12 +26,12 @@ class ProductInstance extends Component {
     }
     
     delete =  (id, productID) => {
-        // console.log('Ahmmmmmmmmmmmad' , id)
+        
         this.props.deleteInstance(id,productID)
     }
 
     render() {
-        // console.log('Ahmmmmmmmmmmmmad',this.props.id);
+        
         return (
             <div>
 

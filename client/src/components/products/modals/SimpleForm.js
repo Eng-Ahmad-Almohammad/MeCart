@@ -1,9 +1,9 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import {Button} from "react-materialize";
 import NewProductScanModal from "./NewProductScanModal";
-import cookieSession from "cookie-session";
+
 
 
 

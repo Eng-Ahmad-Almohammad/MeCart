@@ -8,7 +8,7 @@ import NewProductModal from "./modals/NewInstanceModal";
 class InstanceContentArea extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        
 
         this.state = {
             isModalOpen: false,
@@ -22,21 +22,21 @@ class InstanceContentArea extends Component {
                     iconName: "edit",
                     title: "Edit",
                     onItemClick: (id) => {
-                        console.log({type: "Edit", id})
+                       
                     } // Edit Product by ID function
                 },
                 {
                     iconName: "delete",
                     title: "Delete",
                     onItemClick: (id) => {
-                        console.log({type: "Delete", id})
+                       
                     } // Delete Product by ID function
                 },
                 {
                     iconName: "content_copy",
                     title: "Duplicate",
                     onItemClick: (id) => {
-                        console.log({type: "Duplicate", id})
+                        
                     } // Duplicate Product by ID function
                 }
             ]
@@ -48,7 +48,7 @@ class InstanceContentArea extends Component {
     }
 
     render() {
-        console.log({products: this.props.products})
+        
         return (
             <div>
                 <Row>
@@ -64,7 +64,7 @@ class InstanceContentArea extends Component {
                 <Row>
                     <Container className="content-area">
                         {this.state.cards.map((value) => {
-                            console.log("<<<<<< the value >>>>>>>: " + value._id);
+                            
                             return (
                                 <CardItem
                                     key={`product-${value._id}}`}
@@ -75,7 +75,7 @@ class InstanceContentArea extends Component {
                                     menuItems={this.state.productMenuItems}
                                     onClick={() => {
                                         this.setState({isModalOpen: !this.state.isModalOpen});
-                                        console.log("I was clicked alright");
+                                       
                                     }
                                     }
                                 />

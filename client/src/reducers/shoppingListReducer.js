@@ -14,7 +14,7 @@ const InitialState = {
 };
 
 const shoppingListReducer = function (state = InitialState, action) {
-  // console.log("the action is: " + action);
+ 
   switch (action.type) {
     case FETCH_SHOPPING_LIST:
       return {

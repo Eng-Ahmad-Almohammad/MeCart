@@ -5,11 +5,15 @@ import { connect } from "react-redux";
 import * as actions from "../../../actions";
 import SimpleForm from "./SimpleForm";
 
-class NewStoreModal extends Component {
 
+class NewStoreModal extends Component {
+  // resetMood(event) {
+  //   event.preventDefault();
+  //   this.props.reset('simple');
+  // }
   
   render() {
-    console.log("from storee====>",this.props.store)
+
     return (
       <Modal
         bottomSheet={false}
@@ -32,7 +36,7 @@ class NewStoreModal extends Component {
         }}
       >
         <div>
-          <SimpleForm onNewListSubmit={this.props.store?this.props.updateList:this.props.newList} initialValues={this.props.store} />
+          <SimpleForm onNewListSubmit={Object.keys(this.props.store).length !== 0?this.props.updateList:this.props.newList} initialValues={this.props.store} />
         </div>
       </Modal>
     );

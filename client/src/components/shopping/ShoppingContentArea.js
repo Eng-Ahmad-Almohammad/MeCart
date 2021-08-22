@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { chain, random } from "lodash";
+// import { chain, random } from "lodash";
 import { Button, Container, Row, Col, CardTitle, Card, Icon } from "react-materialize";
 import CardItem from "./card/index";
 import { connect } from "react-redux";
@@ -24,7 +24,6 @@ class ShoppingContentArea extends Component {
   componentDidMount = () => {
 
     this.props.fetchShoppingList().then(res => {
-      console.log('from shopping list ======?', this.props.shoppingList)
       this.setState({ cards: this.props.shoppingList });
     })
   }
@@ -34,8 +33,7 @@ class ShoppingContentArea extends Component {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.shoppingList.length !== this.props.shoppingList.length) {
-      console.log(prevProps.shoppingList)
-      console.log(this.props.shoppingList)
+     
 
       this.props.fetchShoppingList().then(res => {
         this.setState({ cards: this.props.shoppingList })
@@ -58,7 +56,7 @@ class ShoppingContentArea extends Component {
 
 
   render() {
-    console.log("frommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", this.props.shoppingList)
+    
     return !this.state.isModalOpen ? (
       <div>
         <Row>
@@ -70,7 +68,7 @@ class ShoppingContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.props.shoppingList.items.map((value) => {
-              console.log('my man', value);
+              
               return (
                 <div>
                   {/* <CardItem
