@@ -16,12 +16,13 @@ class Menu extends Component {
       itemId: this.props.itemId,
     })
   }
- 
+
 
   render() {
-   
+
     return (
       <Dropdown
+        className={this.props.itemType}
         id={this.props.itemId}
         options={{
           alignment: "left",
@@ -66,47 +67,49 @@ class Menu extends Component {
           Details
         </a>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
-        <Show condition={this.props.itemType === 'Products'}>
-        <a 
-        className="modal-trigger"
-        href="#newProductModal"
-        node="button"
-        onClick={async () => {
-          await this.props.getProduct(this.props.itemId)
-        }}
+        <Show condition={this.props.itemType === 'Products'}
         >
-          <Icon>edit</Icon>
-          Edit
-        </a>
-        <NewProductModal category={this.props.category}/>
+          <a
+
+            className="modal-trigger"
+            href="#newProductModal"
+            node="button"
+            onClick={async () => {
+              await this.props.getProduct(this.props.itemId)
+            }}
+          >
+            <Icon>edit</Icon>
+            Edit
+          </a>
+          <NewProductModal category={this.props.category} />
         </Show>
 
-        <Show condition={this.props.itemType === "Supermarkets"}>
-        <a 
-        className="modal-trigger"
-        href="#newStoreModal" 
-        node="button" 
-        onClick={async () => {
-          await this.props.getStore(this.props.itemId)
-        }}
-        >
-          <Icon>edit</Icon>
-          Edit
-        </a>
-        <NewStoreModal />
+        <Show condition={this.props.itemType === "Supermarkets"} >
+          <a
+            className="modal-trigger"
+            href="#newStoreModal"
+            node="button"
+            onClick={async () => {
+              await this.props.getStore(this.props.itemId)
+            }}
+          >
+            <Icon>edit</Icon>
+            Edit
+          </a>
+          <NewStoreModal />
         </Show>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
         <a
           onClick={() => {
-            if(this.props.itemType === 'Shopping'){
-            this.deleteItem(this.props.itemId);
+            if (this.props.itemType === 'Shopping') {
+              this.deleteItem(this.props.itemId);
             }
-            else if (this.props.itemType === 'Products'){
-             this.props.deleteProduct(this.props.itemId)
-               }
-            
+            else if (this.props.itemType === 'Products') {
+              this.props.deleteProduct(this.props.itemId)
+            }
+
             else if (this.props.itemType === 'Supermarkets') {
-            this.props.deleteStore(this.props.itemId);
+              this.props.deleteStore(this.props.itemId);
             }
           }}
         >
@@ -114,7 +117,7 @@ class Menu extends Component {
           Delete
         </a>
 
-      </Dropdown>
+      </Dropdown >
     );
   }
 }
@@ -131,13 +134,13 @@ const mapDispatchToProps = (dispatch) => ({
   deleteList: (id) => dispatch(actions.deleteShoppingList(id)),
 
   deleteProduct: (id) => dispatch(actions.deleteProduct(id)),
-  deleteStore : (id) => dispatch(actions.deleteStore(id)),
-  getItem:(id)=> dispatch(actions.getProductInstance(id)),
-  getShopItem:(id)=> dispatch(actions.getShoppingList(id)),
-  getStoreItem:(id) => dispatch(actions.getSupermarket(id)),
+  deleteStore: (id) => dispatch(actions.deleteStore(id)),
+  getItem: (id) => dispatch(actions.getProductInstance(id)),
+  getShopItem: (id) => dispatch(actions.getShoppingList(id)),
+  getStoreItem: (id) => dispatch(actions.getSupermarket(id)),
 
-  getProduct:(id)=>dispatch(actions.getProduct(id)),
-  getStore:(id)=>dispatch(actions.getSupermarket(id)),
+  getProduct: (id) => dispatch(actions.getProduct(id)),
+  getStore: (id) => dispatch(actions.getSupermarket(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

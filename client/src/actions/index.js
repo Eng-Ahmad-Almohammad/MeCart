@@ -86,7 +86,7 @@ export const updateContentComponent = (component) => {
 };
 
 export const signIn = (values, history) => async (dispatch) => {
-  
+
   const res = await axios.post("/api/sign-in", values);
 
   history.push("/dashboard");
@@ -94,7 +94,7 @@ export const signIn = (values, history) => async (dispatch) => {
 };
 
 export const signUp = (values, history) => async (dispatch) => {
-  
+
   const res = await axios.post("/api/sign-up", values);
 
   dispatch({ type: SIGN_UP, payload: res.data });
@@ -113,13 +113,13 @@ export const profile = (userId) => async (dispatch) => {
 };
 
 export const showSearch = (search, type) => async (dispatch) => {
-  const res = await axios.get("/api/search/",{
-    params:{
-      search:search.toLowerCase(),
-      type:type
+  const res = await axios.get("/api/search/", {
+    params: {
+      search: search.toLowerCase(),
+      type: type
     }
   });
-  
+
   if (res.status === 200) {
     dispatch({ type: SHOW_SEARCH, payload: res.data.results });
   }
@@ -138,7 +138,7 @@ export const createShoppingList = (list) => async (dispatch) => {
     data: JSON.stringify(list)
   });
 
-  
+
 
   dispatch({ type: CREATE_SHOPPING_LIST, payload: res.data });
   dispatch(getAllShoppingList())
@@ -197,7 +197,7 @@ export const deleteInstance = (InstanceId, productId) => async (dispatch) => {
 };
 
 export const deleteInstanceFromList = (InstanceId, listId) => async (dispatch) => {
-  
+
   const res = await axios.delete("/api/shoppinglistproduct/", {
     params: {
       InstanceId: InstanceId,
@@ -227,14 +227,13 @@ export const getAllShoppingList = () => async (dispatch) => {
 
 export const getShoppingList = (listId) => async (dispatch) => {
   const res = await axios.get(`/api/lists/${listId}`);
-  
   if (res.status === 200) {
     dispatch({ type: FETCH_SHOPPING_LIST_FIELD, payload: res.data });
   }
 };
 
 export const createProduct = (product) => async (dispatch) => {
-  
+
   const res = await axios(`api/products`, {
     method: 'post',
     headers: {
@@ -249,8 +248,8 @@ export const createProduct = (product) => async (dispatch) => {
   dispatch(getAllProducts())
 };
 
-export const addProductToShoppingList = (val,id) => async (dispatch) => {
- const obj={...val,product:id}
+export const addProductToShoppingList = (val, id) => async (dispatch) => {
+  const obj = { ...val, product: id }
 
   const res = await axios(`/api/shoppinglistproduct`, {
     method: 'post',
@@ -261,7 +260,7 @@ export const addProductToShoppingList = (val,id) => async (dispatch) => {
     data: JSON.stringify(obj)
   });
 
- 
+
 
   dispatch({ type: CREATE_SHOPPING_LIST_PRODUCT_INSTANCE, payload: res.data });
 };
@@ -278,7 +277,7 @@ export const createSupermarket = (supermarket) => async (dispatch) => {
 
 
   dispatch({ type: CREATE_STORE_LIST, payload: res.data });
-  dispatch( getAllSupermarkets())
+  dispatch(getAllSupermarkets())
 };
 
 export const getAllProducts = () => async (dispatch) => {
@@ -293,7 +292,7 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
-export const replaceSupermarket=(supermarket)=>async (dispatch)=>{
+export const replaceSupermarket = (supermarket) => async (dispatch) => {
   // eslint-disable-next-line no-unused-vars
   const res = await axios(`api/supermarkets`, {
     method: 'put',
@@ -309,7 +308,7 @@ export const replaceSupermarket=(supermarket)=>async (dispatch)=>{
 export const getAllSupermarkets = () => async (dispatch) => {
   const res = await axios.get("/api/supermarkets");
 
-  
+
 
   if (res.status === 200) {
     dispatch({ type: FETCH_STORE_LIST, payload: res.data.supermarkets });
@@ -318,12 +317,12 @@ export const getAllSupermarkets = () => async (dispatch) => {
 
 export const getSupermarket = (supermarketId) => async (dispatch) => {
   const res = await axios.get(`/api/supermarkets/${supermarketId}`);
-   
-  dispatch({ type:FETCH_STORE_LIST_FEILD, payload: res.data.supermarket });
-  
+
+  dispatch({ type: FETCH_STORE_LIST_FEILD, payload: res.data.supermarket });
+
 };
 
-export const replaceProduct=(product)=>async(dispatch)=>{
+export const replaceProduct = (product) => async (dispatch) => {
   // eslint-disable-next-line no-unused-vars
   const res = await axios(`api/products`, {
     method: 'put',
@@ -340,11 +339,11 @@ export const replaceProduct=(product)=>async(dispatch)=>{
 export const getProduct = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/products/${productId}`, {
   });
-  
-  dispatch({ type:FETCH_PRODUCT_LIST_FIELD, payload: res.data.product });
+
+  dispatch({ type: FETCH_PRODUCT_LIST_FIELD, payload: res.data.product });
 };
-export const createProductInstance = (data,id) => async (dispatch) => {
-  const obj={...data,id:id}
+export const createProductInstance = (data, id) => async (dispatch) => {
+  const obj = { ...data, id: id }
   const res = await axios(`api/productInstance`, {
     method: 'post',
     headers: {
@@ -354,22 +353,22 @@ export const createProductInstance = (data,id) => async (dispatch) => {
     data: JSON.stringify(obj)
   });
 
- 
+
 
   dispatch({ type: CREATE_PRODUCT_INSTANCE, payload: res.data });
   dispatch(getProductInstance(id))
 };
 export const getProductInstance = (productId) => async (dispatch) => {
   const res = await axios.get(`/api/productInstance/${productId}`);
- 
+
   dispatch({ type: FETCH_PRODUCT_INSTANCE, payload: res.data.productInstance });
 };
 
 export const getAllCategories = () => async (dispatch) => {
 
   const res = await axios.get("/api/category");
-  
- 
+
+
   dispatch({ type: FETCH_CATEGORY, payload: res.data.categories });
 
 };

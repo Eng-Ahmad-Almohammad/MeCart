@@ -14,7 +14,7 @@ export const createShoppingList = async (req, res, next) => {
     function: "createShoppingList",
   };
 
-  console.log("debug Info=====================",{ debugInfo });
+  console.log("debug Info=====================", { debugInfo });
 
   try {
     const { name, description } = req.body;
@@ -45,7 +45,7 @@ export const getShoppingList = async (req, res, next) => {
 
   console.log({ debugInfo });
   if (!req.params || !req.params.listId) {
-    res.status(400).send({error: 'Missing/Invalid listId provided.'})
+    res.status(400).send({ error: 'Missing/Invalid listId provided.' })
     return;
   }
 
@@ -55,15 +55,15 @@ export const getShoppingList = async (req, res, next) => {
       res.status(404).send({ error: 'Shopping list not found' });
       return;
     }
-    const productInstances= await ProductInstances.find({
-      '_id':{$in:shoppingList.products}
+    const productInstances = await ProductInstances.find({
+      '_id': { $in: shoppingList.products }
     });
     //we need to populate three collections here to get the product/product instance and the shopping list
-    const shoppingProducts=await ShoppingListPro.find({
-      shoppingList:req.params.listId
+    const shoppingProducts = await ShoppingListPro.find({
+      shoppingList: req.params.listId
     })
     // console.log("from api====>",{products})
-    res.send({ shoppingList: shoppingList ,productInstances:productInstances,shoppingProducts:shoppingProducts});
+    res.send({ shoppingList: shoppingList, productInstances: productInstances, shoppingProducts: shoppingProducts });
     next();
   } catch (err) {
     debugInfo.message = err.message;
@@ -81,12 +81,12 @@ export const getAllShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-  console.log( req.user._id );
+  console.log(req.user._id);
 
   try {
-    const shoppingLists = await ShoppingLists.find({user : req.user._id});
+    const shoppingLists = await ShoppingLists.find({ user: req.user._id });
 
-    res.send({ shoppingLists: [...shoppingLists]});
+    res.send({ shoppingLists: [...shoppingLists] });
     next();
   } catch (err) {
     debugInfo.message = err.message;
@@ -132,10 +132,10 @@ export const deleteShoppingList = async (req, res, next) => {
   };
 
   console.log({ debugInfo });
-   console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.query.listId)
+  console.log('Ahmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmad', req.query.listId)
   try {
     await ShoppingLists.deleteOne({ _shoppingLists: req.params.listId });
-   await ShoppingListProducts.deleteMany({ shoppingList: req.params.listId})
+    await ShoppingListProducts.deleteMany({ shoppingList: req.params.listId })
     res.send("Record deleted");
     next();
   } catch (err) {

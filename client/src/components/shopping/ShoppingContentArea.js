@@ -29,17 +29,17 @@ class ShoppingContentArea extends Component {
   }
 
 
- 
+
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.shoppingList.length !== this.props.shoppingList.length) {
-     
+
 
       this.props.fetchShoppingList().then(res => {
         this.setState({ cards: this.props.shoppingList })
       })
     }
- 
+
   }
 
 
@@ -56,7 +56,7 @@ class ShoppingContentArea extends Component {
 
 
   render() {
-    
+
     return !this.state.isModalOpen ? (
       <div>
         <Row>
@@ -68,7 +68,7 @@ class ShoppingContentArea extends Component {
         <Row>
           <Container className="content-area">
             {this.props.shoppingList.items.map((value) => {
-              
+
               return (
                 <div>
                   {/* <CardItem

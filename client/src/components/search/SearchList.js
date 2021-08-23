@@ -1,15 +1,15 @@
 import React from 'react';
 import CardItem from "../CardItem";
-import {ContentAreaTypes} from '../../actions'
+import { ContentAreaTypes } from '../../actions'
 import { useState } from "react";
 import ProductInstance from "../instances/productInstancesArea";
 import { Row, Container } from 'react-materialize';
 
 
-const SearchList = ({imageUrl=[]}) => {
-  
+const SearchList = ({ products = [] }) => {
 
-  const [isModalOpen , useIsModalOpen] = useState(true)
+
+  const [isModalOpen, useIsModalOpen] = useState(true)
   const [productId, useProductId] = useState('');
 
 
@@ -21,37 +21,39 @@ const SearchList = ({imageUrl=[]}) => {
     // this.setState({ isModalOpen: !this.state.isModalOpen, ProductIn: this.props.storeList.product,productId:id})
   }
   return (
-    isModalOpen? (
-    <>
-    <Row   style={{
-            overflow: 'hidden',
-          }}>
-      <Container className="content-area">
-    { imageUrl.map((data,index) => {
-        if (data) {
-          return (
-            <div>
-            <CardItem
-              type={ContentAreaTypes.PRODUCTS}
-              imageUrl={data.imageUrl}
-              hasMenu={false}
-              listItem={data}
-              handler={handleModal}
-              title={data.name}
-              itemDescription={data.descriptionOne}
-            />
-          </div>
-    	   )
-    	 }
-    	 return null
-    }) }
-    </Container>
-    </Row>
-    </>
-    ):
-    (
-      <ProductInstance handler={handleModal}  id={productId} />
-    )
+    isModalOpen ? (
+      <>
+        <Row style={{
+          overflow: 'hidden',
+          width: '100%',
+          margin: '10px',
+        }}>
+          <Container className="content-area">
+            {products.map((data, index) => {
+              if (data) {
+                return (
+                  <div>
+                    <CardItem
+                      type={ContentAreaTypes.PRODUCTS}
+                      imageUrl={data.imageUrl}
+                      hasMenu={false}
+                      listItem={data}
+                      handler={handleModal}
+                      title={data.name}
+                      itemDescription={data.descriptionOne}
+                    />
+                  </div>
+                )
+              }
+              return null
+            })}
+          </Container>
+        </Row>
+      </>
+    ) :
+      (
+        <ProductInstance handler={handleModal} id={productId} />
+      )
   );
 }
 
